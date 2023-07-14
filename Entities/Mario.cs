@@ -36,5 +36,17 @@ namespace GameAttempt1.Entities
             throw new NotImplementedException();
         }
         public void Die() { }
+        public void Jump()
+        {
+            throw new NotImplementedException();
+        }
+        public void Sprint()
+        {
+            throw new NotImplementedException();
+        }
+        public void Duck()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

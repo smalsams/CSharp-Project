@@ -21,11 +21,6 @@ namespace GameAttempt1.Entities
         public float Speed { get; private set; }  
         public int Order { get; set; }
 
-        public void Destroy()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             throw new NotImplementedException();
@@ -45,6 +40,11 @@ namespace GameAttempt1.Entities
             throw new NotImplementedException();
         }
         public void Duck()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Destroy()
         {
             throw new NotImplementedException();
         }

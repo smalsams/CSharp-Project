@@ -7,19 +7,17 @@ using System.Threading.Tasks;
 
 namespace GameAttempt1.Sprites
 {
+    public enum AnimationState
+    {
+        Animated,
+        Paused,
+        Cancelled
+    }
     public class Animation
     {
-        private List<AnimationFrame> frames = new();
-        public bool IsAnimated { get; private set; }
-        public void Update(GameTime gameTime) { }
-        public void AddFrame(Sprite sprite, float time) { 
-            frames.Add(new AnimationFrame(sprite, time));
-        }
-        public void Cancel() => IsAnimated = false;
-        public void Start() => IsAnimated = true;
-        public AnimationFrame this[int index]
+        public void Start()
         {
-            get { return index < frames.Count && index >= 0 ? frames[index] : throw new ArgumentOutOfRangeException($"There is no frame at index {index}."); }
+
         }
     }
 }

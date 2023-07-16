@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +23,9 @@ namespace GameAttempt1.Sprites
             Width = width;
             Height = height;
         }
-        public void Draw(SpriteBatch spriteBatch, Vector2 coordinates) { }
+        public void Draw(SpriteBatch spriteBatch, Vector2 coordinates) 
+        {
+            spriteBatch.Draw(Texture, coordinates, new Rectangle(X_Coordinate, Y_Coordinate, Width, Height) , Color.Black);
+        }
     }
 }

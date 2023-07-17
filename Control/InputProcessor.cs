@@ -1,4 +1,4 @@
-﻿using GameAttempt1.Entities;
+﻿using GameAttempt1.Entities.PlayerContent;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ namespace GameAttempt1.Control
 {
     public class InputProcessor
     {
-        private Mario Mario { get; set; }
+        private Player Player { get; set; }
         
-        public InputProcessor(Mario mario) { Mario = mario; }
+        public InputProcessor(Player player) { Player = player; }
         public void Process(GameTime gameTime) { }
     }
 }

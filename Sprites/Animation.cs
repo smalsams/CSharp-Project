@@ -7,15 +7,26 @@ using System.Threading.Tasks;
 
 namespace GameAttempt1.Sprites
 {
-    public enum AnimationState
-    {
-        Animated,
-        Paused,
-        Cancelled
-    }
     public class Animation
     {
+
+        public Animation()
+        {
+
+        }
         public void Start()
+        {
+
+        }
+        public void Stop()
+        {
+
+        }
+        public void Update()
+        {
+
+        }
+        public void Draw()
         {
 
         }

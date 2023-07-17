@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameAttempt1.Entities.EntityBehaviour
 {
-    public enum MarioState
+    public enum PlayerState
     {
         Standing,
         Running,

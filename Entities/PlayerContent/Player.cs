@@ -5,21 +5,27 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace GameAttempt1.Entities
+namespace GameAttempt1.Entities.PlayerContent
 {
     [Serializable]
-    public class Mario : IEntity
+    public class Player : IEntity
     {
-        public Sprite Sprite { get; private set; }
-        public MarioState State { get; private set; }
+        private SpriteStateProcessor _stateProcessor = new();
+        public PlayerState State { get; private set; }
         public bool IsAlive { get; private set; }
         public Vector2 Position { get; private set; }
-        public float Speed { get; private set; }  
+        public Vector2 Speed { get; private set; }
         public int Order { get; set; }
+        public int Direction { get; private set; }
+        public Player(PlayerTextures playerTextures)
+        {
+
+        }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
@@ -30,7 +36,12 @@ namespace GameAttempt1.Entities
         {
             throw new NotImplementedException();
         }
-        public void Die() { }
+        public void Die() { IsAlive = false; }
+        public void Move()
+        {
+
+            Speed = new Vector2(1, 0) * Speed * Direction;
+        }
         public void Jump()
         {
             throw new NotImplementedException();
@@ -44,9 +55,5 @@ namespace GameAttempt1.Entities
             throw new NotImplementedException();
         }
 
-        public void Destroy()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

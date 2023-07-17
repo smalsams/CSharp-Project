@@ -13,6 +13,5 @@ namespace GameAttempt1.Entities
         int Order { get; }
         void Draw(SpriteBatch spriteBatch, GameTime gameTime);
         void Update(GameTime gameTime);
-        void Destroy();
     }
 }

@@ -31,11 +31,6 @@
 /processorParam:Quality=Best
 /build:Sounds/jumppp11.ogg
 
-#begin Sounds/life_pickup.flac
-/importer:
-/processor:
-/build:Sounds/life_pickup.flac
-
 #begin Sounds/Lonely Witch.mp3
 /importer:Mp3Importer
 /processor:SongProcessor

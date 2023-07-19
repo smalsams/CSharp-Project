@@ -10,6 +10,7 @@ namespace GameAttempt1.Entities
 {
     public interface IEntity
     {
+        int Layer { get;}
         int Order { get; }
         void Draw(SpriteBatch spriteBatch, GameTime gameTime);
         void Update(GameTime gameTime);

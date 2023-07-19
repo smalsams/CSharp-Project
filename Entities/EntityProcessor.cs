@@ -13,5 +13,9 @@ namespace GameAttempt1.Entities
         public void Remove(IEntity entity) {  entities.Remove(entity); return; }
         public void Clear() { entities.Clear(); return; }
         public IEntity this[int index] { get { return entities[index]; } }
+        public void Draw()
+        {
+
+        }
     }
 }

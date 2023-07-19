@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameAttempt1.Entities.EntityBehaviour
+namespace GameAttempt1.Entities.PlayerContent
 {
     public enum PlayerState
     {

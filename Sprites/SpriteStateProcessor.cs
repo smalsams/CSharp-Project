@@ -10,7 +10,7 @@ namespace GameAttempt1.Sprites
 {
     public class SpriteStateProcessor
     {
-        private Dictionary<string, Animation> _automaton = new Dictionary<string, Animation>();
+        private Dictionary<string, Animation> _automaton = new();
         public Animation Current { get; private set; }
         public void AddState(string name, Animation state) 
         {

@@ -1,23 +1,27 @@
-﻿using GameAttempt1.Control;
+﻿using System.Collections.Generic;
+using GameAttempt1.Control;
 using GameAttempt1.Entities;
 using GameAttempt1.Entities.PlayerContent;
 using GameAttempt1.Sounds;
+using GameAttempt1.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Tiled;
+using MonoGame.Extended.Tiled.Renderers;
+using System.IO;
 
 namespace GameAttempt1
 {
     public class TwoDPlatformer : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private TileMapController _tileMapController;
+        private State _currentState;
+        private State _nextState;
         //sounds
         private Radio _radio;
-        //entities
-        private Player _player;
-        private EntityProcessor _entityProcessor;
-        private InputProcessor _inputProcessor;
 
         public TwoDPlatformer()
         {
@@ -25,7 +29,7 @@ namespace GameAttempt1
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
-
+        public void ChangeState(State state) => _nextState = state;
         protected override void Initialize()
         {
 
@@ -37,39 +41,27 @@ namespace GameAttempt1
 
         protected override void LoadContent()
         {
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            var playerTextures = Content.Load<Texture2D>("Sprites/Tuxedo");
-            _player = new Player(this, playerTextures)
-            {
-                Position = new Vector2(100, 100)
-            };
-            _inputProcessor = new InputProcessor(_player);
-
-
+            _currentState = new MainMenuState(Content, this, _graphics.GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-
+            if (_nextState is not null)
+            {
+                _currentState = _nextState;
+                _nextState = null;
+            }
+            _currentState.Update(gameTime); 
             base.Update(gameTime);
-
-            //update player
-            _player.Update(gameTime);
-            _inputProcessor.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.SkyBlue);
-
-
             base.Draw(gameTime);
-            _spriteBatch.Begin();
-            _player.Draw(_spriteBatch,gameTime);
-            _spriteBatch.End();
+            _currentState.Draw(gameTime, _spriteBatch);
         }
     }
 }

@@ -42,14 +42,12 @@ namespace GameAttempt1.Sprites
         public void Pause() { State = AnimationState.Paused; }
         public void Update(GameTime gameTime)
         {
-            if (State == AnimationState.Animated)
-            {
-                Time += gameTime.ElapsedGameTime.TotalSeconds;
+            if (State != AnimationState.Animated) return;
+            Time += gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (Time > TotalTime)
-                {
-                    Time = 0;
-                }
+            if (Time > TotalTime)
+            {
+                Time = 0;
             }
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffects)

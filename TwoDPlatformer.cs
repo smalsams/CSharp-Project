@@ -20,8 +20,6 @@ namespace GameAttempt1
         private TileMapController _tileMapController;
         private State _currentState;
         private State _nextState;
-        //sounds
-        private Radio _radio;
 
         public TwoDPlatformer()
         {
@@ -35,7 +33,7 @@ namespace GameAttempt1
 
             base.Initialize();
             _graphics.PreferredBackBufferWidth = 1600;
-            _graphics.PreferredBackBufferHeight = 960;
+            _graphics.PreferredBackBufferHeight = 900;
             _graphics.ApplyChanges();
         }
 

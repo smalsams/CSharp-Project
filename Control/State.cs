@@ -19,7 +19,7 @@ namespace GameAttempt1.Control
 
         public abstract void Update(GameTime gameTime);
 
-        public State(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice)
+        protected State(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice)
         {
             _contentManager = contentManager;
             _game = game;

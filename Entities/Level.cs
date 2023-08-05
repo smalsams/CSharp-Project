@@ -8,5 +8,6 @@ namespace GameAttempt1.Entities
 {
     public class Level
     {
+        
     }
 }

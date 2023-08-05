@@ -15,6 +15,8 @@ namespace GameAttempt1.Control
 {
     public class GameState : State
     {
+        private const int PLAYER_DEFAULT_X = 100;
+        private const int PLAYER_DEFAULT_Y = 800;
         private readonly Player _player;
         private readonly InputProcessor _inputProcessor;
         private Texture2D _playerTextures;
@@ -25,7 +27,7 @@ namespace GameAttempt1.Control
             _playerTextures = contentManager.Load<Texture2D>("Sprites/Tuxedo");
             _player = new Player(game, _playerTextures)
             {
-                Position = new Vector2(100, 100)
+                Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y)
             };
             _inputProcessor = new InputProcessor(_player);
         }

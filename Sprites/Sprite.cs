@@ -15,6 +15,7 @@ namespace GameAttempt1.Sprites
         public int YCoordinate { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        private float _rotation;
         
         public Vector2 Origin => new(Width/2, Height/2);
         public Sprite(Texture2D texture, int x, int y, int width, int height)
@@ -27,7 +28,7 @@ namespace GameAttempt1.Sprites
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 coordinates, SpriteEffects spriteEffects) 
         {
-            spriteBatch.Draw(Texture, coordinates, new Rectangle(XCoordinate, YCoordinate, Width, Height) , Color.White, 0,Origin, 0, spriteEffects, 0);
+            spriteBatch.Draw(Texture, coordinates, new Rectangle(XCoordinate, YCoordinate, Width, Height) , Color.White, _rotation,Origin, 0, spriteEffects, 0);
         }
 
         public void Update(GameTime gameTime)

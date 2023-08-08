@@ -10,6 +10,7 @@ namespace GameAttempt1.Sprites
 {
     public class Animation
     {
+        public const int SCALE = 3;
         public const int FPS = 10;
         public AnimationState State { get; private set; } = AnimationState.Cancelled;
         public double Time { get; private set; } = 0;
@@ -52,8 +53,18 @@ namespace GameAttempt1.Sprites
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffects)
         {
-            var drawRect = new Rectangle(Origin.Item1,Origin.Item2 + CurrentYCoordinate * (SpriteHeight + Origin.Item2) - 1, SpriteWidth, SpriteHeight);
-            spriteBatch.Draw(Texture, new Rectangle(position.ToPoint(), new Point(SpriteWidth * 3 , SpriteHeight * 3 )), drawRect, Color.White, 0, SpriteOrigin, spriteEffects, 0);
+            var drawRect =
+                new Rectangle(Origin.Item1,Origin.Item2 + CurrentYCoordinate * (SpriteHeight + Origin.Item2) - 1, SpriteWidth, SpriteHeight);
+            spriteBatch.Draw(
+                Texture, 
+                new Rectangle(position.ToPoint(), new Point(SpriteWidth * SCALE, SpriteHeight * SCALE )), 
+                drawRect, 
+                Color.White, 
+                0, 
+                SpriteOrigin, 
+                spriteEffects, 
+                0
+                );
         }
     }
 }

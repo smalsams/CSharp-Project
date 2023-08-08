@@ -20,9 +20,9 @@ namespace GameAttempt1.Control
         private readonly Player _player;
         private readonly InputProcessor _inputProcessor;
         private Texture2D _playerTextures;
-        private EntityProcessor _entityProcessor;
         private Level _level;
-        public GameState(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice) : base(contentManager, game, graphicsDevice)
+        public GameState(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice, Level level) 
+            : base(contentManager, game, graphicsDevice)
         {
             _playerTextures = contentManager.Load<Texture2D>("Sprites/Tuxedo");
             _player = new Player(game, _playerTextures)
@@ -30,11 +30,12 @@ namespace GameAttempt1.Control
                 Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y)
             };
             _inputProcessor = new InputProcessor(_player);
+            _level = level;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
             _player.Draw(spriteBatch, gameTime);
             spriteBatch.End();
         }

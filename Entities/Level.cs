@@ -14,5 +14,10 @@ namespace GameAttempt1.Entities
         private Song _song;
         private Radio _radio;
         private TileMapController _controller;
+
+        public void Pause()
+        {
+
+        }
     }
 }

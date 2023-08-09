@@ -8,9 +8,7 @@ namespace GameAttempt1.Entities.PlayerContent
 {
     public enum PlayerState
     {
-        Standing,
-        Running,
-        Jumping,
-        Ducking
+        Playing,
+        Paused
     }
 }

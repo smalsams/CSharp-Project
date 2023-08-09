@@ -28,6 +28,7 @@ namespace GameAttempt1.Components
 
         public Rectangle Rectangle => new ((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
         public string Content { get; }
+        private bool _keyInvoker;
         #endregion
 
         #region Constructors
@@ -64,11 +65,15 @@ namespace GameAttempt1.Components
 
             var mouseHitbox = new Rectangle(_currentMouseState.X, _currentMouseState.Y, 1, 1);
             _hovered = mouseHitbox.Intersects(Rectangle);
-            if (Pressed)
+            if (Pressed || _keyInvoker)
             {
                 ButtonPress?.Invoke(this, EventArgs.Empty);
             }
+        }
 
+        public void AddKeyboardInvoker(Keys key)
+        {
+            _keyInvoker = Keyboard.GetState().IsKeyDown(key);
         }
     }
 }

@@ -24,13 +24,13 @@ namespace GameAttempt1.Components
         public Vector2 SliderPosition { get; set; }
         private Vector2 _scrollPosition;
 
-        public EventHandler<float> VolumeChanged;
-        public Slider(Texture2D sliderTexture,Texture2D scrollTexture, Vector2 sliderPosition)
+        public EventHandler<float> SliderScroll;
+        public Slider(Texture2D sliderTexture,Texture2D scrollTexture, Vector2 sliderPosition, float defaultValue = 1f)
         {
             _sliderTexture = sliderTexture;
             _scrollTexture = scrollTexture;
             SliderPosition = sliderPosition;
-            _scrollPosition = new Vector2(SliderPosition.X + _scrollTexture.Width / 2, SliderPosition.Y);
+            _scrollPosition = new Vector2(SliderPosition.X + (_sliderTexture.Width * defaultValue) - _scrollTexture.Width, _sliderRectangle.Center.Y - _scrollRectangle.Height / 2);
         }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -49,12 +49,12 @@ namespace GameAttempt1.Components
             }
             if (_isSliderClicked)
             {
-                _scrollPosition.X = MathHelper.Clamp(mousePosition.X - _sliderRectangle.Width / 2, _sliderRectangle.Left, _sliderRectangle.Right - _scrollRectangle.Width);
+                _scrollPosition.X = MathHelper.Clamp(mousePosition.X, _sliderRectangle.Left, _sliderRectangle.Right - _scrollRectangle.Width);
                 _scrollPosition.Y = _sliderRectangle.Center.Y - _scrollRectangle.Height / 2;
 
-                var volumePercentage = (_scrollPosition.X - _sliderRectangle.Left) / (float)(_sliderRectangle.Width - _scrollRectangle.Width);
-                volumePercentage = MathHelper.Clamp(volumePercentage, 0f, 1f);
-                VolumeChanged?.Invoke(this, volumePercentage);
+                var percentage = (_scrollPosition.X - _sliderRectangle.Left) / (float)(_sliderRectangle.Width - _scrollRectangle.Width);
+                percentage = MathHelper.Clamp(percentage, 0f, 1f);
+                SliderScroll?.Invoke(this, percentage);
             }
 
             if (mouseState.LeftButton == ButtonState.Released)

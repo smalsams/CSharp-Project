@@ -13,5 +13,10 @@ namespace GameAttempt1.Utilities
         public const float MIN = int.MinValue;
         public const float ZERO = 0.0001f;
         public static int Round(this float f) => (int)Math.Round(f);
+
+        public static void Add<T>(this List<T> list, params T[] parameters)
+        {
+            list.AddRange(parameters);
+        }
     }
 }

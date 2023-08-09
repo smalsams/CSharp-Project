@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameAttempt1.Entities.PlayerContent
 {
@@ -22,11 +23,12 @@ namespace GameAttempt1.Entities.PlayerContent
         private SpriteStateProcessor _stateProcessor = new();
         public PlayerState State { get; private set; }
         public bool IsAlive { get; private set; }
-        public Vector2 Position { get; set; }
-        public Vector2 Speed { get; private set; } = new Vector2(4, 0);
+        public Vector2 Position;
+        public Vector2 Velocity;
         public int Order { get; set; }
-        public int Direction { get; private set; }
+        public GameDirection Direction { get; private set; }
         public bool OnSolidObject { get; private set; } = true;
+        public bool HasJumped { get; private set; } = true;
         public int Layer { get; private set; }
 
         public Player(Game game, Texture2D playerTextures)
@@ -39,32 +41,65 @@ namespace GameAttempt1.Entities.PlayerContent
             _stateProcessor.ChangeCurrent(nameof(PlayerTextures.None));
             _stateProcessor.Current?.Animate();
         }
-        public void SetDirection(GameDirection direction)
-        {
-            Direction = direction switch
-            {
-                GameDirection.Left => -1,
-                GameDirection.Right => 1,
-                _ => throw new ArgumentOutOfRangeException(nameof(direction))
-            };
-        }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            _stateProcessor.Draw(spriteBatch, Position, Direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+            _stateProcessor.Draw(spriteBatch, Position, Direction == GameDirection.Left ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
         }
         
         public void Update(GameTime gameTime)
         {
-            _stateProcessor.Update(gameTime);
+            if (State == PlayerState.Paused) return;
+                _stateProcessor.Update(gameTime);
+            Position += Velocity;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                Velocity.X = Position.X > SPRITE_WIDTH*2 ? -4f : 0;
+                Direction = GameDirection.Left;
+                if (!HasJumped) Walk();
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                Velocity.X = 4f;
+                Direction = GameDirection.Right;
+                if(!HasJumped) Walk();
+            }
+            else
+            {
+                Velocity.X = 0;
+            }
+
+            if (!HasJumped && Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                Position.Y -= 10f;
+                Velocity.Y = -5f;
+                Jump();
+                HasJumped = true;
+            }
+
+            if (HasJumped)
+            {
+                Velocity.Y += 0.10f;
+            }
+            //temporary condition
+            if (Position.Y + SPRITE_HEIGHT >= 800)
+            {
+                HasJumped = false;
+            }
+
+            if (HasJumped) return;
+            Velocity.Y = 0;
+            if (Velocity.X == 0)
+            {
+                Stop();
+            }
+
         }
         public void Die() { IsAlive = false; }
-        public void Walk(GameDirection direction)
-        {   
-            SetDirection(direction);
+        public void Walk()
+        {
             _stateProcessor.ChangeCurrent(nameof(PlayerTextures.Walk));
             _stateProcessor.Current.Animate();
-            Position +=  Speed * Direction;
-            //Position = Position.X < 0 ? new Vector2(810, Position.Y) : Position.X >= 810 ? new Vector2(10, Position.Y) : Position;
         }
         public void Stop() 
         {
@@ -81,6 +116,9 @@ namespace GameAttempt1.Entities.PlayerContent
             
         }
 
-
+        public void Pause()
+        {
+            State = State == PlayerState.Paused ? PlayerState.Playing : PlayerState.Paused;
+        }
     }
 }

@@ -14,6 +14,9 @@ namespace GameAttempt1.Components
         #region Fields and Properties
         private MouseState _currentMouseState;
         private MouseState _previousMouseState;
+        private Keys _keyInvoker;
+        private KeyboardState _previousKeyboardState;
+        private KeyboardState _currentKeyboardState;
         private readonly Texture2D _texture;
         private readonly SpriteFont _font;
         private bool _hovered;
@@ -23,12 +26,11 @@ namespace GameAttempt1.Components
         public bool Pressed => _hovered &&
                                _currentMouseState.LeftButton == ButtonState.Released &&
                                _previousMouseState.LeftButton == ButtonState.Pressed;
-        public Color TextColor { get; private set; }
+        public Color TextColor { get; }
         public Vector2 Position { get; set; }
 
         public Rectangle Rectangle => new ((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
         public string Content { get; }
-        private bool _keyInvoker;
         #endregion
 
         #region Constructors
@@ -45,8 +47,7 @@ namespace GameAttempt1.Components
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            var color = Color.White;
-            if (_hovered) color = Color.MediumPurple;
+            var color = _hovered ? Color.MediumPurple : Color.White;
             spriteBatch.Draw(_texture, Rectangle, color);
             if (!string.IsNullOrEmpty(Content))
             {
@@ -58,14 +59,20 @@ namespace GameAttempt1.Components
             }
         }
 
-        public override void Update(GameTime gameTime)
+
+        public void UpdateInput()
         {
             _previousMouseState = _currentMouseState;
             _currentMouseState = Mouse.GetState();
-
+            _previousKeyboardState = _currentKeyboardState;
+            _currentKeyboardState = Keyboard.GetState();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            UpdateInput();
             var mouseHitbox = new Rectangle(_currentMouseState.X, _currentMouseState.Y, 1, 1);
             _hovered = mouseHitbox.Intersects(Rectangle);
-            if (Pressed || _keyInvoker)
+            if (Pressed || (_currentKeyboardState.IsKeyDown(_keyInvoker) && !_previousKeyboardState.IsKeyDown(_keyInvoker)))
             {
                 ButtonPress?.Invoke(this, EventArgs.Empty);
             }
@@ -73,7 +80,7 @@ namespace GameAttempt1.Components
 
         public void AddKeyboardInvoker(Keys key)
         {
-            _keyInvoker = Keyboard.GetState().IsKeyDown(key);
+            _keyInvoker = key;
         }
     }
 }

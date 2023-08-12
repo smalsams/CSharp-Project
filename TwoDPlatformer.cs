@@ -17,7 +17,6 @@ namespace GameAttempt1
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private TileMapController _tileMapController;
         private State _currentState;
         private State _nextState;
 

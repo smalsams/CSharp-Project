@@ -6,10 +6,11 @@
 /platform:DesktopGL
 /config:
 /profile:Reach
-/compress:False
+/compress:True
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\3.9.0-alpha0094\tools\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -31,6 +32,30 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:ButtonFont.spritefont
+
+#begin country-platform-back.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:country-platform-back.png
+
+#begin country-platform-forest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:country-platform-forest.png
 
 #begin PauseButton.png
 /importer:TextureImporter
@@ -82,7 +107,7 @@
 
 #begin Sounds/jumppp11.ogg
 /importer:OggImporter
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/jumppp11.ogg
 
@@ -320,6 +345,11 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/zombie-SWEN.png
 
+#begin TilesetGen/Test.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TilesetGen/Test.tmx
+
 #begin Tilesets/candyLand_tileset_v1_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -331,6 +361,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tilesets/candyLand_tileset_v1_1.png
+
+#begin Tilesets/Jungle_terrain.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tilesets/Jungle_terrain.png
 
 #begin Tilesets/lava_spr_strip45.png
 /importer:TextureImporter

@@ -16,7 +16,7 @@ namespace GameAttempt1.TileMap
         private TiledMap _tiledMap;
         private TiledMapRenderer _renderer;
 
-        public TileMap(string path, ref ContentManager content, ref GraphicsDevice graphics)
+        public TileMap(string path, ContentManager content, GraphicsDevice graphics)
         {
             _tiledMap = content.Load<TiledMap>(path);
             _renderer = new TiledMapRenderer(graphics, _tiledMap);

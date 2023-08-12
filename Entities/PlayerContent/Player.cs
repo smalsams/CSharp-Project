@@ -11,7 +11,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace GameAttempt1.Entities.PlayerContent
 {
@@ -30,6 +32,7 @@ namespace GameAttempt1.Entities.PlayerContent
         public bool OnSolidObject { get; private set; } = true;
         public bool HasJumped { get; private set; } = true;
         public int Layer { get; private set; }
+        public EventHandler Radio { get; set; }
 
         public Player(Game game, Texture2D playerTextures)
         {
@@ -75,6 +78,7 @@ namespace GameAttempt1.Entities.PlayerContent
                 Velocity.Y = -5f;
                 Jump();
                 HasJumped = true;
+                Radio.Invoke(this, EventArgs.Empty);
             }
 
             if (HasJumped)

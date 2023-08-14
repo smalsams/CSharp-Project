@@ -16,12 +16,13 @@ namespace GameAttempt1.Entities
     {
         private Song _song;
         private Radio _radio;
-        private TiledMap _tiledMap;
+        public TiledMap TiledMap;
         private TiledMapRenderer _renderer;
         public EventHandler LevelFinish;
+        public bool Locked { get; set; }
         public Level(TiledMap map, TiledMapRenderer renderer)
         {
-            _tiledMap = map;
+            TiledMap = map;
             _renderer = renderer;
         }
 

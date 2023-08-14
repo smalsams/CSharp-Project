@@ -16,16 +16,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Entities;
+using MonoGame.Extended.Tiled;
 
 namespace GameAttempt1.Control
 {
     public class GameState : State
     {
-        private const int MENU_X_COORDINATE = 650;
-        private const int MENU_Y_COORDINATE = 320;
-        private const int MENU_OFFSET = 100;
-        private const int PLAYER_DEFAULT_X = 100;
-        private const int PLAYER_DEFAULT_Y = 800;
+        
         private readonly Player _player;
         private List<Component> _pauseComponents;
         private Texture2D _playerTextures;
@@ -39,9 +36,10 @@ namespace GameAttempt1.Control
             _playerTextures = _contentManager.Load<Texture2D>("Sprites/Tuxedo");
             _player = new Player(_game, _playerTextures)
             {
-                Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y)
+                Position = new Vector2(GameUtilities.PLAYER_DEFAULT_X, GameUtilities.PLAYER_DEFAULT_Y),
             };
             _levelController = new LevelController(contentManager, graphicsDevice);
+            _player.LevelController = _levelController;
             LoadComponents();
         }
 
@@ -55,11 +53,11 @@ namespace GameAttempt1.Control
             var buttonFont = _contentManager.Load<SpriteFont>("ButtonFont");
             var buttonTexture = _contentManager.Load<Texture2D>("Button");
             var saveButton = new Button(buttonTexture, buttonFont,
-                new Vector2(MENU_X_COORDINATE, MENU_Y_COORDINATE),
+                new Vector2(GameUtilities.MENU_X_COORDINATE, GameUtilities.MENU_Y_COORDINATE),
                 "Save");
             saveButton.ButtonPress += SaveGame_OnClick;
             var mainMenuButton = new Button(buttonTexture, buttonFont,
-                new Vector2(MENU_X_COORDINATE, MENU_Y_COORDINATE + MENU_OFFSET),
+                new Vector2(GameUtilities.MENU_X_COORDINATE, GameUtilities.MENU_Y_COORDINATE + GameUtilities.MENU_OFFSET),
                 "Exit");
             mainMenuButton.ButtonPress += ExitGame_OnClick;
             _jumpSoundEffect = _contentManager.Load<SoundEffect>("Sounds/jumppp11");
@@ -97,9 +95,31 @@ namespace GameAttempt1.Control
             }
             spriteBatch.End();
         }
+        public bool CheckPlatformY()
+        {
+            return _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms")
+                .Objects.Any(platform => _player.Position.Y >= platform.Position.Y &&
+                                         _player.Position.X > platform.Position.X &&
+                                         _player.Position.X - 2 * GameUtilities.PLAYER_WIDTH < platform.Position.X + platform.Size.Width &&
+                                         _player.Position.Y < platform.Position.Y + platform.Size.Height);
+        }
+        public bool CheckPlatformX()
+        {
+            return _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms")
+                .Objects.Any(platform => _player.Position.X + GameUtilities.PLAYER_WIDTH >= platform.Position.X &&
+                                         _player.Position.Y - GameUtilities.PLAYER_HEIGHT > platform.Position.Y &&
+                                         _player.Position.Y < platform.Position.Y + platform.Size.Height &&
+                                         _player.Position.X - 2*GameUtilities.PLAYER_WIDTH <= platform.Position.X + platform.Size.Width);
+        }
 
+        private void PlayerExternalUpdate()
+        {
+            _player.Colliding = CheckPlatformX();
+            _player.OnPlatform = CheckPlatformY();
+        }
         public override void Update(GameTime gameTime)
         {
+            PlayerExternalUpdate();
             _player.Update(gameTime);
             _pauseButton.Update(gameTime);
             _levelController.Update(gameTime);

@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Content;
 
 namespace GameAttempt1.Utilities
 {
@@ -20,7 +15,7 @@ namespace GameAttempt1.Utilities
         public const int MENU_OFFSET = 100;
         public const int PLAYER_DEFAULT_X = 100;
         public const int PLAYER_DEFAULT_Y = 700;
-        public const float GRAVITY = 0.15f;
+        public const float GRAVITY = 0.10f;
         public const float JUMP_HEIGHT = 10f;
         public const float DEFAULT_WALK_VELOCITY = 4f;
         public const float JUMP_Y_VELOCITY = 5f;

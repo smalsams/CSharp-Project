@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using GameAttempt1.Components;
-using GameAttempt1.Entities;
+﻿using GameAttempt1.Components;
 using GameAttempt1.Entities.PlayerContent;
 using GameAttempt1.Utilities;
 using Microsoft.Xna.Framework;
@@ -14,37 +6,42 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Entities;
 using MonoGame.Extended.Tiled;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MonoGame.Extended;
+using static GameAttempt1.Utilities.GameUtilities;
+
 
 namespace GameAttempt1.Control
 {
-    public class GameState : State
+    [Serializable]
+    public sealed class GameState : State
     {
-        
         private readonly Player _player;
-        private List<Component> _pauseComponents;
+        private readonly List<Component> _pauseComponents;
         private Texture2D _playerTextures;
-        private LevelController _levelController;
+        private readonly LevelController _levelController;
         private SoundEffect _jumpSoundEffect;
         private Button _pauseButton;
-        public GameState(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice) 
+        private Camera _camera;
+        public GameState(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice, LevelController levelController)
             : base(contentManager, game, graphicsDevice)
         {
             _pauseComponents = new List<Component>();
             _playerTextures = _contentManager.Load<Texture2D>("Sprites/Tuxedo");
-            _player = new Player(_game, _playerTextures)
+            _player = new Player(_playerTextures)
             {
-                Position = new Vector2(GameUtilities.PLAYER_DEFAULT_X, GameUtilities.PLAYER_DEFAULT_Y),
+                Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y),
             };
-            _levelController = new LevelController(contentManager, graphicsDevice);
-            _player.LevelController = _levelController;
+            _levelController = levelController;
             LoadComponents();
         }
 
         public void LoadComponents()
         {
+            _camera = new Camera();
             var pauseTexture = _contentManager.Load<Texture2D>("PauseButton");
             _pauseButton = new Button(pauseTexture, null, new Vector2(0, 0), "");
             _pauseButton.AddKeyboardInvoker(Keys.Escape);
@@ -53,11 +50,11 @@ namespace GameAttempt1.Control
             var buttonFont = _contentManager.Load<SpriteFont>("ButtonFont");
             var buttonTexture = _contentManager.Load<Texture2D>("Button");
             var saveButton = new Button(buttonTexture, buttonFont,
-                new Vector2(GameUtilities.MENU_X_COORDINATE, GameUtilities.MENU_Y_COORDINATE),
+                new Vector2(MENU_X_COORDINATE, MENU_Y_COORDINATE),
                 "Save");
             saveButton.ButtonPress += SaveGame_OnClick;
             var mainMenuButton = new Button(buttonTexture, buttonFont,
-                new Vector2(GameUtilities.MENU_X_COORDINATE, GameUtilities.MENU_Y_COORDINATE + GameUtilities.MENU_OFFSET),
+                new Vector2(MENU_X_COORDINATE, MENU_Y_COORDINATE + MENU_OFFSET),
                 "Exit");
             mainMenuButton.ButtonPress += ExitGame_OnClick;
             _jumpSoundEffect = _contentManager.Load<SoundEffect>("Sounds/jumppp11");
@@ -85,48 +82,88 @@ namespace GameAttempt1.Control
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            spriteBatch.Begin(transformMatrix: _camera.Transform);
             _player.Draw(spriteBatch, gameTime);
+            _levelController.Draw(gameTime, _camera.Transform);
+            _player.DrawDebug(_graphicsDevice);
+            if (Keyboard.GetState().IsKeyDown(Keys.F1))
+            {
+                DrawDebug(_graphicsDevice,spriteBatch);
+            }
+            spriteBatch.End();
+            spriteBatch.Begin();
             _pauseButton.Draw(gameTime, spriteBatch);
-            _levelController.Draw(gameTime);
             if (_player.State == PlayerState.Paused)
             {
                 _pauseComponents.ForEach(c => c.Draw(gameTime, spriteBatch));
             }
             spriteBatch.End();
         }
-        public bool CheckPlatformY()
+        public void DrawDebug(GraphicsDevice gd, SpriteBatch spriteBatch)
         {
-            return _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms")
-                .Objects.Any(platform => _player.Position.Y >= platform.Position.Y &&
-                                         _player.Position.X > platform.Position.X &&
-                                         _player.Position.X - 2 * GameUtilities.PLAYER_WIDTH < platform.Position.X + platform.Size.Width &&
-                                         _player.Position.Y < platform.Position.Y + platform.Size.Height);
+            var textures = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms").Objects;
+            foreach (var t in textures)
+            {
+                var rectangleTexture2D = new Texture2D(gd, (int)t.Size.Width, (int)t.Size.Height);
+                var colours = new List<Color>();
+                for (var i = 0; i < (int)t.Size.Width; i++)
+                {
+                    for (var j = 0; j < (int)t.Size.Height; j++)
+                    {
+                        if (i == 0 || j == 0 || i == PLAYER_HEIGHT - 1 || j == PLAYER_WIDTH - 1)
+                        {
+                            colours.Add(new Color(255, 255, 255, 255));
+                        }
+                        else
+                        {
+                            colours.Add(new Color(0, 0, 0, 0));
+                        }
+                    }
+                }
+
+                rectangleTexture2D.SetData(colours.ToArray());
+                spriteBatch.Draw(rectangleTexture2D, t.Position, Color.Red);
+            }
         }
-        public bool CheckPlatformX()
+        public void PlayerExternalUpdate()
         {
-            return _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms")
-                .Objects.Any(platform => _player.Position.X + GameUtilities.PLAYER_WIDTH >= platform.Position.X &&
-                                         _player.Position.Y - GameUtilities.PLAYER_HEIGHT > platform.Position.Y &&
-                                         _player.Position.Y < platform.Position.Y + platform.Size.Height &&
-                                         _player.Position.X - 2*GameUtilities.PLAYER_WIDTH <= platform.Position.X + platform.Size.Width);
+            var platforms = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms")
+                .Objects;
+            _player.OnPlatform = false;
+            _player.CollidingY = false;
+            _player.CollidingX = false;
+            foreach (var platform in platforms)
+            {
+                var platformRectangle = new RectangleF(platform.Position.X, platform.Position.Y, platform.Size.Width,
+                    platform.Size.Height);
+                _player.HandleCollisionY(platformRectangle);
+                _player.HandleCollisionX(platformRectangle);
+            }
         }
 
-        private void PlayerExternalUpdate()
-        {
-            _player.Colliding = CheckPlatformX();
-            _player.OnPlatform = CheckPlatformY();
-        }
+
         public override void Update(GameTime gameTime)
         {
             PlayerExternalUpdate();
             _player.Update(gameTime);
+            if (_player.Direction == GameDirection.Right && _player.Position.X > _levelController.Current.GlobalBounds.X - PLAYER_WIDTH * 2) _player.Velocity.X = 0;
+            _camera.Follow(_player, _graphicsDevice);
+            if (IsPlayerDead())
+            {
+                _player.Reset();
+            }
             _pauseButton.Update(gameTime);
             _levelController.Update(gameTime);
-            if( _player.State == PlayerState.Paused){
+            if (_player.State == PlayerState.Paused)
+            {
                 _pauseComponents.ForEach(c => c.Update(gameTime));
             }
 
+        }
+
+        public bool IsPlayerDead()
+        {
+            return (_player.Position.Y > _graphicsDevice.Viewport.Height );
         }
     }
 }

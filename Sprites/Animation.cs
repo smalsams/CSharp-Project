@@ -1,10 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameAttempt1.Sprites
 {
@@ -14,22 +10,22 @@ namespace GameAttempt1.Sprites
         public const int FPS = 10;
         public AnimationState State { get; private set; } = AnimationState.Cancelled;
         public double Time { get; private set; } = 0;
-        public double TotalTime => (double)SpriteLength / (double)FPS;
+        public double TotalTime => (double)SpriteLength / FPS;
         public int CurrentYCoordinate => (int)(Time * FPS);
-        public Texture2D Texture { get; private set; }
-        public int SpriteLength { get; private set; }
-        public int SpriteWidth { get; private set; }
-        public int SpriteHeight { get; private set; }
-        public (int, int) Origin { get; private set; }
-        public Vector2 SpriteOrigin { get; private set; }
-        public Animation(Texture2D texture, int count, (int,int) origin, (int,int) dimensions)
+        public Texture2D Texture { get; }
+        public int SpriteLength { get; }
+        public int SpriteWidth { get; }
+        public int SpriteHeight { get; }
+        public (int, int) Origin { get; }
+        public Vector2 SpriteOrigin { get; }
+        public Animation(Texture2D texture, int count, (int, int) origin, (int, int) dimensions)
         {
             SpriteLength = count;
             Texture = texture;
             SpriteWidth = dimensions.Item1;
             SpriteHeight = dimensions.Item2;
             Origin = origin;
-            SpriteOrigin = new Vector2(SpriteWidth, SpriteHeight);
+            SpriteOrigin = new Vector2(SpriteWidth/2, SpriteHeight/2);
         }
         public void Animate()
         {
@@ -40,7 +36,7 @@ namespace GameAttempt1.Sprites
             State = AnimationState.Cancelled;
             Time = 0;
         }
-        public void Pause() { State = AnimationState.Paused; }
+
         public void Update(GameTime gameTime)
         {
             if (State != AnimationState.Animated) return;
@@ -54,15 +50,16 @@ namespace GameAttempt1.Sprites
         public void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffects)
         {
             var drawRect =
-                new Rectangle(Origin.Item1,Origin.Item2 + CurrentYCoordinate * (SpriteHeight + Origin.Item2) - 1, SpriteWidth, SpriteHeight);
+                new Rectangle(Origin.Item1, Origin.Item2 + CurrentYCoordinate * (SpriteHeight + Origin.Item2) - 1, SpriteWidth, SpriteHeight);
+
             spriteBatch.Draw(
-                Texture, 
-                new Rectangle(position.ToPoint(), new Point(SpriteWidth * SCALE, SpriteHeight * SCALE )), 
-                drawRect, 
-                Color.White, 
-                0, 
-                SpriteOrigin, 
-                spriteEffects, 
+                Texture,
+                new Rectangle(position.ToPoint(), new Point(SpriteWidth * SCALE, SpriteHeight * SCALE)),
+                drawRect,
+                Color.White,
+                0,
+                SpriteOrigin,
+                spriteEffects,
                 0
                 );
         }

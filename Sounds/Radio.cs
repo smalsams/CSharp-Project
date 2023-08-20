@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Audio;
-using System;
+using Microsoft.Xna.Framework.Content;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Content;
 
 namespace GameAttempt1.Sounds
 {

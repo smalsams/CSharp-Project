@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameAttempt1.Sounds;
+﻿using GameAttempt1.Sounds;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
+using System;
 
 namespace GameAttempt1.Entities
 {
     public class Level
     {
-        private Song _song;
         private Radio _radio;
         public TiledMap TiledMap;
         private TiledMapRenderer _renderer;
         public EventHandler LevelFinish;
+        public Vector2 GlobalBounds => new(TiledMap.WidthInPixels, TiledMap.HeightInPixels);
+        public float TileSize => TiledMap.TileWidth;
         public bool Locked { get; set; }
         public Level(TiledMap map, TiledMapRenderer renderer)
         {
@@ -30,9 +26,10 @@ namespace GameAttempt1.Entities
         {
         }
 
-        public void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime, Matrix viewMatrix)
         {
-            _renderer.Draw();
+            _renderer.Draw(viewMatrix);
+
         }
 
         public void Update(GameTime gameTime)

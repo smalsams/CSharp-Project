@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameAttempt1.Components
@@ -37,7 +32,7 @@ namespace GameAttempt1.Components
 
         public override void Update(GameTime gameTime)
         {
-            
+
         }
     }
 }

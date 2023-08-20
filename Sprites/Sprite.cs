@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameAttempt1.Sprites
 {
@@ -16,8 +11,8 @@ namespace GameAttempt1.Sprites
         public int Width { get; set; }
         public int Height { get; set; }
         private float _rotation;
-        
-        public Vector2 Origin => new(Width/2, Height/2);
+
+        public Vector2 Origin => new(Width / 2, Height / 2);
         public Sprite(Texture2D texture, int x, int y, int width, int height)
         {
             Texture = texture;
@@ -26,9 +21,9 @@ namespace GameAttempt1.Sprites
             Width = width;
             Height = height;
         }
-        public void Draw(SpriteBatch spriteBatch, Vector2 coordinates, SpriteEffects spriteEffects) 
+        public void Draw(SpriteBatch spriteBatch, Vector2 coordinates, SpriteEffects spriteEffects)
         {
-            spriteBatch.Draw(Texture, coordinates, new Rectangle(XCoordinate, YCoordinate, Width, Height) , Color.White, _rotation,Origin, 0, spriteEffects, 0);
+            spriteBatch.Draw(Texture, coordinates, new Rectangle(XCoordinate, YCoordinate, Width, Height), Color.White, _rotation, Origin, 0, spriteEffects, 0);
         }
 
         public void Update(GameTime gameTime)

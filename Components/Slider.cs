@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended;
+using System;
 
 namespace GameAttempt1.Components
 {
@@ -25,7 +18,7 @@ namespace GameAttempt1.Components
         private Vector2 _scrollPosition;
 
         public EventHandler<float> SliderScroll;
-        public Slider(Texture2D sliderTexture,Texture2D scrollTexture, Vector2 sliderPosition, float defaultValue = 1f)
+        public Slider(Texture2D sliderTexture, Texture2D scrollTexture, Vector2 sliderPosition, float defaultValue = 1f)
         {
             _sliderTexture = sliderTexture;
             _scrollTexture = scrollTexture;

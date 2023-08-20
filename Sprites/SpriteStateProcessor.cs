@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameAttempt1.Sprites
 {
@@ -12,13 +8,13 @@ namespace GameAttempt1.Sprites
     {
         private Dictionary<string, Animation> _automaton = new();
         public Animation Current { get; private set; }
-        public void AddState(string name, Animation state) 
+        public void AddState(string name, Animation state)
         {
             _automaton.Add(name, state);
         }
         public void AddState(Animation state)
         {
-            _automaton.Add(nameof(state), state);  
+            _automaton.Add(nameof(state), state);
         }
         public void ChangeCurrent(string name) => Current = _automaton[name];
         public void RemoveState(string name)
@@ -30,7 +26,7 @@ namespace GameAttempt1.Sprites
         public void RemoveState(Animation state)
         {
             _automaton.Remove(nameof(state));
-            if(Current == state)
+            if (Current == state)
             {
                 Current = null;
             }

@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace GameAttempt1.Components
 {
@@ -29,7 +25,7 @@ namespace GameAttempt1.Components
         public Color TextColor { get; }
         public Vector2 Position { get; set; }
 
-        public Rectangle Rectangle => new ((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
+        public Rectangle Rectangle => new((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
         public string Content { get; }
         #endregion
 

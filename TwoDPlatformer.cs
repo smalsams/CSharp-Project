@@ -1,19 +1,10 @@
-﻿using System.Collections.Generic;
-using GameAttempt1.Control;
-using GameAttempt1.Entities;
-using GameAttempt1.Entities.PlayerContent;
-using GameAttempt1.Sounds;
-using GameAttempt1.TileMap;
+﻿using GameAttempt1.Control;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended.Tiled;
-using MonoGame.Extended.Tiled.Renderers;
-using System.IO;
 
 namespace GameAttempt1
 {
-    public class TwoDPlatformer : Game
+    public sealed class TwoDPlatformer : Game
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -50,7 +41,7 @@ namespace GameAttempt1
                 _currentState = _nextState;
                 _nextState = null;
             }
-            _currentState.Update(gameTime); 
+            _currentState.Update(gameTime);
             base.Update(gameTime);
         }
 

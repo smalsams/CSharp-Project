@@ -345,10 +345,10 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/zombie-SWEN.png
 
-#begin TilesetGen/Test.tmx
+#begin TilesetGen/Level0.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:TilesetGen/Test.tmx
+/build:TilesetGen/Level0.tmx
 
 #begin Tilesets/candyLand_tileset_v1_1.png
 /importer:TextureImporter

@@ -12,7 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using MonoGame.Extended;
 using static GameAttempt1.Utilities.GameUtilities;
-
+using MonoGame.Extended.Entities;
+using GameAttempt1.Entities;
 
 namespace GameAttempt1.Control
 {
@@ -36,6 +37,7 @@ namespace GameAttempt1.Control
                 Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y),
             };
             _levelController = levelController;
+            _levelController.Current.PlaySong();
             LoadComponents();
         }
 
@@ -129,15 +131,33 @@ namespace GameAttempt1.Control
         {
             var platforms = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms")
                 .Objects;
-            _player.OnPlatform = false;
-            _player.CollidingY = false;
-            _player.CollidingX = false;
+            var obstacles = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Obstacles").Objects;
+            var waterTiles = _levelController.Current.TiledMap.GetLayer<TiledMapTileLayer>("WaterLayer").Tiles;
+            _player.CollidingFromTop = false;
+            _player.CollidingFromBottom = false;
+            _player.CollidingFromLeft = false;
+            _player.CollidingFromRight = false;
+            _player.InWater = false;
+
             foreach (var platform in platforms)
             {
-                var platformRectangle = new RectangleF(platform.Position.X, platform.Position.Y, platform.Size.Width,
-                    platform.Size.Height);
-                _player.HandleCollisionY(platformRectangle);
+                var platformRectangle = new RectangleF(platform.Position.X, platform.Position.Y, platform.Size.Width, platform.Size.Height);
+                _player.HandleCollisionY(platformRectangle, true);
                 _player.HandleCollisionX(platformRectangle);
+            }
+            foreach(var obstacle in obstacles)
+            {
+                var obstacleRectangle = new RectangleF(obstacle.Position.X, obstacle.Position.Y, obstacle.Size.Width, obstacle.Size.Height);
+                _player.HandleCollisionY(obstacleRectangle, false);
+                _player.HandleCollisionX(obstacleRectangle);
+            }
+            foreach(var waterTile in waterTiles)
+            {
+                var tileRectangle = new RectangleF(waterTile.X * 32, waterTile.Y * 32, 32, 32);
+                if (!waterTile.IsBlank)
+                {
+                    _player.WaterCheck(tileRectangle);
+                }
             }
         }
 
@@ -150,6 +170,7 @@ namespace GameAttempt1.Control
             _camera.Follow(_player, _graphicsDevice);
             if (IsPlayerDead())
             {
+                _levelController.Current.ResetSong();
                 _player.Reset();
             }
             _pauseButton.Update(gameTime);
@@ -163,7 +184,7 @@ namespace GameAttempt1.Control
 
         public bool IsPlayerDead()
         {
-            return (_player.Position.Y > _graphicsDevice.Viewport.Height );
+            return (_player.Position.Y > _graphicsDevice.Viewport.Height);
         }
     }
 }

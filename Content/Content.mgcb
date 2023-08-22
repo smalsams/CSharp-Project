@@ -111,17 +111,17 @@
 /processorParam:Quality=Best
 /build:Sounds/jumppp11.ogg
 
-#begin Sounds/Lonely Witch.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Lonely Witch.mp3
-
 #begin Sounds/Picked Coin Echo.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/Picked Coin Echo.wav
+
+#begin Sounds/song_level1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/song_level1.mp3
 
 #begin Sounds/space.mp3
 /importer:Mp3Importer

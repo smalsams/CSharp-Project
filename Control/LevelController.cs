@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using System;
@@ -37,6 +38,7 @@ namespace GameAttempt1.Control
         }
         public void NextLevel(object sender, EventArgs args)
         {
+            MediaPlayer.Stop();
             _index++;
             _index %= _levelList.Count;
             SetLevel(_index);
@@ -46,7 +48,8 @@ namespace GameAttempt1.Control
         {
             var tileMap = _contentManager.Load<TiledMap>("./TilesetGen/" + levelName);
             var renderer = new TiledMapRenderer(_device, tileMap);
-            Current = new Level(tileMap, renderer);
+            var song = _contentManager.Load<Song>($"Sounds/song_level{_index + 1}");
+            Current = new Level(tileMap, renderer, song);
         }
 
         public void SetLevel(int levelIndex)

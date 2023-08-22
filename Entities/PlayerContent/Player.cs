@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using MonoGame.Extended;
 using MonoGame.Extended.Sprites;
 using static GameAttempt1.Utilities.GameUtilities;
-using Animation = GameAttempt1.Sprites.Animation;
+using Animation = GameAttempt1.Sprites.VerticalAnimation;
+using MonoGame.Extended.Tiled;
+using System.Reflection.Metadata;
 
 #endregion
 
@@ -26,26 +28,28 @@ public class Player : IEntity, IFocusable
     public Vector2 Position { get => _position ; set => _position = value; }
     public Vector2 Velocity;
     private Vector2 _position;
-    private RectangleF _boundingBox => new(Position.X, Position.Y, PLAYER_WIDTH, PLAYER_HEIGHT);
+    private RectangleF _boundingBox => new(Position.X - 10f, Position.Y +5f, PLAYER_WIDTH, PLAYER_HEIGHT);
     public PlayerState State { get; private set; }
     public GameDirection Direction { get; private set; }
     public bool HasJumped { get; set; }
-    public bool OnPlatform { get; set; }
-    public bool CollidingX { get; set; }
-    public bool CollidingY { get; set; }
+    public bool CollidingFromTop { get; set; }
+    public bool CollidingFromLeft { get; set; }
+    public bool CollidingFromBottom { get; set; }
+    public bool CollidingFromRight { get; set; }
+    public bool InWater { get; set; }
     public EventHandler Radio { get; set; }
     #endregion
     #region Constructors
     public Player(Texture2D playerTextures)
     {
         _stateProcessor.AddState(nameof(PlayerTextures.None),
-            new Animation(playerTextures, 4, (6, 6), (PLAYER_WIDTH, PLAYER_HEIGHT)));
+            new Animation(playerTextures, 4, new Point(6, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Walk),
-            new Animation(playerTextures, 6, (46, 6), (PLAYER_WIDTH, PLAYER_HEIGHT)));
+            new Animation(playerTextures, 6, new Point(46, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Jump),
-            new Animation(playerTextures, 4, (86, 6), (PLAYER_WIDTH, PLAYER_HEIGHT)));
+            new Animation(playerTextures, 4, new Point(86, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Swim),
-            new Animation(playerTextures, 6, (166, 6), (PLAYER_WIDTH, PLAYER_HEIGHT)));
+            new Animation(playerTextures, 6, new Point(166, 6), new Point(PLAYER_HEIGHT, PLAYER_HEIGHT), 3));
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.None));
         _stateProcessor.Current?.Animate();
     }
@@ -60,7 +64,121 @@ public class Player : IEntity, IFocusable
             spriteBatch.Draw(_rectangleTexture2D, _boundingBox.TopLeft, Color.Purple);
         }
     }
+    public void AirGravityMove(KeyboardState keyboardState, Vector2 previous)
+    {
+        if (keyboardState.IsKeyDown(Keys.A))
+        {
+            Velocity.X = Position.X > PLAYER_WIDTH * 2 ? -DEFAULT_WALK_VELOCITY : 0;
+            Direction = GameDirection.Left;
+            if (CollidingFromTop && !HasJumped) Walk();
+        }
+        else if (keyboardState.IsKeyDown(Keys.D))
+        {
+            Velocity.X = DEFAULT_WALK_VELOCITY;
+            Direction = GameDirection.Right;
+            if (CollidingFromTop && !HasJumped) Walk();
+        }
+        else
+        {
+            Velocity.X = 0;
+        }
+        if (CollidingFromLeft)
+        {
+            if (previous.X < Position.X)
+            {
+                _position.X = previous.X;
+            }
+        }
+        if (CollidingFromRight)
+        {
+            if (previous.X > Position.X)
+            {
+                _position.X = previous.X;
+            }
+        }
 
+        if (CollidingFromBottom)
+        {
+            if (Velocity.Y < 0) Velocity.Y += JUMP_Y_VELOCITY;
+            CollidingFromTop = false;
+        }
+        if (CollidingFromTop && keyboardState.IsKeyDown(Keys.W) && !HasJumped)
+        {
+            _position.Y -= JUMP_HEIGHT;
+            Velocity.Y -= JUMP_Y_VELOCITY;
+            CollidingFromTop = false;
+            Jump();
+            HasJumped = true;
+            Radio.Invoke(this, EventArgs.Empty);
+        }
+
+        if (!CollidingFromTop)
+        {
+            if (Velocity.Y < 10f)
+            {
+                Velocity.Y += GRAVITY;
+            }
+        }
+        else
+        {
+            Velocity.Y = 0;
+            HasJumped = false;
+        }
+
+        if (Velocity.X == 0 && CollidingFromTop) Stop();
+    }
+
+    public void WaterGravityMove(KeyboardState keyboardState, Vector2 previous)
+    {   
+        if (keyboardState.IsKeyDown(Keys.W)) { Velocity.Y = -3f; }
+        else if (keyboardState.IsKeyDown(Keys.S)) { Velocity.Y = 3f; }
+        if (keyboardState.IsKeyDown(Keys.A))
+        {
+            Direction = GameDirection.Left;
+            Velocity.X = Position.X > PLAYER_WIDTH * 2 ? -DEFAULT_WALK_VELOCITY : 0;
+        }
+        else if (keyboardState.IsKeyDown(Keys.D))
+        {
+            Direction = GameDirection.Right;
+            Velocity.X = DEFAULT_WALK_VELOCITY;
+        }
+        else
+        {
+            Velocity.X = 0;
+        }
+
+        if (CollidingFromLeft)
+        {
+            if (previous.X < Position.X)
+            {
+                _position.X = previous.X;
+            }
+        }
+        else if (CollidingFromRight)
+        {
+            if (previous.X > Position.X)
+            {
+                _position.X = previous.X;
+            }
+        }
+
+        if (CollidingFromBottom)
+        {
+            if (Velocity.Y < 0) Velocity.Y = -Velocity.Y;
+            CollidingFromTop = false;
+        }
+        if (!CollidingFromTop)
+        {
+            if (!keyboardState.IsKeyDown(Keys.W) && !keyboardState.IsKeyDown(Keys.S)){ Velocity.Y = 1f; }
+            SwimOrCrawl();
+        }
+        else
+        {
+            Walk();
+            if(!keyboardState.IsKeyDown(Keys.W)) { Velocity.Y = 0; }
+        }
+        if (Velocity.X == 0 && CollidingFromTop) Stop();
+    }
     public void Update(GameTime gameTime)
     {
         var previous = Position;
@@ -72,50 +190,15 @@ public class Player : IEntity, IFocusable
             drawDebug = !drawDebug;
         }
         Position += Velocity;
-        if (keyboardState.IsKeyDown(Keys.A))
+        if (InWater)
         {
-            Velocity.X = Position.X > PLAYER_WIDTH * 2 ? -DEFAULT_WALK_VELOCITY : 0;
-            Direction = GameDirection.Left;
-            if (OnPlatform && !HasJumped) Walk();
-        }
-        else if (keyboardState.IsKeyDown(Keys.D))
-        {
-            Velocity.X = DEFAULT_WALK_VELOCITY;
-            Direction = GameDirection.Right;
-            if (OnPlatform && !HasJumped) Walk();
+            WaterGravityMove(keyboardState, previous);
         }
         else
         {
-            Velocity.X = 0;
+            AirGravityMove(keyboardState, previous);
         }
 
-        if (CollidingX){ _position.X = previous.X;}
-
-        if (CollidingY)
-        {
-            if (Velocity.Y < 0) Velocity.Y += JUMP_Y_VELOCITY;
-        }
-        if (OnPlatform && keyboardState.IsKeyDown(Keys.W) && !HasJumped)
-        {
-            _position.Y -= JUMP_HEIGHT;
-            Velocity.Y -= JUMP_Y_VELOCITY;
-            OnPlatform = false;
-            Jump();
-            HasJumped = true;
-            Radio.Invoke(this, EventArgs.Empty);
-        }
-
-        if (!OnPlatform)
-        {
-            Velocity.Y += GRAVITY;
-        }
-        else
-        {
-            Velocity.Y = 0;
-            HasJumped = false;
-        }
-
-        if (Velocity.X == 0 && OnPlatform) Stop();
 
     }
 
@@ -139,60 +222,55 @@ public class Player : IEntity, IFocusable
         }
         _rectangleTexture2D.SetData(colours.ToArray());
     }
-    public void HandleCollisionY(RectangleF platformRectangle)
+    public void HandleCollisionY(RectangleF platformRectangle, bool platform)
     {
         if (_boundingBox.Right < platformRectangle.Left || _boundingBox.Left > platformRectangle.Right){
             return;
 
         }
-        if (_boundingBox.Bottom > platformRectangle.Top && _boundingBox.Bottom < platformRectangle.Bottom && _boundingBox.Top < platformRectangle.Top)
+        if (_boundingBox.Bottom - platformRectangle.Top <= 20f && _boundingBox.Bottom < platformRectangle.Bottom && _boundingBox.Bottom > platformRectangle.Top)
         {
-            OnPlatform = true;
+            if(_boundingBox.Bottom - platformRectangle.Top > 10f)
+            {
+                _position.Y -= 10f;
+            }
+            if (platform)
+            {
+                CollidingFromTop = true;
+            }
         }
 
-        else if (_boundingBox.Top < platformRectangle.Bottom && _boundingBox.Top > platformRectangle.Top && _boundingBox.Bottom > platformRectangle.Bottom)
+        else if (_boundingBox.Top < platformRectangle.Bottom && _boundingBox.Top > platformRectangle.Top &&
+                 _boundingBox.Bottom > platformRectangle.Bottom)
         {
-            CollidingY = true;
+            CollidingFromBottom = true;
         }
     }
 
     public void HandleCollisionX(RectangleF platformRectangle)
     {
-        if (_boundingBox.Bottom - 10f < platformRectangle.Top || _boundingBox.Top > platformRectangle.Bottom)
+        if (_boundingBox.Bottom - 20f < platformRectangle.Top || _boundingBox.Top + 20f> platformRectangle.Bottom)
         {
             return;
         }
 
-        if (_boundingBox.Right > platformRectangle.Left && _boundingBox.Right < platformRectangle.Right ||
-            _boundingBox.Left < platformRectangle.Right && _boundingBox.Left > platformRectangle.Left)
+        if (_boundingBox.Right  + 5f> platformRectangle.Left && _boundingBox.Right < platformRectangle.Right)
         {
-            CollidingX = true;
+            CollidingFromLeft = true;
+        }
+        else if (_boundingBox.Left -5f < platformRectangle.Right && _boundingBox.Left > platformRectangle.Left)
+        {
+            CollidingFromRight = true;
         }
     }
 
-    public void HandleCollisionY(Rectangle rectangle)
+    public void WaterCheck(RectangleF rectangle)
     {
-        if (!(_boundingBox.Left > rectangle.Left) || !(_boundingBox.Right < rectangle.Right)) return;
-        if (_boundingBox.Top < rectangle.Bottom)
+        if (_boundingBox.Intersects(rectangle))
         {
-            CollidingY = true;
-            return;
-        }
-
-        if (_boundingBox.Bottom > rectangle.Top)
-        {
-            OnPlatform = true;
+            InWater = true;
         }
     }
-    public void HandleCollisionX(Rectangle rectangle)
-    {
-        if (!(_boundingBox.Bottom > rectangle.Top) || !(_boundingBox.Top < rectangle.Bottom)) return;
-        if (_boundingBox.Left > rectangle.Left || _boundingBox.Right < rectangle.Right)
-        {
-            CollidingX = true;
-        }
-    }
-
     public void Pause()
     {
         State = State == PlayerState.Paused ? PlayerState.Playing : PlayerState.Paused;
@@ -202,7 +280,7 @@ public class Player : IEntity, IFocusable
     {
         Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y);
         HasJumped = true;
-        OnPlatform = false;
+        CollidingFromTop = false;
 
     }
     #endregion

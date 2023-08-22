@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace GameAttempt1.Entities
 {
-    public class EntityProcessor
+    public class EntityController
     {
         public List<IEntity> entities = new();
+        public List<IEntity> activeEntities = new();
         public void Add(IEntity entity)
         {
             if (!entities.Contains(entity)) entities.Add(entity);
@@ -19,9 +22,12 @@ namespace GameAttempt1.Entities
         }
         public IEntity this[int index] => entities[index];
 
-        public void Draw()
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-
+            foreach(var entity in activeEntities)
+            {
+                entity.Draw(spriteBatch, gameTime);
+            }
         }
     }
 }

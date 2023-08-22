@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace GameAttempt1.Utilities
 {
     public static class GameUtilities
@@ -21,6 +20,7 @@ namespace GameAttempt1.Utilities
         public const float JUMP_Y_VELOCITY = 5f;
         public const int PLAYER_TEXTURE_X_OFFSET = 40;
         public const int PLAYER_TEXTURE_DEFAULT = 6;
+        public const int FPS = 10;
         public static int Round(this float f) => (int)Math.Round(f);
 
         public static void Add<T>(this List<T> list, params T[] parameters)

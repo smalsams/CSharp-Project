@@ -1,9 +1,12 @@
-﻿using GameAttempt1.Sounds;
+﻿using GameAttempt1.Entities.PlayerContent;
+using GameAttempt1.Sounds;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using System;
+using System.Collections.Generic;
 
 namespace GameAttempt1.Entities
 {
@@ -15,6 +18,7 @@ namespace GameAttempt1.Entities
         private TiledMapRenderer _renderer;
         public EventHandler LevelFinish;
         public EntityController Controller;
+        public List<IEntity> Entities { get; set; }
         private bool _paused;
         public Vector2 GlobalBounds => new(TiledMap.WidthInPixels, TiledMap.HeightInPixels);
         public float TileSize => TiledMap.TileWidth;
@@ -24,6 +28,7 @@ namespace GameAttempt1.Entities
             TiledMap = map;
             _renderer = renderer;
             _song = song;
+            Entities = new List<IEntity>();
         }
 
         public void Pause()
@@ -38,16 +43,24 @@ namespace GameAttempt1.Entities
                 MediaPlayer.Resume();
             }
         }
-        public void Draw(GameTime gameTime, Matrix viewMatrix)
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Matrix viewMatrix)
         {
             _renderer.Draw(viewMatrix);
-
+            foreach (var entity in Entities)
+            {
+                entity.Draw(spriteBatch, gameTime);
+            }
         }
+
 
         public void Update(GameTime gameTime)
         {
             if (_paused) return;
             _renderer.Update(gameTime);
+            foreach (var entity in Entities)
+            {
+                entity.Update(gameTime);
+            }
         }
         public void PlaySong()
         {

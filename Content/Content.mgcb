@@ -117,11 +117,11 @@
 /processorParam:Quality=Best
 /build:Sounds/Picked Coin Echo.wav
 
-#begin Sounds/song_level1.mp3
+#begin Sounds/song_level0.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Sounds/song_level1.mp3
+/build:Sounds/song_level0.mp3
 
 #begin Sounds/space.mp3
 /importer:Mp3Importer

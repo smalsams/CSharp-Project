@@ -1,0 +1,24 @@
+{
+  "entities": {
+    "a": {
+      "Class": "Coin",
+      "Id" :  "1",
+      "Type": "silver",
+      "Position": "600 660"
+    },
+    "b" : {
+      "Class": "Coin",
+      "Id" : "2",
+      "Type": "gold",
+      "Position": "140 755" 
+    }
+
+  },
+  "textures": [
+    "coin_gold",
+    "coin_silver",
+    "coin_copper",
+    "bloody_zombie-NESW",
+    "Tuxedo"
+  ]
+}

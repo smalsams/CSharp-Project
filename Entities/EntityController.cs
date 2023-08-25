@@ -24,7 +24,7 @@ namespace GameAttempt1.Entities
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach(var entity in activeEntities)
+            foreach (var entity in activeEntities)
             {
                 entity.Draw(spriteBatch, gameTime);
             }

@@ -1,4 +1,5 @@
 ﻿using GameAttempt1.Components;
+using GameAttempt1.Entities;
 using GameAttempt1.Entities.PlayerContent;
 using GameAttempt1.Utilities;
 using Microsoft.Xna.Framework;
@@ -6,14 +7,14 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using MonoGame.Extended;
 using static GameAttempt1.Utilities.GameUtilities;
-using MonoGame.Extended.Entities;
-using GameAttempt1.Entities;
 
 namespace GameAttempt1.Control
 {
@@ -40,6 +41,8 @@ namespace GameAttempt1.Control
             _levelController.Current.PlaySong();
             LoadComponents();
         }
+
+
 
         public void LoadComponents()
         {
@@ -74,7 +77,21 @@ namespace GameAttempt1.Control
 
         public void SaveGame_OnClick(object sender, EventArgs e)
         {
+            var data = new PlayerData();
+            data.Position = _player.Position;
+            data.State = _player.State;
+            data.Direction = _player.Direction;
+            data.Velocity = _player.Velocity;
 
+            string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
+            int fileNum = 1;
+            var filename = $"../../../Saves/save{fileNum}";
+            while (File.Exists(filename))
+            {
+                fileNum++;
+                filename = $"../../../Saves/save{fileNum}";
+            }
+            File.WriteAllText(filename, jsonData);
         }
         public void PauseGame_OnPress(object sender, EventArgs e)
         {
@@ -82,15 +99,16 @@ namespace GameAttempt1.Control
             _player.Pause();
         }
 
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(transformMatrix: _camera.Transform);
             _player.Draw(spriteBatch, gameTime);
-            _levelController.Draw(gameTime, _camera.Transform);
+            _levelController.Draw(spriteBatch, gameTime, _camera.Transform);
             _player.DrawDebug(_graphicsDevice);
             if (Keyboard.GetState().IsKeyDown(Keys.F1))
             {
-                DrawDebug(_graphicsDevice,spriteBatch);
+                DrawDebug(_graphicsDevice, spriteBatch);
             }
             spriteBatch.End();
             spriteBatch.Begin();
@@ -145,13 +163,13 @@ namespace GameAttempt1.Control
                 _player.HandleCollisionY(platformRectangle, true);
                 _player.HandleCollisionX(platformRectangle);
             }
-            foreach(var obstacle in obstacles)
+            foreach (var obstacle in obstacles)
             {
                 var obstacleRectangle = new RectangleF(obstacle.Position.X, obstacle.Position.Y, obstacle.Size.Width, obstacle.Size.Height);
                 _player.HandleCollisionY(obstacleRectangle, false);
                 _player.HandleCollisionX(obstacleRectangle);
             }
-            foreach(var waterTile in waterTiles)
+            foreach (var waterTile in waterTiles)
             {
                 var tileRectangle = new RectangleF(waterTile.X * 32, waterTile.Y * 32, 32, 32);
                 if (!waterTile.IsBlank)
@@ -175,6 +193,16 @@ namespace GameAttempt1.Control
             }
             _pauseButton.Update(gameTime);
             _levelController.Update(gameTime);
+            foreach (var entity in _levelController.Current.Entities)
+            {
+                if(_levelController.PlayerEntityCollision(_player, entity))
+                {
+                    if(entity.GetType() == typeof(Coin))
+                    {
+                        ((Coin)entity).Picked = true;
+                    }
+                }
+            }
             if (_player.State == PlayerState.Paused)
             {
                 _pauseComponents.ForEach(c => c.Update(gameTime));

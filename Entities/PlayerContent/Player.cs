@@ -1,34 +1,34 @@
 ﻿#region Usings
 using GameAttempt1.Control;
+using GameAttempt1.Serialization;
 using GameAttempt1.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using MonoGame.Extended;
-using MonoGame.Extended.Sprites;
+using System.Linq.Expressions;
+using System.Text.Json.Serialization;
 using static GameAttempt1.Utilities.GameUtilities;
 using Animation = GameAttempt1.Sprites.VerticalAnimation;
-using MonoGame.Extended.Tiled;
-using System.Reflection.Metadata;
 
 #endregion
 
 namespace GameAttempt1.Entities.PlayerContent;
-
-[Serializable]
-public class Player : IEntity, IFocusable
+[JsonConverter(typeof(EntityConverter))]
+public class Player : IFocusable
 {
     #region Fields and Properties
 
     private Texture2D _rectangleTexture2D;
     private bool drawDebug;
     private readonly SpriteStateProcessor _stateProcessor = new();
-    public Vector2 Position { get => _position ; set => _position = value; }
+    public Vector2 Position { get => _position; set => _position = value; }
     public Vector2 Velocity;
     private Vector2 _position;
-    private RectangleF _boundingBox => new(Position.X - 10f, Position.Y +5f, PLAYER_WIDTH, PLAYER_HEIGHT);
+    private RectangleF _boundingBox => new(Position.X - 10f, Position.Y + 5f, PLAYER_WIDTH, PLAYER_HEIGHT);
     public PlayerState State { get; private set; }
     public GameDirection Direction { get; private set; }
     public bool HasJumped { get; set; }
@@ -38,12 +38,36 @@ public class Player : IEntity, IFocusable
     public bool CollidingFromRight { get; set; }
     public bool InWater { get; set; }
     public EventHandler Radio { get; set; }
+
+    public RectangleF BoundingBox => _boundingBox;
+
+    public int Id { get => 1; set => value = 1; }
     #endregion
     #region Constructors
     public Player(Texture2D playerTextures)
     {
         _stateProcessor.AddState(nameof(PlayerTextures.None),
-            new Animation(playerTextures, 4, new Point(6, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+    new Animation(playerTextures, 4, new Point(6, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+        _stateProcessor.AddState(nameof(PlayerTextures.Walk),
+            new Animation(playerTextures, 6, new Point(46, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+        _stateProcessor.AddState(nameof(PlayerTextures.Jump),
+            new Animation(playerTextures, 4, new Point(86, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+        _stateProcessor.AddState(nameof(PlayerTextures.Swim),
+            new Animation(playerTextures, 6, new Point(166, 6), new Point(PLAYER_HEIGHT, PLAYER_HEIGHT), 3));
+        _stateProcessor.ChangeCurrent(nameof(PlayerTextures.None));
+        _stateProcessor.Current?.Animate();
+    }
+    [JsonConstructor]
+    public Player(PlayerData data)
+    {
+        Position = data.Position;
+        State = data.State;
+        Direction = data.Direction;
+    }
+    public void LoadTexture(Texture2D playerTextures)
+    {
+        _stateProcessor.AddState(nameof(PlayerTextures.None),
+    new Animation(playerTextures, 4, new Point(6, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Walk),
             new Animation(playerTextures, 6, new Point(46, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Jump),
@@ -129,7 +153,7 @@ public class Player : IEntity, IFocusable
     }
 
     public void WaterGravityMove(KeyboardState keyboardState, Vector2 previous)
-    {   
+    {
         if (keyboardState.IsKeyDown(Keys.W)) { Velocity.Y = -3f; }
         else if (keyboardState.IsKeyDown(Keys.S)) { Velocity.Y = 3f; }
         if (keyboardState.IsKeyDown(Keys.A))
@@ -169,13 +193,13 @@ public class Player : IEntity, IFocusable
         }
         if (!CollidingFromTop)
         {
-            if (!keyboardState.IsKeyDown(Keys.W) && !keyboardState.IsKeyDown(Keys.S)){ Velocity.Y = 1f; }
+            if (!keyboardState.IsKeyDown(Keys.W) && !keyboardState.IsKeyDown(Keys.S)) { Velocity.Y = 1f; }
             SwimOrCrawl();
         }
         else
         {
             Walk();
-            if(!keyboardState.IsKeyDown(Keys.W)) { Velocity.Y = 0; }
+            if (!keyboardState.IsKeyDown(Keys.W)) { Velocity.Y = 0; }
         }
         if (Velocity.X == 0 && CollidingFromTop) Stop();
     }
@@ -212,11 +236,11 @@ public class Player : IEntity, IFocusable
             {
                 if (i == 0 || j == 0 || i == (int)_boundingBox.Height - 1 || j == (int)_boundingBox.Width - 1)
                 {
-                    colours.Add(new Color(255,255,255,255));
+                    colours.Add(new Color(255, 255, 255, 255));
                 }
                 else
                 {
-                    colours.Add(new Color(0,0,0,0));
+                    colours.Add(new Color(0, 0, 0, 0));
                 }
             }
         }
@@ -224,13 +248,14 @@ public class Player : IEntity, IFocusable
     }
     public void HandleCollisionY(RectangleF platformRectangle, bool platform)
     {
-        if (_boundingBox.Right < platformRectangle.Left || _boundingBox.Left > platformRectangle.Right){
+        if (_boundingBox.Right < platformRectangle.Left || _boundingBox.Left > platformRectangle.Right)
+        {
             return;
 
         }
         if (_boundingBox.Bottom - platformRectangle.Top <= 20f && _boundingBox.Bottom < platformRectangle.Bottom && _boundingBox.Bottom > platformRectangle.Top)
         {
-            if(_boundingBox.Bottom - platformRectangle.Top > 10f)
+            if (_boundingBox.Bottom - platformRectangle.Top > 10f)
             {
                 _position.Y -= 10f;
             }
@@ -249,16 +274,16 @@ public class Player : IEntity, IFocusable
 
     public void HandleCollisionX(RectangleF platformRectangle)
     {
-        if (_boundingBox.Bottom - 20f < platformRectangle.Top || _boundingBox.Top + 20f> platformRectangle.Bottom)
+        if (_boundingBox.Bottom - 20f < platformRectangle.Top || _boundingBox.Top + 20f > platformRectangle.Bottom)
         {
             return;
         }
 
-        if (_boundingBox.Right  + 5f> platformRectangle.Left && _boundingBox.Right < platformRectangle.Right)
+        if (_boundingBox.Right + 5f > platformRectangle.Left && _boundingBox.Right < platformRectangle.Right)
         {
             CollidingFromLeft = true;
         }
-        else if (_boundingBox.Left -5f < platformRectangle.Right && _boundingBox.Left > platformRectangle.Left)
+        else if (_boundingBox.Left - 5f < platformRectangle.Right && _boundingBox.Left > platformRectangle.Left)
         {
             CollidingFromRight = true;
         }
@@ -309,5 +334,16 @@ public class Player : IEntity, IFocusable
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.Swim));
         _stateProcessor.Current.Animate();
     }
+
+    public void PopulateFromJson(JObject jsonObject)
+    {
+        throw new NotImplementedException();
+    }
+
+    public string GetTextureName(JObject jsonObject)
+    {
+        return "Tuxedo";
+    }
+
     #endregion
 }

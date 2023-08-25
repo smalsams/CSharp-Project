@@ -11,7 +11,7 @@ namespace GameAttempt1.Control
         {
             if (target.Position.X >= graphics.Viewport.Width / 2)
             {
-                Position.X = target.Position.X - graphics.Viewport.Width/2;
+                Position.X = target.Position.X - graphics.Viewport.Width / 2;
             }
             else
             {

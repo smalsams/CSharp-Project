@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using static GameAttempt1.Utilities.GameUtilities;
 
 
 namespace GameAttempt1.Control
@@ -21,7 +22,7 @@ namespace GameAttempt1.Control
     public sealed class LevelController
     {
         private readonly List<string> _levelList;
-        private int _index;
+        public int Index { get; set; }
         private readonly GraphicsDevice _device;
         private readonly ContentManager _contentManager;
         private TextureManager _textureManager;
@@ -30,10 +31,10 @@ namespace GameAttempt1.Control
         public LevelController(ContentManager contentManager, GraphicsDevice graphicsDevice)
         {
             _levelList = new List<string>();
-            LoadLevels("../../../Content/");
+            LoadLevels(DIR_PATH_RELATIVE + "Content/");
             _contentManager = contentManager;
             _device = graphicsDevice;
-            SetLevel(_index);
+            SetLevel(Index);
             Current.LevelFinish += NextLevel;
         }
 
@@ -45,23 +46,23 @@ namespace GameAttempt1.Control
         }
         private LevelData LoadLevelData(string levelName)
         {
-            var levelDataJson = File.ReadAllText($"../../../LevelEntityData/{levelName}Data.json");
+            var levelDataJson = File.ReadAllText($"{DIR_PATH_RELATIVE}LevelEntityData/{levelName}Data.json");
             return JsonConvert.DeserializeObject<LevelData>(levelDataJson);
 
         }
         public void NextLevel(object sender, EventArgs args)
         {
             MediaPlayer.Stop();
-            _index++;
-            _index %= _levelList.Count;
-            SetLevel(_index);
+            Index++;
+            Index %= _levelList.Count;
+            SetLevel(Index);
         }
 
         public void SetLevel(string levelName)
         {
             var tileMap = _contentManager.Load<TiledMap>("./TilesetGen/" + levelName);
             var renderer = new TiledMapRenderer(_device, tileMap);
-            var song = _contentManager.Load<Song>($"Sounds/song_level{_index}");
+            var song = _contentManager.Load<Song>($"Sounds/song_level{Index}");
             Current = new Level(tileMap, renderer, song);
             var levelData = LoadLevelData(levelName);
             _textureManager = new TextureManager(_contentManager);

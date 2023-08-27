@@ -55,7 +55,6 @@ namespace GameAttempt1.Entities
 
         public void Update(GameTime gameTime)
         {
-            if (_paused) return;
             _renderer.Update(gameTime);
             foreach (var entity in Entities)
             {

@@ -20,7 +20,6 @@ namespace GameAttempt1
         public void ChangeState(State state) => _nextState = state;
         protected override void Initialize()
         {
-
             base.Initialize();
             _graphics.PreferredBackBufferWidth = 1600;
             _graphics.PreferredBackBufferHeight = 900;

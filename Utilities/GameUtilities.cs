@@ -4,6 +4,7 @@ namespace GameAttempt1.Utilities
 {
     public static class GameUtilities
     {
+        public const string DIR_PATH_RELATIVE = "../../../";
         public const float MAX = int.MaxValue;
         public const float MIN = int.MinValue;
         public const float ZERO = 0.0001f;

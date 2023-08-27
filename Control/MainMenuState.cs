@@ -1,13 +1,18 @@
 ﻿#region Usings
 
 using GameAttempt1.Components;
+using GameAttempt1.Entities.PlayerContent;
 using GameAttempt1.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
+using static GameAttempt1.Utilities.GameUtilities;
 
 #endregion
 
@@ -21,10 +26,11 @@ public sealed class MainMenuState : State
     private const int MENU_Y_COORDINATE = 320;
     private const int MENU_OFFSET = 100;
     private readonly List<Component> _components;
+    private readonly List<Component> _loadComponents;
     private Texture2D _backgroundTexture;
     private Song song;
     private LevelController _levelController;
-    private bool _levelSelectMenuVisible;
+    private bool _loadSelectMenuVisible;
 
     #endregion
     #region Constructors
@@ -33,8 +39,9 @@ public sealed class MainMenuState : State
         : base(contentManager, game, graphicsDevice)
     {
         _components = new List<Component>();
+        _loadComponents = new List<Component>();
         LoadComponents();
-        _levelSelectMenuVisible = false;
+        _loadSelectMenuVisible = false;
     }
 
     #endregion
@@ -66,7 +73,7 @@ public sealed class MainMenuState : State
             buttonFont,
             new Vector2(MENU_X_COORDINATE, MENU_Y_COORDINATE + MENU_OFFSET),
             "Load Game");
-        loadGameButton.ButtonPress += LoadGame_OnClick;
+        loadGameButton.ButtonPress += LoadMenu_OnClick;
 
         var exitButton = new Button(buttonTexture,
             buttonFont,
@@ -84,6 +91,17 @@ public sealed class MainMenuState : State
             exitButton,
             volumeSlider,
             volumeCounter);
+        for(var i = 1; i<5; i++)
+        {
+            var button = new SerialButton<int>(buttonTexture,
+                buttonFont,
+                new Vector2(200 + (buttonTexture.Width + 10f)*(i-1) , 200),
+                $"Save {i}",
+                i);
+            button.ButtonPress += LoadSave_OnClick;
+            _loadComponents.Add(button);
+        }
+
         //sounds
         song = _contentManager.Load<Song>("Sounds/space");
         PlayMediaPlayer();
@@ -100,23 +118,40 @@ public sealed class MainMenuState : State
         spriteBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
         spriteBatch.End();
         spriteBatch.Begin();
-        if (!_levelSelectMenuVisible) { _components.ForEach(c => c.Draw(gameTime, spriteBatch)); }
+        if (!_loadSelectMenuVisible) { _components.ForEach(c => c.Draw(gameTime, spriteBatch)); }
         else
         {
-
+            _loadComponents.ForEach(c => c.Draw(gameTime, spriteBatch));
         }
         spriteBatch.End();
     }
 
     public override void Update(GameTime gameTime)
     {
-        _components.ForEach(c => c.Update(gameTime));
+       if(!_loadSelectMenuVisible) _components.ForEach(c => c.Update(gameTime));
+        else
+        {
+            _loadComponents.ForEach(c => c.Update(gameTime));
+        }
     }
 
     #endregion
 
     #region Content events
-
+    private void LoadSave_OnClick<T>(object sender, T args)
+    {
+        var fileName = DIR_PATH_RELATIVE + $"Saves/save{args}";
+        if(!File.Exists(fileName)) 
+        {
+            return;
+        }
+        var data = File.ReadAllText(fileName);
+        var gameData = JsonConvert.DeserializeObject<GameData>(data);
+        var playerData = gameData.PlayerData;
+        var level = gameData.Level;
+        _levelController.SetLevel(level);
+        _game.ChangeState(new GameState(_contentManager, _game, _graphicsDevice, _levelController, playerData));
+    }
     private void NewGame_OnClick(object sender, EventArgs e)
     {
         StopMediaPlayer();
@@ -128,9 +163,10 @@ public sealed class MainMenuState : State
         MediaPlayer.Volume = volume;
     }
 
-    private void LoadGame_OnClick(object sender, EventArgs e)
+    private void LoadMenu_OnClick(object sender, EventArgs e)
     {
         StopMediaPlayer();
+        _loadSelectMenuVisible = !_loadSelectMenuVisible;
     }
 
     private void ExitGame_OnClick(object sender, EventArgs e)
@@ -139,10 +175,6 @@ public sealed class MainMenuState : State
         _game.Exit();
     }
 
-    private void SelectLevelMenu_OnClick(object sender, EventArgs e)
-    {
-        _levelSelectMenuVisible = !_levelSelectMenuVisible;
-    }
 
     #endregion
 

@@ -49,14 +49,6 @@ namespace GameAttempt1.Entities
             }
         }
 
-        public void PopulateFromJson(JObject jsonObject)
-        {
-            Type = Enum.Parse<CoinType>(jsonObject["Type"].Value<string>());
-            var pos = jsonObject["Position"];
-            Position = new Vector2(pos["X"].Value<float>(), pos["Y"].Value<float>());
-            Id = jsonObject["Id"].Value<int>();
-        }
-
         public string GetTextureName(JObject jsonObject)
         {
             return $"coin_{jsonObject["Type"].Value<string>()}";
@@ -64,7 +56,10 @@ namespace GameAttempt1.Entities
 
         public void Update(GameTime gameTime)
         {
-            _spriteStateProcessor.Update(gameTime);
+            if (!Picked)
+            {
+                _spriteStateProcessor.Update(gameTime);
+            }
         }
     }
 }

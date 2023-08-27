@@ -8,17 +8,17 @@ namespace GameAttempt1.Components
     public class Button : Component
     {
         #region Fields and Properties
-        private MouseState _currentMouseState;
-        private MouseState _previousMouseState;
-        private Keys _keyInvoker;
-        private KeyboardState _previousKeyboardState;
-        private KeyboardState _currentKeyboardState;
+        protected MouseState _currentMouseState;
+        protected MouseState _previousMouseState;
+        protected Keys _keyInvoker;
+        protected KeyboardState _previousKeyboardState;
+        protected KeyboardState _currentKeyboardState;
         private readonly Texture2D _texture;
         private readonly SpriteFont _font;
-        private bool _hovered;
+        protected bool _hovered;
 
         public EventHandler ButtonPress;
-
+        public bool Deactivated { get; set; }
         public bool Pressed => _hovered &&
                                _currentMouseState.LeftButton == ButtonState.Released &&
                                _previousMouseState.LeftButton == ButtonState.Pressed;

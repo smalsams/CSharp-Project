@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace GameAttempt1.Components
+namespace SamSer.Components
 {
     public sealed class Counter<T> : TextComponent
     {

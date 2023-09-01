@@ -1,5 +1,4 @@
-﻿using GameAttempt1.Entities.PlayerContent;
-using GameAttempt1.Sounds;
+﻿using SamSer.Sounds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
@@ -8,7 +7,7 @@ using MonoGame.Extended.Tiled.Renderers;
 using System;
 using System.Collections.Generic;
 
-namespace GameAttempt1.Entities
+namespace SamSer.Entities
 {
     public class Level
     {
@@ -17,6 +16,7 @@ namespace GameAttempt1.Entities
         public TiledMap TiledMap;
         private TiledMapRenderer _renderer;
         public EventHandler LevelFinish;
+        public bool Finished { get; set; }
         public EntityController Controller;
         public List<IEntity> Entities { get; set; }
         private bool _paused;
@@ -61,6 +61,7 @@ namespace GameAttempt1.Entities
                 entity.Update(gameTime);
             }
         }
+
         public void PlaySong()
         {
             MediaPlayer.Play(_song);

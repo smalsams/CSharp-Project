@@ -1,11 +1,9 @@
-﻿using GameAttempt1.Entities;
-using MonoGame.Extended.Collections;
+﻿using SamSer.Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Linq.Expressions;
 
-namespace GameAttempt1.Serialization
+namespace SamSer.Serialization
 {
     public class EntityConverter : JsonConverter<IEntity>
     {
@@ -20,7 +18,7 @@ namespace GameAttempt1.Serialization
             }
             var entity = (IEntity)Activator.CreateInstance(type);
             return entity;
-            
+
         }
 
         public override void WriteJson(JsonWriter writer, IEntity value, JsonSerializer serializer)

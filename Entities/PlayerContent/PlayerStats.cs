@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace GameAttempt1.Entities.PlayerContent
+namespace SamSer.Entities.PlayerContent
 {
     public class PlayerStats
     {

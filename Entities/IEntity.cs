@@ -1,14 +1,15 @@
-﻿using GameAttempt1.Serialization;
+﻿using SamSer.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Dynamic;
 using System.Text.Json.Serialization;
 
-namespace GameAttempt1.Entities
+namespace SamSer.Entities
 {
+    /// <summary>
+    /// Defines a base non-playable object
+    /// </summary>
     [JsonConverter(typeof(EntityConverter))]
     public interface IEntity
     {

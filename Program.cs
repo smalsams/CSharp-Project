@@ -1,2 +1,2 @@
-﻿using var game = new GameAttempt1.TwoDPlatformer();
+﻿using var game = new SamSer.TwoDPlatformer();
 game.Run();

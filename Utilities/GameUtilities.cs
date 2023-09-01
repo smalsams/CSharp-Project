@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace GameAttempt1.Utilities
+namespace SamSer.Utilities
 {
     public static class GameUtilities
     {

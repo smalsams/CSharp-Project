@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameAttempt1.Control
+namespace SamSer.Control
 {
     public class Camera
     {

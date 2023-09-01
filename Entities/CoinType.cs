@@ -1,9 +1,9 @@
-﻿namespace GameAttempt1.Entities
+﻿namespace SamSer.Entities
 {
     public enum CoinType
     {
-        gold,
-        silver,
-        bronze
+        gold = 3,
+        silver = 2,
+        bronze = 1
     }
 }

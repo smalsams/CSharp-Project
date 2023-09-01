@@ -2,30 +2,92 @@
 using Microsoft.Xna.Framework.Content;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using static SamSer.Utilities.GameUtilities;
 
-namespace GameAttempt1.Sounds
+namespace SamSer.Sounds
 {
-    public class Radio : ICollection<SoundEffect>
+    public class Radio : IDictionary<string, SoundEffect>
     {
-        private ContentManager _contentManager;
+        private readonly ContentManager _contentManager;
 
         public Radio(ContentManager content)
         {
-            content = _contentManager;
+            _contentManager = content;
         }
-        public ICollection<SoundEffect> SoundEffects = new List<SoundEffect>();
+        public Dictionary<string, SoundEffect> SoundEffects = new Dictionary<string, SoundEffect>();
 
         public int Count => SoundEffects.Count;
 
-        public bool IsReadOnly => SoundEffects.IsReadOnly;
-        public void Add(string path)
+        public bool IsReadOnly => false;
+
+        public ICollection<string> Keys => SoundEffects.Keys;
+
+        public ICollection<SoundEffect> Values => SoundEffects.Values;
+
+        public SoundEffect this[string key] 
         {
-            var item = _contentManager.Load<SoundEffect>(path);
-            SoundEffects.Add(item);
+            get 
+            {
+                if (!ContainsKey(key))
+                {
+                    throw new KeyNotFoundException();
+                }
+                return SoundEffects[key];
+            }
+            set 
+            {
+                if (!ContainsKey(key))
+                {
+                    this[key] = value;
+                }
+            } 
+        }
+
+        public void Add(string itemName)
+        {
+            var item = _contentManager.Load<SoundEffect>($"{DIR_PATH_RELATIVE}{itemName}");
+            SoundEffects.Add(itemName, item);
         }
         public void Add(SoundEffect item)
         {
-            SoundEffects.Add(item);
+            SoundEffects.Add(nameof(item),item);
+        }
+
+        public bool Contains(SoundEffect item)
+        {
+            return SoundEffects.ContainsValue(item);
+        }
+        public bool ContainsKey(string key)
+        {
+            return SoundEffects.ContainsKey(key);
+        }
+
+
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return SoundEffects.GetEnumerator();
+        }
+
+        public void Add(string key, SoundEffect value)
+        {
+            SoundEffects.Add(key, value);
+        }
+
+        public bool Remove(string key)
+        {
+            return SoundEffects.Remove(key);
+        }
+
+        public bool TryGetValue(string key, [MaybeNullWhen(false)] out SoundEffect value)
+        {
+            return SoundEffects.TryGetValue(key, out value);
+        }
+
+        public void Add(KeyValuePair<string, SoundEffect> item)
+        {
+            SoundEffects.Add(item.Key, item.Value);
         }
 
         public void Clear()
@@ -33,29 +95,24 @@ namespace GameAttempt1.Sounds
             SoundEffects.Clear();
         }
 
-        public bool Contains(SoundEffect item)
+        public bool Contains(KeyValuePair<string, SoundEffect> item)
         {
-            return SoundEffects.Contains(item);
+            return (SoundEffects.ContainsKey(item.Key) && SoundEffects[item.Key] == item.Value);
         }
 
-        public void CopyTo(SoundEffect[] array, int arrayIndex)
+        public void CopyTo(KeyValuePair<string, SoundEffect>[] array, int arrayIndex)
         {
-            SoundEffects.CopyTo(array, arrayIndex);
+            throw new System.NotImplementedException();
         }
 
-        public IEnumerator<SoundEffect> GetEnumerator()
+        public bool Remove(KeyValuePair<string, SoundEffect> item)
         {
-            return SoundEffects.GetEnumerator();
+            throw new System.NotImplementedException();
         }
 
-        public bool Remove(SoundEffect item)
+        IEnumerator<KeyValuePair<string, SoundEffect>> IEnumerable<KeyValuePair<string, SoundEffect>>.GetEnumerator()
         {
-            return SoundEffects.Remove(item);
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return SoundEffects.GetEnumerator();
+            throw new System.NotImplementedException();
         }
     }
 }

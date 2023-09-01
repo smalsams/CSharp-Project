@@ -1,8 +1,9 @@
-﻿using GameAttempt1.Utilities;
+﻿using SamSer.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
-namespace GameAttempt1.Sprites
+namespace SamSer.Sprites
 {
     public abstract class AnimationBase
     {
@@ -17,13 +18,13 @@ namespace GameAttempt1.Sprites
         public AnimationState State { get; protected set; } = AnimationState.Cancelled;
         public double Time { get; protected set; }
         public double TotalTime => (double)TextureLength / FPS;
-        protected AnimationBase(Texture2D texture, int spriteAnimationCount, Point textureOrigin, Point spriteDimensions, int entityScale = 1)
+        protected AnimationBase(Texture2D texture, int spriteAnimationCount, Point textureOrigin, Size spriteDimensions, int entityScale = 1)
         {
             Texture = texture;
             TextureLength = spriteAnimationCount;
             Origin = textureOrigin;
-            SpriteWidth = spriteDimensions.X;
-            SpriteHeight = spriteDimensions.Y;
+            SpriteWidth = spriteDimensions.Width;
+            SpriteHeight = spriteDimensions.Height;
             Scale = entityScale;
             Time = 0;
         }

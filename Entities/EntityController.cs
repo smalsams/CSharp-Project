@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace GameAttempt1.Entities
+namespace SamSer.Entities
 {
     public class EntityController
     {

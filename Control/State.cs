@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameAttempt1.Control
+namespace SamSer.Control
 {
     public abstract class State
     {

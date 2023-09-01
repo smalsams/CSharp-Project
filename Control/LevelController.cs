@@ -1,12 +1,12 @@
-﻿using GameAttempt1.Entities;
-using GameAttempt1.Entities.PlayerContent;
+﻿using SamSer.Entities;
+using SamSer.Entities.PlayerContent;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Entities;
-using MonoGame.Extended.Tiled;
+using MonoGame.Extended;
 using MonoGame.Extended.Serialization;
+using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -14,19 +14,23 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using static GameAttempt1.Utilities.GameUtilities;
+using static SamSer.Utilities.GameUtilities;
 
-
-namespace GameAttempt1.Control
+namespace SamSer.Control
 {
     public sealed class LevelController
     {
+        #region Fields and Properties
         private readonly List<string> _levelList;
         public int Index { get; set; }
+        public Level Current { get; private set; }
         private readonly GraphicsDevice _device;
         private readonly ContentManager _contentManager;
         private TextureManager _textureManager;
         private PlayerData _playerData;
+        public PlayerData GetPlayerData => _playerData;
+        #endregion
+        #region Constructors
 
         public LevelController(ContentManager contentManager, GraphicsDevice graphicsDevice)
         {
@@ -35,21 +39,23 @@ namespace GameAttempt1.Control
             _contentManager = contentManager;
             _device = graphicsDevice;
             SetLevel(Index);
-            Current.LevelFinish += NextLevel;
         }
-
+        #endregion
+        #region Load Methods
         public void LoadLevels(string path)
         {
             const string suffix = "TilesetGen/Level*.tmx";
             var filenames = Directory.GetFiles(path, suffix, SearchOption.TopDirectoryOnly);
             _levelList.AddRange(filenames.Select(Path.GetFileNameWithoutExtension));
         }
-        private LevelData LoadLevelData(string levelName)
+        private static LevelData LoadLevelData(string levelName)
         {
             var levelDataJson = File.ReadAllText($"{DIR_PATH_RELATIVE}LevelEntityData/{levelName}Data.json");
             return JsonConvert.DeserializeObject<LevelData>(levelDataJson);
 
         }
+        #endregion
+        #region Level Control
         public void NextLevel(object sender, EventArgs args)
         {
             MediaPlayer.Stop();
@@ -57,6 +63,11 @@ namespace GameAttempt1.Control
             Index %= _levelList.Count;
             SetLevel(Index);
         }
+        public void SetLevel(int levelIndex)
+        {
+            SetLevel(_levelList[levelIndex]);
+        }
+
 
         public void SetLevel(string levelName)
         {
@@ -64,6 +75,7 @@ namespace GameAttempt1.Control
             var renderer = new TiledMapRenderer(_device, tileMap);
             var song = _contentManager.Load<Song>($"Sounds/song_level{Index}");
             Current = new Level(tileMap, renderer, song);
+            Current.LevelFinish += NextLevel;
             var levelData = LoadLevelData(levelName);
             _textureManager = new TextureManager(_contentManager);
             foreach (var texture in levelData.Textures)
@@ -74,34 +86,44 @@ namespace GameAttempt1.Control
             {
                 Current.Entities.Add(SetEntity(entityJson.Value));
             }
-            if(levelData.Player is not null)
+            if (levelData.Player is not null)
             {
                 _playerData = JsonConvert.DeserializeObject<PlayerData>(levelData.Player.ToString());
             }
         }
+        #endregion
+        #region Entity Control
         public IEntity SetEntity(JObject jsonObject)
         {
             var entityType = jsonObject["Class"]?.Value<string>();
-
-            IEntity entity;
-            switch (entityType)
+            IEntity entity = entityType switch
             {
-                case "Coin":
-                    entity = JsonConvert.DeserializeObject<Coin>(jsonObject.ToString(), new Vector2JsonConverter());
-                    break;
-                default:
-                    throw new JsonException($"Unknown entity type: {entityType}");
-            }
+                "Coin" => JsonConvert.DeserializeObject<Coin>(jsonObject.ToString(), new Vector2JsonConverter()),
+                "FlameEnemy" => JsonConvert.DeserializeObject<FlameEnemy>(jsonObject.ToString(), new Vector2JsonConverter()),
+                _ => throw new JsonException($"Unknown entity type: {entityType}"),
+            };
             var texture = entity.GetTextureName(jsonObject);
             entity.LoadTexture(_textureManager[texture]);
             return entity;
         }
-        public PlayerData GetPlayerData() => _playerData;
-
-        public void SetLevel(int levelIndex)
+        public void EntityTerrainCollision(RectangleF rectangle)
         {
-            SetLevel(_levelList[levelIndex]);
+            foreach (var entity in Current.Entities)
+            {
+                if (entity.GetType().IsAssignableTo(typeof(BaseEnemy)))
+                {
+                    ((BaseEnemy)entity).CollisionX(rectangle);
+                    ((BaseEnemy)entity).CollisionY(rectangle);
+                }
+            }
         }
+        public static bool PlayerEntityCollision(Player player, IEntity entity)
+        {
+
+            return player.BoundingBox.Intersects(entity.BoundingBox);
+        }
+        #endregion
+        #region Update/Draw Methods
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Matrix viewMatrix)
         {
@@ -111,11 +133,6 @@ namespace GameAttempt1.Control
         {
             Current.Update(gameTime);
         }
-        public Level Current { get; private set; }
-
-        public bool PlayerEntityCollision(Player player, IEntity entity)
-        {
-            return player.BoundingBox.Intersects(entity.BoundingBox);
-        }
+        #endregion
     }
 }

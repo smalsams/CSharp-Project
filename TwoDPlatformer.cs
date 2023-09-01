@@ -1,8 +1,8 @@
-﻿using GameAttempt1.Control;
+﻿using SamSer.Control;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameAttempt1
+namespace SamSer
 {
     public sealed class TwoDPlatformer : Game
     {

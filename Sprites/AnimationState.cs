@@ -1,4 +1,4 @@
-﻿namespace GameAttempt1.Sprites
+﻿namespace SamSer.Sprites
 {
     public enum AnimationState
     {

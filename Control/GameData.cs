@@ -1,15 +1,10 @@
-﻿using GameAttempt1.Entities.PlayerContent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SamSer.Entities.PlayerContent;
 
-namespace GameAttempt1.Control
+namespace SamSer.Control
 {
     public class GameData
     {
         public int Level { get; set; }
-        public PlayerData PlayerData { get; set; } 
+        public PlayerData PlayerData { get; set; }
     }
 }

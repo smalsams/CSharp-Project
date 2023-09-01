@@ -6,11 +6,19 @@
       "Type": "silver",
       "Position": "600 660"
     },
-    "b" : {
+    "b": {
       "Class": "Coin",
-      "Id" : "2",
+      "Id": "2",
       "Type": "gold",
-      "Position": "140 755" 
+      "Position": "140 755"
+    },
+    "c" : {
+      "Class": "FlameEnemy",
+      "Id": "3",
+      "Position": "300 700",
+      "Direction": 1,
+      "InSight": "true",
+      "Velocity" : "-1 10"
     }
 
   },
@@ -19,6 +27,7 @@
     "coin_silver",
     "coin_copper",
     "bloody_zombie-NESW",
-    "Tuxedo"
+    "Tuxedo",
+    "messy"
   ]
 }

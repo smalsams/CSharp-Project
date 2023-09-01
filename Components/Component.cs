@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameAttempt1.Components
+namespace SamSer.Components
 {
     public abstract class Component
     {

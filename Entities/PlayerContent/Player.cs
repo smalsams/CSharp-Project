@@ -1,22 +1,20 @@
 ﻿#region Usings
-using GameAttempt1.Control;
-using GameAttempt1.Serialization;
-using GameAttempt1.Sprites;
+using SamSer.Control;
+using SamSer.Serialization;
+using SamSer.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Text.Json.Serialization;
-using static GameAttempt1.Utilities.GameUtilities;
-using Animation = GameAttempt1.Sprites.VerticalAnimation;
+using static SamSer.Utilities.GameUtilities;
+using Animation = SamSer.Sprites.VerticalAnimation;
 
 #endregion
 
-namespace GameAttempt1.Entities.PlayerContent;
+namespace SamSer.Entities.PlayerContent;
 [JsonConverter(typeof(EntityConverter))]
 public class Player : IFocusable
 {
@@ -29,6 +27,8 @@ public class Player : IFocusable
     public Vector2 Velocity;
     private Vector2 _position;
     private RectangleF _boundingBox => new(Position.X - 10f, Position.Y + 5f, PLAYER_WIDTH, PLAYER_HEIGHT);
+    public float invulnerabilityDuration = 0.5f;
+    public float invulnerabilityTimer = 0;
     public PlayerState State { get; private set; }
     public GameDirection Direction { get; private set; }
     public bool HasJumped { get; set; }
@@ -37,25 +37,28 @@ public class Player : IFocusable
     public bool CollidingFromBottom { get; set; }
     public bool CollidingFromRight { get; set; }
     public bool InWater { get; set; }
+    public int Health { get; set; }
     public EventHandler Radio { get; set; }
+    public EventHandler NoHealthEvent { get; set; }
 
     public RectangleF BoundingBox => _boundingBox;
 
-    public int Id { get => 1; set => value = 1; }
+    public static int Id { get => 1; set => _ = 1; }
     #endregion
     #region Constructors
     public Player(Texture2D playerTextures)
     {
         _stateProcessor.AddState(nameof(PlayerTextures.None),
-    new Animation(playerTextures, 4, new Point(6, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+    new Animation(playerTextures, 4, new Point(6, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Walk),
-            new Animation(playerTextures, 6, new Point(46, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+            new Animation(playerTextures, 6, new Point(46, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Jump),
-            new Animation(playerTextures, 4, new Point(86, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+            new Animation(playerTextures, 4, new Point(86, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Swim),
-            new Animation(playerTextures, 6, new Point(166, 6), new Point(PLAYER_HEIGHT, PLAYER_HEIGHT), 3));
+            new Animation(playerTextures, 6, new Point(166, 6), new Size(PLAYER_HEIGHT, PLAYER_HEIGHT), 3));
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.None));
         _stateProcessor.Current?.Animate();
+        Health = 3;
     }
     [JsonConstructor]
     public Player(PlayerData data)
@@ -63,17 +66,18 @@ public class Player : IFocusable
         Position = data.Position;
         State = data.State;
         Direction = data.Direction;
+        Health = 3;
     }
     public void LoadTexture(Texture2D playerTextures)
     {
         _stateProcessor.AddState(nameof(PlayerTextures.None),
-    new Animation(playerTextures, 4, new Point(6, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+    new Animation(playerTextures, 4, new Point(6, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Walk),
-            new Animation(playerTextures, 6, new Point(46, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+            new Animation(playerTextures, 6, new Point(46, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Jump),
-            new Animation(playerTextures, 4, new Point(86, 6), new Point(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+            new Animation(playerTextures, 4, new Point(86, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Swim),
-            new Animation(playerTextures, 6, new Point(166, 6), new Point(PLAYER_HEIGHT, PLAYER_HEIGHT), 3));
+            new Animation(playerTextures, 6, new Point(166, 6), new Size(PLAYER_HEIGHT, PLAYER_HEIGHT), 3));
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.None));
         _stateProcessor.Current?.Animate();
     }
@@ -222,7 +226,10 @@ public class Player : IFocusable
         {
             AirGravityMove(keyboardState, previous);
         }
-
+        if (invulnerabilityTimer > 0f)
+        {
+            invulnerabilityTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
 
     }
 
@@ -306,6 +313,12 @@ public class Player : IFocusable
         Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y);
         HasJumped = true;
         CollidingFromTop = false;
+        invulnerabilityTimer = invulnerabilityDuration;
+        Health--;
+        if(Health < 0)
+        {
+            NoHealthEvent.Invoke(this, EventArgs.Empty);
+        }
 
     }
     #endregion
@@ -335,12 +348,8 @@ public class Player : IFocusable
         _stateProcessor.Current.Animate();
     }
 
-    public void PopulateFromJson(JObject jsonObject)
-    {
-        throw new NotImplementedException();
-    }
 
-    public string GetTextureName(JObject jsonObject)
+    public static string GetTextureName()
     {
         return "Tuxedo";
     }

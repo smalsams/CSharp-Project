@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace GameAttempt1.Entities.PlayerContent
+namespace SamSer.Entities.PlayerContent
 {
     public struct PlayerTextures
     {

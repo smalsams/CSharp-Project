@@ -1,8 +1,7 @@
 ﻿#region Usings
 
-using GameAttempt1.Components;
-using GameAttempt1.Entities.PlayerContent;
-using GameAttempt1.Utilities;
+using SamSer.Components;
+using SamSer.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,13 +9,12 @@ using Microsoft.Xna.Framework.Media;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
-using static GameAttempt1.Utilities.GameUtilities;
+using static SamSer.Utilities.GameUtilities;
 
 #endregion
 
-namespace GameAttempt1.Control;
+namespace SamSer.Control;
 
 public sealed class MainMenuState : State
 {
@@ -47,7 +45,6 @@ public sealed class MainMenuState : State
     #endregion
 
     #region Content-Loading methods
-
     private void LoadComponents()
     {
         _levelController = new LevelController(_contentManager, _graphicsDevice);
@@ -60,7 +57,7 @@ public sealed class MainMenuState : State
         var sliderTexture = _contentManager.Load<Texture2D>("Slider");
         var sliderScrollTexture = _contentManager.Load<Texture2D>("SliderScroll");
 
-        var gameTitle = new TextComponent(titleFont, new Vector2(550, 100), "GAME_TITLE");
+        var gameTitle = new TextComponent(titleFont, new Vector2(620, 100), "SamSer");
 
 
         var startGameButton = new Button(buttonTexture,
@@ -85,17 +82,18 @@ public sealed class MainMenuState : State
         var volumeSlider = new Slider(sliderTexture, sliderScrollTexture, new Vector2(MENU_X_COORDINATE,
             MENU_Y_COORDINATE + 4 * MENU_OFFSET));
 
-        _components.Add(gameTitle,
+        _components.Add(
+            gameTitle,
             startGameButton,
             loadGameButton,
             exitButton,
             volumeSlider,
             volumeCounter);
-        for(var i = 1; i<5; i++)
+        for (var i = 1; i < 5; i++)
         {
             var button = new SerialButton<int>(buttonTexture,
                 buttonFont,
-                new Vector2(200 + (buttonTexture.Width + 10f)*(i-1) , 200),
+                new Vector2(200 + (buttonTexture.Width + 10f) * (i - 1), 200),
                 $"Save {i}",
                 i);
             button.ButtonPress += LoadSave_OnClick;
@@ -128,7 +126,7 @@ public sealed class MainMenuState : State
 
     public override void Update(GameTime gameTime)
     {
-       if(!_loadSelectMenuVisible) _components.ForEach(c => c.Update(gameTime));
+        if (!_loadSelectMenuVisible) _components.ForEach(c => c.Update(gameTime));
         else
         {
             _loadComponents.ForEach(c => c.Update(gameTime));
@@ -141,7 +139,7 @@ public sealed class MainMenuState : State
     private void LoadSave_OnClick<T>(object sender, T args)
     {
         var fileName = DIR_PATH_RELATIVE + $"Saves/save{args}";
-        if(!File.Exists(fileName)) 
+        if (!File.Exists(fileName))
         {
             return;
         }

@@ -93,12 +93,6 @@
 /processorParam:TextureFormat=Color
 /build:SliderScroll.png
 
-#begin Sounds/Final Epic Battle.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/Final Epic Battle.mp3
-
 #begin Sounds/jumpland44100.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -122,6 +116,12 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Sounds/song_level0.mp3
+
+#begin Sounds/song_level1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/song_level1.mp3
 
 #begin Sounds/space.mp3
 /importer:Mp3Importer
@@ -349,6 +349,11 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:TilesetGen/Level0.tmx
+
+#begin TilesetGen/Level1.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TilesetGen/Level1.tmx
 
 #begin Tilesets/candyLand_tileset_v1_1.png
 /importer:TextureImporter

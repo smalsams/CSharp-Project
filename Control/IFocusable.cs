@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace GameAttempt1.Control
+namespace SamSer.Control
 {
     public interface IFocusable
     {

@@ -1,7 +1,7 @@
-﻿using GameAttempt1.Components;
-using GameAttempt1.Entities;
-using GameAttempt1.Entities.PlayerContent;
-using GameAttempt1.Utilities;
+﻿using SamSer.Components;
+using SamSer.Entities;
+using SamSer.Entities.PlayerContent;
+using SamSer.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -14,21 +14,23 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using static GameAttempt1.Utilities.GameUtilities;
+using static SamSer.Utilities.GameUtilities;
 
-namespace GameAttempt1.Control
+namespace SamSer.Control
 {
     public sealed class GameState : State
     {
         #region Fields
         private readonly Player _player;
         private readonly List<Component> _pauseComponents;
-        private Texture2D _playerTextures;
+        private readonly Texture2D _playerTextures;
         private readonly LevelController _levelController;
         private SoundEffect _jumpSoundEffect;
         private Button _pauseButton;
+        private Counter<int> _scoreCounter;
+        private Counter<int> _healthCounter;
         private Camera _camera;
+        public int Score { get; set; }
         #endregion
         #region Constructors
         public GameState(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice, LevelController levelController)
@@ -40,6 +42,7 @@ namespace GameAttempt1.Control
             {
                 Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y),
             };
+            _player.NoHealthEvent += ExitGame_OnClick;
             _levelController = levelController;
             _levelController.Current.PlaySong();
             LoadComponents();
@@ -48,11 +51,14 @@ namespace GameAttempt1.Control
             : base(contentManager, game, graphicsDevice)
         {
             _pauseComponents = new List<Component>();
-            _playerTextures = _contentManager.Load<Texture2D>("Sprites/Tuxedo");
+            var playerTextureName = Player.GetTextureName();
+            _playerTextures = _contentManager.Load<Texture2D>($"Sprites/{playerTextureName}");
             _player = new Player(playerData);
             _player.LoadTexture(_playerTextures);
+            _player.NoHealthEvent += ExitGame_OnClick;
             _levelController = levelController;
             _levelController.Current.PlaySong();
+            Score = playerData.Score;
             LoadComponents();
         }
         #endregion
@@ -69,7 +75,7 @@ namespace GameAttempt1.Control
             var buttonTexture = _contentManager.Load<Texture2D>("Button");
             var sliderTexture = _contentManager.Load<Texture2D>("Slider");
             var sliderScrollTexture = _contentManager.Load<Texture2D>("SliderScroll");
-            var volumeFont = _contentManager.Load<SpriteFont>("VolSliderDescriptionFont");
+            var counterFont = _contentManager.Load<SpriteFont>("VolSliderDescriptionFont");
 
             var saveButton = new Button(buttonTexture, buttonFont,
                 new Vector2(MENU_X_COORDINATE, MENU_Y_COORDINATE),
@@ -80,11 +86,14 @@ namespace GameAttempt1.Control
                 "Exit");
             mainMenuButton.ButtonPress += ExitGame_OnClick;
 
-            var volumeCounter = new Counter<float>(volumeFont, new Vector2(MENU_X_COORDINATE,
+            var volumeCounter = new Counter<float>(counterFont, new Vector2(MENU_X_COORDINATE,
             MENU_Y_COORDINATE + 3 * MENU_OFFSET), "Volume", 100, () => (float)Math.Round(MediaPlayer.Volume * 100));
             var volumeSlider = new Slider(sliderTexture, sliderScrollTexture, new Vector2(MENU_X_COORDINATE,
                 MENU_Y_COORDINATE + 4 * MENU_OFFSET));
             volumeSlider.SliderScroll += VolumeSlider_VolumeChanged;
+
+            _scoreCounter = new Counter<int>(counterFont, new Vector2(1500, 0), "Score",Color.Beige, 0, () => Score);
+            _healthCounter = new Counter<int>(counterFont, new Vector2(1500, 50), "Health", Color.Red, 3, () => _player.Health);
 
             _jumpSoundEffect = _contentManager.Load<SoundEffect>("Sounds/jumppp11");
             _player.Radio += PlaySoundEffect_OnJump;
@@ -107,14 +116,19 @@ namespace GameAttempt1.Control
 
         public void SaveGame_OnClick(object sender, EventArgs e)
         {
-            var data = new PlayerData();
-            data.Position = _player.Position;
-            data.State = _player.State;
-            data.Direction = _player.Direction;
-            data.Velocity = _player.Velocity;
-            var gameData = new GameData();
-            gameData.PlayerData = data;
-            gameData.Level = _levelController.Index;
+            var data = new PlayerData
+            {
+                Position = _player.Position,
+                State = _player.State,
+                Direction = _player.Direction,
+                Velocity = _player.Velocity,
+                Score = Score
+            };
+            var gameData = new GameData
+            {
+                PlayerData = data,
+                Level = _levelController.Index,
+            };
 
             string jsonData = JsonConvert.SerializeObject(gameData, Formatting.Indented);
             int fileNum = 1;
@@ -124,7 +138,7 @@ namespace GameAttempt1.Control
                 fileNum++;
                 filename = $"{DIR_PATH_RELATIVE}Saves/save{fileNum}";
             }
-            if(!File.Exists(filename))
+            if (!File.Exists(filename))
             {
                 File.WriteAllText(filename, jsonData);
                 return;
@@ -156,6 +170,8 @@ namespace GameAttempt1.Control
             spriteBatch.End();
             spriteBatch.Begin();
             _pauseButton.Draw(gameTime, spriteBatch);
+            _scoreCounter.Draw(gameTime, spriteBatch);
+            _healthCounter.Draw(gameTime, spriteBatch);
             if (_player.State == PlayerState.Paused)
             {
                 _pauseComponents.ForEach(c => c.Draw(gameTime, spriteBatch));
@@ -175,14 +191,27 @@ namespace GameAttempt1.Control
                 _player.Reset();
             }
             _pauseButton.Update(gameTime);
+            _scoreCounter.Update(gameTime);
+            _healthCounter.Update(gameTime);
             _levelController.Update(gameTime);
             foreach (var entity in _levelController.Current.Entities)
             {
-                if (_levelController.PlayerEntityCollision(_player, entity))
+                if (LevelController.PlayerEntityCollision(_player, entity))
                 {
                     if (entity.GetType() == typeof(Coin))
                     {
+                        if (!((Coin)entity).Picked)
+                        {
+                            Score+=((int)((Coin)entity).Type);
+                        }
                         ((Coin)entity).Picked = true;
+                    }
+                    if (entity.GetType().IsAssignableTo(typeof(BaseEnemy)))
+                    {
+                        if (_player.invulnerabilityTimer <= 0f)
+                        {
+                            _player.Reset();
+                        }
                     }
                 }
             }
@@ -205,7 +234,7 @@ namespace GameAttempt1.Control
                 {
                     for (var j = 0; j < (int)t.Size.Height; j++)
                     {
-                        if (i == 0 || j == 0 || i == PLAYER_HEIGHT - 1 || j == PLAYER_WIDTH - 1)
+                        if (i == 0 || j == 0 || i == (int)t.Size.Width - 1 || j == (int)t.Size.Height - 1)
                         {
                             colours.Add(new Color(255, 255, 255, 255));
                         }
@@ -219,14 +248,38 @@ namespace GameAttempt1.Control
                 rectangleTexture2D.SetData(colours.ToArray());
                 spriteBatch.Draw(rectangleTexture2D, t.Position, Color.Red);
             }
+            foreach (var e in _levelController.Current.Entities)
+            {
+                var rectangleTexture2D = new Texture2D(gd, (int)e.BoundingBox.Width, (int)e.BoundingBox.Height);
+                var colours = new List<Color>();
+                for (var i = 0; i < (int)e.BoundingBox.Width; i++)
+                {
+                    for (var j = 0; j < (int)e.BoundingBox.Height; j++)
+                    {
+                        if (i == 0 || j == 0 || i == (int)e.BoundingBox.Width - 1 || j == (int)e.BoundingBox.Height - 1)
+                        {
+                            colours.Add(new Color(255, 255, 255, 255));
+                        }
+                        else
+                        {
+                            colours.Add(new Color(0, 0, 0, 0));
+                        }
+                    }
+                }
+
+                rectangleTexture2D.SetData(colours.ToArray());
+                spriteBatch.Draw(rectangleTexture2D, e.Position, Color.Red);
+            }
         }
         #endregion
         #region External Player Related Methods
+
         public void PlayerExternalUpdate()
         {
             var platforms = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms")
                 .Objects;
             var obstacles = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Obstacles").Objects;
+            var finish = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("LevelEnd").Objects;
             var waterTiles = _levelController.Current.TiledMap.GetLayer<TiledMapTileLayer>("WaterLayer").Tiles;
             _player.CollidingFromTop = false;
             _player.CollidingFromBottom = false;
@@ -234,9 +287,22 @@ namespace GameAttempt1.Control
             _player.CollidingFromRight = false;
             _player.InWater = false;
 
+            foreach (var finishBlock in finish)
+            {
+                var rectangle = new RectangleF(finishBlock.Position.X, finishBlock.Position.Y, finishBlock.Size.Width, finishBlock.Size.Height);
+                var playerRect = _player.BoundingBox;
+                if (rectangle.Intersects(playerRect))
+                {
+                    _levelController.Current.LevelFinish.Invoke(_levelController.Current, EventArgs.Empty);
+                    _player.Position = new Vector2(100, 100);
+                    return;
+                }
+            }
+
             foreach (var platform in platforms)
             {
                 var platformRectangle = new RectangleF(platform.Position.X, platform.Position.Y, platform.Size.Width, platform.Size.Height);
+                _levelController.EntityTerrainCollision(platformRectangle);
                 _player.HandleCollisionY(platformRectangle, true);
                 _player.HandleCollisionX(platformRectangle);
             }

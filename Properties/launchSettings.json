@@ -2,7 +2,7 @@
   "profiles": {
     "Profile 1": {
       "commandName": "Executable",
-      "executablePath": "C:\\Users\\seraf\\source\\repos\\CSharp-Project\\bin\\Debug\\net6.0\\GameAttempt1.exe"
+      "executablePath": "C:\\Users\\seraf\\source\\repos\\CSharp-Project\\bin\\Debug\\net6.0\\SamSer.exe"
     }
   }
 }

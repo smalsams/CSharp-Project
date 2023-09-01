@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameAttempt1.Sprites
+namespace SamSer.Sprites
 {
     public class HorizontalAnimation : AnimationBase
     {

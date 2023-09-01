@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameAttempt1.Sprites
+namespace SamSer.Sprites
 {
     public class Sprite
     {
@@ -10,7 +10,7 @@ namespace GameAttempt1.Sprites
         public int YCoordinate { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        private float _rotation;
+        private readonly float _rotation;
 
         public Vector2 Origin => new(Width / 2, Height / 2);
         public Sprite(Texture2D texture, int x, int y, int width, int height)

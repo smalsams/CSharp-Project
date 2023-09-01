@@ -1,4 +1,4 @@
-﻿namespace GameAttempt1.Control
+﻿namespace SamSer.Control
 {
     public enum GameDirection
     {

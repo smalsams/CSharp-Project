@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace GameAttempt1.Components
+namespace SamSer.Components
 {
     public sealed class Slider : Component
     {

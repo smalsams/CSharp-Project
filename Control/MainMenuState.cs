@@ -10,7 +10,10 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.Xna.Framework.Input;
 using static SamSer.Utilities.GameUtilities;
+using SamSer.Entities;
+using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -19,19 +22,29 @@ namespace SamSer.Control;
 public sealed class MainMenuState : State
 {
     #region Fields
-
-    private const int MENU_X_COORDINATE = 650;
-    private const int MENU_Y_COORDINATE = 320;
-    private const int MENU_OFFSET = 100;
+    /// <remarks>
+    /// List of all <see cref="Component"/>s shown during the regular screen.
+    /// </remarks>
     private readonly List<Component> _components;
+    /// <remarks>
+    /// List of all <see cref="Component"/>s shown during the loading screen.
+    /// </remarks>
     private readonly List<Component> _loadComponents;
+
     private Texture2D _backgroundTexture;
-    private Song song;
+
+
+    private Song _song;
     private LevelController _levelController;
+
+    /// <remarks>
+    /// Indicates whether the loading screen is visible.
+    /// </remarks>
     private bool _loadSelectMenuVisible;
 
     #endregion
     #region Constructors
+
 
     public MainMenuState(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice)
         : base(contentManager, game, graphicsDevice)
@@ -45,17 +58,22 @@ public sealed class MainMenuState : State
     #endregion
 
     #region Content-Loading methods
+    /// <summary>
+    /// Loads assets exclusive/non-exclusive for <see cref="MainMenuState"/>
+    /// into the content manager and creates components that these assets represent.
+    /// </summary>
     private void LoadComponents()
     {
-        _levelController = new LevelController(_contentManager, _graphicsDevice);
+        _levelController = new LevelController(ContentManager, GraphicsDevice);
+        _levelController.WinGame += WinGame_OnFinishingLastLevel;
         //textures
-        _backgroundTexture = _contentManager.Load<Texture2D>("country-platform-back");
-        var titleFont = _contentManager.Load<SpriteFont>("TitleFont");
-        var buttonFont = _contentManager.Load<SpriteFont>("ButtonFont");
-        var volumeFont = _contentManager.Load<SpriteFont>("VolSliderDescriptionFont");
-        var buttonTexture = _contentManager.Load<Texture2D>("Button");
-        var sliderTexture = _contentManager.Load<Texture2D>("Slider");
-        var sliderScrollTexture = _contentManager.Load<Texture2D>("SliderScroll");
+        _backgroundTexture = ContentManager.Load<Texture2D>("country-platform-back");
+        var titleFont = ContentManager.Load<SpriteFont>("TitleFont");
+        var buttonFont = ContentManager.Load<SpriteFont>("ButtonFont");
+        var volumeFont = ContentManager.Load<SpriteFont>("VolSliderDescriptionFont");
+        var buttonTexture = ContentManager.Load<Texture2D>("Button");
+        var sliderTexture = ContentManager.Load<Texture2D>("Slider");
+        var sliderScrollTexture = ContentManager.Load<Texture2D>("SliderScroll");
 
         var gameTitle = new TextComponent(titleFont, new Vector2(620, 100), "SamSer");
 
@@ -101,7 +119,7 @@ public sealed class MainMenuState : State
         }
 
         //sounds
-        song = _contentManager.Load<Song>("Sounds/space");
+        _song = ContentManager.Load<Song>("Sounds/space");
         PlayMediaPlayer();
         volumeSlider.SliderScroll += VolumeSlider_VolumeChanged;
     }
@@ -109,7 +127,7 @@ public sealed class MainMenuState : State
     #endregion
 
     #region State methods
-
+    /// <inheritdoc/>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Begin();
@@ -123,12 +141,17 @@ public sealed class MainMenuState : State
         }
         spriteBatch.End();
     }
-
+    /// <inheritdoc/>
     public override void Update(GameTime gameTime)
     {
         if (!_loadSelectMenuVisible) _components.ForEach(c => c.Update(gameTime));
         else
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+
+                _loadSelectMenuVisible = false;
+            }
             _loadComponents.ForEach(c => c.Update(gameTime));
         }
     }
@@ -136,6 +159,14 @@ public sealed class MainMenuState : State
     #endregion
 
     #region Content events
+
+    /// <summary>
+    /// Loads data from json save into its in-game representation
+    /// </summary>
+    /// <typeparam name="T">Type identifying the save file name/index </typeparam>
+    /// <param name="sender">Reference to the object that raised the event</param>
+    /// <param name="args">Object representing the save file name/index</param>
+    /// <exception cref="ArgumentOutOfRangeException">Raised if the save file entity is not in the list of supported entities.</exception>
     private void LoadSave_OnClick<T>(object sender, T args)
     {
         var fileName = DIR_PATH_RELATIVE + $"Saves/save{args}";
@@ -148,42 +179,86 @@ public sealed class MainMenuState : State
         var playerData = gameData.PlayerData;
         var level = gameData.Level;
         _levelController.SetLevel(level);
-        _game.ChangeState(new GameState(_contentManager, _game, _graphicsDevice, _levelController, playerData));
+        _levelController.Current.Entities.Clear();
+        foreach (var entityInfo in gameData.EntityData)
+        {
+            var properties = JObject.Parse(entityInfo.Properties);
+            IEntity entity = entityInfo.Type switch
+            {
+                "Coin" => JsonConvert.DeserializeObject<Coin>(entityInfo.Properties) ,
+                "FlameEnemy" => JsonConvert.DeserializeObject<FlameEnemy>(entityInfo.Properties),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            var name = entity.GetTextureName(properties);
+            entity.LoadTexture(_levelController.TextureManager[name]);
+            _levelController.Current.Entities.Add(entity);
+        }
+        Game.ChangeState(new GameState(ContentManager, Game, GraphicsDevice, _levelController, playerData));
+        _levelController.Current.Pause();
     }
+    /// <summary>
+    /// Creates new instance of the game, changes <see cref="State"/> to <see cref="GameState"/>.
+    /// </summary>
+    /// <param name="sender">Reference to the object that raised the event</param>
+    /// <param name="e">Event data</param>
     private void NewGame_OnClick(object sender, EventArgs e)
     {
         StopMediaPlayer();
-        _game.ChangeState(new GameState(_contentManager, _game, _graphicsDevice, _levelController));
+        Game.ChangeState(new GameState(ContentManager, Game, GraphicsDevice, _levelController));
     }
-
+    /// <summary>
+    /// Changes volume of the background music to the <see cref="float"/> number specified by UI logic.
+    /// </summary>
+    /// <param name="sender">Reference to the object that raised the event</param>
+    /// <param name="volume"><see cref="float"/> number representing volume of the background music</param>
     private static void VolumeSlider_VolumeChanged(object sender, float volume)
     {
         MediaPlayer.Volume = volume;
     }
-
+    /// <summary>
+    /// Displays menu with save files and <see cref="Button"/>s representing them.
+    /// </summary>
+    /// <param name="sender">Reference to the object that raised the event</param>
+    /// <param name="e">Event data</param>
     private void LoadMenu_OnClick(object sender, EventArgs e)
     {
         StopMediaPlayer();
         _loadSelectMenuVisible = !_loadSelectMenuVisible;
     }
-
+    /// <summary>
+    /// Exits the game and terminates the program.
+    /// </summary>
+    /// <param name="sender">Reference to the object that raised the event</param>
+    /// <param name="e">Event data</param>
     private void ExitGame_OnClick(object sender, EventArgs e)
     {
         StopMediaPlayer();
-        _game.Exit();
+        Game.Exit();
     }
-
+    /// <summary>
+    /// Changes the <see cref="State"/> to <see cref="EndState"/>, which represents the game ending.
+    /// </summary>
+    /// <param name="sender">Reference to the object that raised the event</param>
+    /// <param name="e">Event data</param>
+    private void WinGame_OnFinishingLastLevel(object sender, EventArgs e)
+    {
+        Game.ChangeState(new EndState(ContentManager, Game, GraphicsDevice));
+    }
 
     #endregion
 
     #region MediaPlayer control methods
-
+    /// <summary>
+    /// Plays the background music for <see cref="MainMenuState"/>.
+    /// </summary>
     private void PlayMediaPlayer()
     {
-        MediaPlayer.Play(song);
+        MediaPlayer.Play(_song);
         MediaPlayer.IsRepeating = true;
     }
-
+    /// <summary>
+    /// Stops the background music for <see cref="MainMenuState"/>
+    /// </summary>
     private static void StopMediaPlayer()
     {
         MediaPlayer.Stop();

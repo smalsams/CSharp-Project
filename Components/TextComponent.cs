@@ -1,20 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SamSer.Components
-{
+namespace SamSer.Components{
+
+    /// <summary>
+    /// Basic text area on screen.
+    /// </summary>
     public class TextComponent : Component
     {
-        protected string _content;
-        private Vector2 _position;
-        private SpriteFont _font;
-        private Color _color;
+        protected string Content;
+        private readonly Vector2 _position;
+        private readonly SpriteFont _font;
+        private readonly Color _color;
 
         public TextComponent(SpriteFont font, Vector2 position, string content)
         {
             _font = font;
             _position = position;
-            _content = content;
+            Content = content;
             _color = Color.Black;
         }
 
@@ -22,14 +25,15 @@ namespace SamSer.Components
         {
             _font = font;
             _position = position;
-            _content = content;
+            Content = content;
             _color = color;
         }
+        /// <inheritdoc/>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(_font, _content, _position, _color);
+            spriteBatch.DrawString(_font, Content, _position, _color);
         }
-
+        /// <inheritdoc/>
         public override void Update(GameTime gameTime)
         {
 

@@ -1,10 +1,33 @@
 {
-  "entities": {},
+  "entities": {
+    "q": {
+      "Class": "FlameEnemy",
+      "Id": "1",
+      "Position": "1632 525",
+      "Direction": 1,
+      "InSight": "false",
+      "Velocity": "-0.5 5"
+    },
+    "b": {
+      "Class": "Coin",
+      "Id": "2",
+      "Type": "silver",
+      "Position": "2250 320"
+    },
+    "c": {
+      "Class": "Coin",
+      "Id": "2",
+      "Type": "gold",
+      "Position": "1290 800"
+    }
+  },
   "textures": [
     "coin_gold",
     "coin_silver",
     "coin_copper",
-    "bloody_zombie-NESW",
-    "Tuxedo"
-  ]
+    "bloody_zombie-SWEN",
+    "Tuxedo",
+    "messy"
+  ],
+  "playerposition" :  "100 500"
 }

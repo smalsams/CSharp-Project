@@ -1,17 +1,16 @@
-﻿using SamSer.Serialization;
-using SamSer.Sprites;
+﻿using SamSer.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Newtonsoft.Json.Linq;
 using System.Text.Json.Serialization;
+using Microsoft.Xna.Framework.Audio;
 
 namespace SamSer.Entities
 {
     /// <summary>
-    /// Defines a coin object
+    /// Defines a collectable coin object used as a score measurement
     /// </summary>
-    [JsonConverter(typeof(EntityConverter))]
     public class Coin : IEntity
     {
         #region Fields and Properties
@@ -21,17 +20,15 @@ namespace SamSer.Entities
         public CoinType Type { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public bool Picked { get; set; }
         public RectangleF BoundingBox => new(Position, new Size2(Width, Height));
+
+        public bool Paused { get; set; }
+        public bool InSight { get ; set; }
         #endregion
         #region Non-Json Constructors
         public Coin(Texture2D texture)
         {
-            _spriteStateProcessor = new SpriteStateProcessor();
-            _spriteStateProcessor.AddState("i", new HorizontalAnimation(texture, 8, new Point(0, 0), new Point(32, 32)));
-            _spriteStateProcessor.ChangeCurrent("i");
-            _spriteStateProcessor.Current.Animate();
-            (Width, Height) = (texture.Width, texture.Height);
+            LoadTexture(texture);
         }
         #endregion
         #region Json Constructors
@@ -51,7 +48,7 @@ namespace SamSer.Entities
         #region Update/Draw Methods
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            if (!Picked)
+            if (InSight)
             {
                 _spriteStateProcessor.Draw(spriteBatch, Position, SpriteEffects.None);
             }
@@ -59,17 +56,19 @@ namespace SamSer.Entities
 
         public void Update(GameTime gameTime)
         {
-            if (!Picked)
+            if (InSight && !Paused)
             {
                 _spriteStateProcessor.Update(gameTime);
             }
         }
         #endregion
-        #region Texture Building Methods
+        #region Asset Building Methods
         public string GetTextureName(JObject jsonObject)
         {
-            return $"coin_{jsonObject["Type"].Value<string>()}";
+            var res = int.TryParse(jsonObject["Type"].Value<string>(), out var intResult);
+            return res ? $"coin_{(CoinType)(intResult)}" : $"coin_{jsonObject["Type"].Value<string>()}";
         }
+
         #endregion
     }
 }

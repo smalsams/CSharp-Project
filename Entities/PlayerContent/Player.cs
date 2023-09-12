@@ -1,6 +1,5 @@
 ﻿#region Usings
 using SamSer.Control;
-using SamSer.Serialization;
 using SamSer.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,49 +14,79 @@ using Animation = SamSer.Sprites.VerticalAnimation;
 #endregion
 
 namespace SamSer.Entities.PlayerContent;
-[JsonConverter(typeof(EntityConverter))]
+
+/// <summary>
+/// The Playable character for the game
+/// </summary>
 public class Player : IFocusable
 {
     #region Fields and Properties
 
     private Texture2D _rectangleTexture2D;
-    private bool drawDebug;
+    private bool _drawDebug;
     private readonly SpriteStateProcessor _stateProcessor = new();
+    public float PlayerDefaultX = 100;
+    public float PlayerDefaultY = 600;
+    /// <remarks>Determines the current position of the <see cref="Player"/> on the screen</remarks>
     public Vector2 Position { get => _position; set => _position = value; }
     public Vector2 Velocity;
     private Vector2 _position;
+    /// <remarks>Determines the current hitboxes of the <see cref="Player"/>.</remarks>
     private RectangleF _boundingBox => new(Position.X - 10f, Position.Y + 5f, PLAYER_WIDTH, PLAYER_HEIGHT);
-    public float invulnerabilityDuration = 0.5f;
-    public float invulnerabilityTimer = 0;
+    /// <remarks>Time for which the <see cref="Player"/> cannot die (in seconds)</remarks>>
+    public float InvulnerabilityDuration = 0.5f;
+    /// <remarks>Time for which the <see cref="Player"/> has been invulnerable.</remarks>
+    public float InvulnerabilityTimer;
     public PlayerState State { get; private set; }
+    /// <remarks>The direction the <see cref="Player"/> is facing.</remarks>
     public GameDirection Direction { get; private set; }
+    /// <remarks>Determines whether the <see cref="Player"/> has recently jumped</remarks>
     public bool HasJumped { get; set; }
+    //colliders
     public bool CollidingFromTop { get; set; }
     public bool CollidingFromLeft { get; set; }
     public bool CollidingFromBottom { get; set; }
     public bool CollidingFromRight { get; set; }
+    /// <remarks>Indicates whether the <see cref="Player"/> is in a water environment</remarks>
     public bool InWater { get; set; }
+    /// <remarks>Current health points of the <see cref="Player"/>.</remarks>
     public int Health { get; set; }
-    public EventHandler Radio { get; set; }
+    /// <summary>
+    /// Invoked at <see cref="Player"/> jumping.
+    /// </summary>
+    public EventHandler JumpEvent { get; set; }
+    /// <summary>
+    /// Invoked at <see cref="Player"/> having less than 0 health
+    /// </summary>
     public EventHandler NoHealthEvent { get; set; }
+
 
     public RectangleF BoundingBox => _boundingBox;
 
     public static int Id { get => 1; set => _ = 1; }
     #endregion
     #region Constructors
+
     public Player(Texture2D playerTextures)
     {
         _stateProcessor.AddState(nameof(PlayerTextures.None),
-    new Animation(playerTextures, 4, new Point(6, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+    new Animation(playerTextures, PLAYER_WALK_ANI_COUNT, new Point(PLAYER_TEXTURE_DEFAULT, PLAYER_TEXTURE_DEFAULT),
+        new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Walk),
-            new Animation(playerTextures, 6, new Point(46, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+            new Animation(playerTextures, PLAYER_JUMP_ANI_COUNT,
+                new Point(PLAYER_TEXTURE_DEFAULT + PLAYER_TEXTURE_X_OFFSET, PLAYER_TEXTURE_DEFAULT),
+                new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Jump),
-            new Animation(playerTextures, 4, new Point(86, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+            new Animation(playerTextures, PLAYER_SWIM_ANI_COUNT,
+                new Point(PLAYER_TEXTURE_DEFAULT + 2 * PLAYER_TEXTURE_X_OFFSET, PLAYER_TEXTURE_DEFAULT),
+                new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
         _stateProcessor.AddState(nameof(PlayerTextures.Swim),
-            new Animation(playerTextures, 6, new Point(166, 6), new Size(PLAYER_HEIGHT, PLAYER_HEIGHT), 3));
+            new Animation(playerTextures, PLAYER_IDLE_ANI_COUNT,
+                new Point(PLAYER_TEXTURE_DEFAULT + 4 * PLAYER_TEXTURE_X_OFFSET, PLAYER_TEXTURE_DEFAULT),
+                new Size(PLAYER_HEIGHT, PLAYER_HEIGHT), 3));
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.None));
         _stateProcessor.Current?.Animate();
+        Position = new Vector2(PlayerDefaultX, PlayerDefaultY);
         Health = 3;
     }
     [JsonConstructor]
@@ -68,30 +97,47 @@ public class Player : IFocusable
         Direction = data.Direction;
         Health = 3;
     }
-    public void LoadTexture(Texture2D playerTextures)
+    /// <summary>
+    /// Loads all necessary assets for the <see cref="Player"/> and constructs the necessary components for <see cref="Animation"/>
+    /// </summary>
+    /// <param name="spriteSheet">The texture with all sprites necessary for <see cref="Player"/> construction</param>
+    public void LoadTexture(Texture2D spriteSheet)
     {
         _stateProcessor.AddState(nameof(PlayerTextures.None),
-    new Animation(playerTextures, 4, new Point(6, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+            new Animation(spriteSheet, PLAYER_WALK_ANI_COUNT, new Point(PLAYER_TEXTURE_DEFAULT, PLAYER_TEXTURE_DEFAULT),
+                new Size(PLAYER_WIDTH, PLAYER_HEIGHT), GAME_INCR_SCALE));
         _stateProcessor.AddState(nameof(PlayerTextures.Walk),
-            new Animation(playerTextures, 6, new Point(46, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+            new Animation(spriteSheet, PLAYER_JUMP_ANI_COUNT,
+                new Point(PLAYER_TEXTURE_DEFAULT + PLAYER_TEXTURE_X_OFFSET, PLAYER_TEXTURE_DEFAULT),
+                new Size(PLAYER_WIDTH, PLAYER_HEIGHT), GAME_INCR_SCALE));
         _stateProcessor.AddState(nameof(PlayerTextures.Jump),
-            new Animation(playerTextures, 4, new Point(86, 6), new Size(PLAYER_WIDTH, PLAYER_HEIGHT), 3));
+            new Animation(spriteSheet, PLAYER_SWIM_ANI_COUNT,
+                new Point(PLAYER_TEXTURE_DEFAULT + 2 * PLAYER_TEXTURE_X_OFFSET, PLAYER_TEXTURE_DEFAULT),
+                new Size(PLAYER_WIDTH, PLAYER_HEIGHT), GAME_INCR_SCALE));
         _stateProcessor.AddState(nameof(PlayerTextures.Swim),
-            new Animation(playerTextures, 6, new Point(166, 6), new Size(PLAYER_HEIGHT, PLAYER_HEIGHT), 3));
+            new Animation(spriteSheet, PLAYER_IDLE_ANI_COUNT,
+                new Point(PLAYER_TEXTURE_DEFAULT + 4 * PLAYER_TEXTURE_X_OFFSET, PLAYER_TEXTURE_DEFAULT),
+                new Size(PLAYER_HEIGHT, PLAYER_HEIGHT), GAME_INCR_SCALE));
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.None));
         _stateProcessor.Current?.Animate();
     }
     #endregion
     #region Player control
+    /// <inheritdoc cref="IEntity.Draw"/>
     public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
     {
         _stateProcessor.Draw(spriteBatch, Position,
             Direction == GameDirection.Left ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
-        if (drawDebug)
+        if (_drawDebug)
         {
             spriteBatch.Draw(_rectangleTexture2D, _boundingBox.TopLeft, Color.Purple);
         }
     }
+    /// <summary>
+    /// Defines movement and physics in air environment, checks <see cref="Player"/> input and invokes movement events.
+    /// </summary>
+    /// <param name="keyboardState">Keys that are currently pressed</param>
+    /// <param name="previous">Last position of the player</param>
     public void AirGravityMove(KeyboardState keyboardState, Vector2 previous)
     {
         if (keyboardState.IsKeyDown(Keys.A))
@@ -137,12 +183,12 @@ public class Player : IFocusable
             CollidingFromTop = false;
             Jump();
             HasJumped = true;
-            Radio.Invoke(this, EventArgs.Empty);
+            JumpEvent.Invoke(this, EventArgs.Empty);
         }
 
         if (!CollidingFromTop)
         {
-            if (Velocity.Y < 10f)
+            if (Velocity.Y < GRAVITY_LIMIT)
             {
                 Velocity.Y += GRAVITY;
             }
@@ -155,11 +201,15 @@ public class Player : IFocusable
 
         if (Velocity.X == 0 && CollidingFromTop) Stop();
     }
-
+    /// <summary>
+    /// Defines movement and physics in water environment, checks <see cref="Player"/> input and invokes movement events.
+    /// </summary>
+    /// <param name="keyboardState">Keys that are currently pressed</param>
+    /// <param name="previous">Last <see cref="Position"/> of the <see cref="Player"/></param>
     public void WaterGravityMove(KeyboardState keyboardState, Vector2 previous)
     {
-        if (keyboardState.IsKeyDown(Keys.W)) { Velocity.Y = -3f; }
-        else if (keyboardState.IsKeyDown(Keys.S)) { Velocity.Y = 3f; }
+        if (keyboardState.IsKeyDown(Keys.W)) { Velocity.Y = -WATER_RUSH_VELOCITY; }
+        else if (keyboardState.IsKeyDown(Keys.S)) { Velocity.Y = WATER_RUSH_VELOCITY; }
         if (keyboardState.IsKeyDown(Keys.A))
         {
             Direction = GameDirection.Left;
@@ -197,8 +247,8 @@ public class Player : IFocusable
         }
         if (!CollidingFromTop)
         {
-            if (!keyboardState.IsKeyDown(Keys.W) && !keyboardState.IsKeyDown(Keys.S)) { Velocity.Y = 1f; }
-            SwimOrCrawl();
+            if (!keyboardState.IsKeyDown(Keys.W) && !keyboardState.IsKeyDown(Keys.S)) { Velocity.Y = WATER_DEFAULT_VELOCITY; }
+            Swim();
         }
         else
         {
@@ -207,6 +257,7 @@ public class Player : IFocusable
         }
         if (Velocity.X == 0 && CollidingFromTop) Stop();
     }
+    /// <inheritdoc cref="IEntity.Update"/>
     public void Update(GameTime gameTime)
     {
         var previous = Position;
@@ -215,7 +266,7 @@ public class Player : IFocusable
         var keyboardState = Keyboard.GetState();
         if (keyboardState.IsKeyDown(Keys.F1))
         {
-            drawDebug = !drawDebug;
+            _drawDebug = !_drawDebug;
         }
         Position += Velocity;
         if (InWater)
@@ -226,13 +277,16 @@ public class Player : IFocusable
         {
             AirGravityMove(keyboardState, previous);
         }
-        if (invulnerabilityTimer > 0f)
+        if (InvulnerabilityTimer > 0f)
         {
-            invulnerabilityTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            InvulnerabilityTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
     }
-
+    /// <summary>
+    /// Draws lines around the <see cref="Player"/>, mainly for debug and test purposes
+    /// </summary>
+    /// <param name="gd"></param>
     public void DrawDebug(GraphicsDevice gd)
     {
         _rectangleTexture2D = new Texture2D(gd, (int)_boundingBox.Width, (int)_boundingBox.Height);
@@ -253,18 +307,26 @@ public class Player : IFocusable
         }
         _rectangleTexture2D.SetData(colours.ToArray());
     }
+    /// <summary>
+    /// Handles collision with terrain on Y-axis, basically only controlling vertical movement
+    /// </summary>
+    /// <param name="platformRectangle"></param>
+    /// <param name="platform"></param>
     public void HandleCollisionY(RectangleF platformRectangle, bool platform)
     {
+        if(_boundingBox.Top - PLAYER_WIDTH< 0)
+        {
+            CollidingFromBottom = true;
+        }
         if (_boundingBox.Right < platformRectangle.Left || _boundingBox.Left > platformRectangle.Right)
         {
             return;
-
         }
-        if (_boundingBox.Bottom - platformRectangle.Top <= 20f && _boundingBox.Bottom < platformRectangle.Bottom && _boundingBox.Bottom > platformRectangle.Top)
+        if (_boundingBox.Bottom - platformRectangle.Top <= PLAYER_HEIGHT && _boundingBox.Bottom < platformRectangle.Bottom && _boundingBox.Bottom > platformRectangle.Top)
         {
-            if (_boundingBox.Bottom - platformRectangle.Top > 10f)
+            if (_boundingBox.Bottom - platformRectangle.Top > COLLISION_THRESHOLD_Y)
             {
-                _position.Y -= 10f;
+                _position.Y -= COLLISION_THRESHOLD_Y;
             }
             if (platform)
             {
@@ -278,24 +340,30 @@ public class Player : IFocusable
             CollidingFromBottom = true;
         }
     }
-
+    /// <summary>
+    /// Handles collision with terrain on X-axis, basically only controlling horizontal movement
+    /// </summary>
+    /// <param name="platformRectangle"></param>
     public void HandleCollisionX(RectangleF platformRectangle)
     {
-        if (_boundingBox.Bottom - 20f < platformRectangle.Top || _boundingBox.Top + 20f > platformRectangle.Bottom)
+        if (_boundingBox.Bottom - PLAYER_HEIGHT < platformRectangle.Top || _boundingBox.Top + PLAYER_HEIGHT > platformRectangle.Bottom)
         {
             return;
         }
 
-        if (_boundingBox.Right + 5f > platformRectangle.Left && _boundingBox.Right < platformRectangle.Right)
+        if (_boundingBox.Right + COLLISION_THRESHOLD_X > platformRectangle.Left && _boundingBox.Right < platformRectangle.Right)
         {
             CollidingFromLeft = true;
         }
-        else if (_boundingBox.Left - 5f < platformRectangle.Right && _boundingBox.Left > platformRectangle.Left)
+        else if (_boundingBox.Left - COLLISION_THRESHOLD_X < platformRectangle.Right && _boundingBox.Left > platformRectangle.Left)
         {
             CollidingFromRight = true;
         }
     }
-
+    /// <summary>
+    /// Checks if the <see cref="Player"/> is located in water
+    /// </summary>
+    /// <param name="rectangle"></param>
     public void WaterCheck(RectangleF rectangle)
     {
         if (_boundingBox.Intersects(rectangle))
@@ -303,17 +371,22 @@ public class Player : IFocusable
             InWater = true;
         }
     }
+    /// <summary>
+    /// Pauses the <see cref="Player"/> animation
+    /// </summary>
     public void Pause()
     {
         State = State == PlayerState.Paused ? PlayerState.Playing : PlayerState.Paused;
     }
-
-    public void Reset()
+    /// <summary>
+    /// Makes the <see cref="Player"/> reset its position and removes 1 health point
+    /// </summary>
+    public void Die()
     {
-        Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y);
+        Position = new Vector2(PlayerDefaultX, PlayerDefaultY);
         HasJumped = true;
         CollidingFromTop = false;
-        invulnerabilityTimer = invulnerabilityDuration;
+        InvulnerabilityTimer = InvulnerabilityDuration;
         Health--;
         if(Health < 0)
         {
@@ -321,38 +394,62 @@ public class Player : IFocusable
         }
 
     }
+    /// <summary>
+    /// Resets every collider booleans
+    /// </summary>
+    public void ResetPhysicsValues()
+    {
+        InWater = false;
+        CollidingFromBottom = false;
+        CollidingFromLeft = false;
+        CollidingFromTop = false;
+        CollidingFromRight = false;
+    }
     #endregion
     #region Player actions
-
+    /// <summary>
+    /// Makes the <see cref="Player"/>'s animation be a Walk animation
+    /// </summary>
     public void Walk()
     {
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.Walk));
         _stateProcessor.Current.Animate();
     }
-
+    /// <summary>
+    /// Makes the <see cref="Player"/>'s animation be an Idle animation
+    /// </summary>
     public void Stop()
     {
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.None));
         _stateProcessor.Current.Animate();
     }
-
+    /// <summary>
+    /// Makes the <see cref="Player"/>'s animation be a Jump animation
+    /// </summary>
     public void Jump()
     {
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.Jump));
         _stateProcessor.Current.Animate();
     }
-
-    public void SwimOrCrawl()
+    /// <summary>
+    /// Makes the <see cref="Player"/>'s animation be a Swim animation
+    /// </summary>
+    public void Swim()
     {
         _stateProcessor.ChangeCurrent(nameof(PlayerTextures.Swim));
         _stateProcessor.Current.Animate();
     }
 
-
+    /// <summary>
+    /// Gets the texture name for <see cref="Player"/>
+    /// </summary>
+    /// <returns>The name of the texture exclusive for <see cref="Player"/></returns>
     public static string GetTextureName()
     {
-        return "Tuxedo";
+        return PLAYER_TEXTURE_NAME;
     }
+
+
 
     #endregion
 }

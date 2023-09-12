@@ -14,68 +14,96 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using static SamSer.Utilities.GameUtilities;
+using MonoGame.Extended.Entities;
 
 namespace SamSer.Control
 {
+    /// <summary>
+    /// Playable <see cref="State"/> instance.
+    /// </summary>
     public sealed class GameState : State
     {
         #region Fields
         private readonly Player _player;
         private readonly List<Component> _pauseComponents;
-        private readonly Texture2D _playerTextures;
         private readonly LevelController _levelController;
         private SoundEffect _jumpSoundEffect;
         private Button _pauseButton;
         private Counter<int> _scoreCounter;
         private Counter<int> _healthCounter;
+        private Texture2D _backgroundTexture;
         private Camera _camera;
+        /// <remarks>
+        /// Current score in the form of <see cref="int"/> representing the number of <see cref="Coin"/>s caught during the game
+        /// </remarks>
         public int Score { get; set; }
         #endregion
         #region Constructors
+        /// <summary>
+        /// The Non-Json constructor for the <see cref="GameState"/>.
+        /// </summary>
+        /// <param name="contentManager">Object responsible for asset manipulation, for further documentation see <see cref="ContentManager"/></param>
+        /// <param name="game">The game instance.</param>
+        /// <param name="graphicsDevice"></param>
+        /// <param name="levelController"></param>
         public GameState(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice, LevelController levelController)
             : base(contentManager, game, graphicsDevice)
         {
             _pauseComponents = new List<Component>();
-            _playerTextures = _contentManager.Load<Texture2D>("Sprites/Tuxedo");
-            _player = new Player(_playerTextures)
-            {
-                Position = new Vector2(PLAYER_DEFAULT_X, PLAYER_DEFAULT_Y),
-            };
+            var playerTextures = ContentManager.Load<Texture2D>("Sprites/Tuxedo");
+            _player = new Player(playerTextures);
             _player.NoHealthEvent += ExitGame_OnClick;
             _levelController = levelController;
+            _levelController.SetPlayerPosition += SetPlayerPosition_OnNextLevel;
             _levelController.Current.PlaySong();
             LoadComponents();
         }
+
+        /// <summary>
+        /// The Json constructor for the <see cref="GameState"/>.
+        /// </summary>
+        /// <param name="contentManager">Object responsible for asset manipulation, for further documentation see <see cref="ContentManager"/></param>
+        /// <param name="game">The game instance.</param>
+        /// <param name="graphicsDevice"></param>
+        /// <param name="levelController"></param>
+        /// <param name="playerData"></param>
         public GameState(ContentManager contentManager, TwoDPlatformer game, GraphicsDevice graphicsDevice, LevelController levelController, PlayerData playerData)
             : base(contentManager, game, graphicsDevice)
         {
             _pauseComponents = new List<Component>();
             var playerTextureName = Player.GetTextureName();
-            _playerTextures = _contentManager.Load<Texture2D>($"Sprites/{playerTextureName}");
+            var playerTextures = ContentManager.Load<Texture2D>($"Sprites/{playerTextureName}");
             _player = new Player(playerData);
-            _player.LoadTexture(_playerTextures);
+            _player.LoadTexture(playerTextures);
             _player.NoHealthEvent += ExitGame_OnClick;
             _levelController = levelController;
+            _levelController.SetPlayerPosition += SetPlayerPosition_OnNextLevel;
             _levelController.Current.PlaySong();
             Score = playerData.Score;
             LoadComponents();
         }
         #endregion
         #region Content-Loading Methods
+        /// <summary>
+        /// Loads assets exclusive/non-exclusive for <see cref="GameState"/>
+        /// into the content manager and creates components that these assets represent.
+        /// </summary>
         public void LoadComponents()
         {
             _camera = new Camera();
-            var pauseTexture = _contentManager.Load<Texture2D>("PauseButton");
+            var pauseTexture = ContentManager.Load<Texture2D>("PauseButton");
             _pauseButton = new Button(pauseTexture, null, new Vector2(0, 0), "");
             _pauseButton.AddKeyboardInvoker(Keys.Escape);
             _pauseButton.ButtonPress += PauseGame_OnPress;
 
-            var buttonFont = _contentManager.Load<SpriteFont>("ButtonFont");
-            var buttonTexture = _contentManager.Load<Texture2D>("Button");
-            var sliderTexture = _contentManager.Load<Texture2D>("Slider");
-            var sliderScrollTexture = _contentManager.Load<Texture2D>("SliderScroll");
-            var counterFont = _contentManager.Load<SpriteFont>("VolSliderDescriptionFont");
+            _backgroundTexture = ContentManager.Load<Texture2D>("sky1");
+            var buttonFont = ContentManager.Load<SpriteFont>("ButtonFont");
+            var buttonTexture = ContentManager.Load<Texture2D>("Button");
+            var sliderTexture = ContentManager.Load<Texture2D>("Slider");
+            var sliderScrollTexture = ContentManager.Load<Texture2D>("SliderScroll");
+            var counterFont = ContentManager.Load<SpriteFont>("VolSliderDescriptionFont");
 
             var saveButton = new Button(buttonTexture, buttonFont,
                 new Vector2(MENU_X_COORDINATE, MENU_Y_COORDINATE),
@@ -92,30 +120,53 @@ namespace SamSer.Control
                 MENU_Y_COORDINATE + 4 * MENU_OFFSET));
             volumeSlider.SliderScroll += VolumeSlider_VolumeChanged;
 
-            _scoreCounter = new Counter<int>(counterFont, new Vector2(1500, 0), "Score",Color.Beige, 0, () => Score);
-            _healthCounter = new Counter<int>(counterFont, new Vector2(1500, 50), "Health", Color.Red, 3, () => _player.Health);
+            _scoreCounter = new Counter<int>(counterFont, new Vector2(1450, 0), "Score",Color.Beige, 0, () => Score);
+            _healthCounter = new Counter<int>(counterFont, new Vector2(1450, 50), "Health", Color.Red, 3, () => _player.Health);
 
-            _jumpSoundEffect = _contentManager.Load<SoundEffect>("Sounds/jumppp11");
-            _player.Radio += PlaySoundEffect_OnJump;
+            _jumpSoundEffect = ContentManager.Load<SoundEffect>("Sounds/jumppp11");
+            _player.JumpEvent += PlaySoundEffect_OnJump;
             _pauseComponents.Add(saveButton, mainMenuButton, volumeCounter, volumeSlider);
         }
         #endregion
         #region GameState Events
+        /// <summary>
+        /// Plays the jump sound effect.
+        /// </summary>
+        /// <param name="sender">Reference to the object that raised the event</param>
+        /// <param name="e">Event data</param>
         public void PlaySoundEffect_OnJump(object sender, EventArgs e)
         {
             _jumpSoundEffect.Play();
         }
+
+        /// <summary>
+        /// Changes volume of the background music to the <see cref="float"/> number specified by UI logic.
+        /// </summary>
+        /// <param name="sender">Reference to the object that raised the event</param>
+        /// <param name="volume"><see cref="float"/> number representing volume of the background music</param>
         private static void VolumeSlider_VolumeChanged(object sender, float volume)
         {
             MediaPlayer.Volume = volume;
         }
-        public void ExitGame_OnClick(object sender, EventArgs e)
+        /// <summary>
+        /// Exits the game session and changes the <see cref="State"/> into <see cref="MainMenuState"/>.
+        /// </summary>
+        /// <param name="sender">Reference to the object that raised the event</param>
+        /// <param name="e">Event data</param>
+        private void ExitGame_OnClick(object sender, EventArgs e)
         {
-            _game.ChangeState(new MainMenuState(_contentManager, _game, _graphicsDevice));
+            Game.ChangeState(new MainMenuState(ContentManager, Game, GraphicsDevice));
         }
-
-        public void SaveGame_OnClick(object sender, EventArgs e)
+        /// <summary>
+        /// Saves the game state into a Json file according to the template provided by
+        /// <see cref="PlayerData"/>, <see cref="EntityInfo"/> and
+        /// <see cref="GameData"/>. The constructed file is then saved into one of four save slots.
+        /// </summary>
+        /// <param name="sender">Reference to the object that raised the event</param>
+        /// <param name="e">Event data</param>
+        private void SaveGame_OnClick(object sender, EventArgs e)
         {
+            //reformats player data
             var data = new PlayerData
             {
                 Position = _player.Position,
@@ -124,14 +175,24 @@ namespace SamSer.Control
                 Velocity = _player.Velocity,
                 Score = Score
             };
+            //reformats entity data
+            var entityData = _levelController.Current.Entities.Select(entity => new EntityInfo
+                {
+                    Type = entity.GetType().Name,
+                    Properties = JsonConvert.SerializeObject(entity, Formatting.Indented)
+                })
+                .ToList();
+            //reformats level data
             var gameData = new GameData
             {
                 PlayerData = data,
                 Level = _levelController.Index,
+                EntityData = entityData
             };
-
-            string jsonData = JsonConvert.SerializeObject(gameData, Formatting.Indented);
-            int fileNum = 1;
+            //Serializes all formatted data into a json string
+            var jsonData = JsonConvert.SerializeObject(gameData, Formatting.Indented);
+            //saves the produced file into Saves folder into one of 4 slots
+            var fileNum = 1;
             var filename = $"{DIR_PATH_RELATIVE}Saves/save{fileNum}";
             while (File.Exists(filename) && fileNum < 4)
             {
@@ -150,22 +211,41 @@ namespace SamSer.Control
             File.WriteAllText(filename, jsonData);
 
         }
-        public void PauseGame_OnPress(object sender, EventArgs e)
+        /// <summary>
+        /// Pauses the level and all entities including the player
+        /// </summary>
+        /// <param name="sender">Reference to the object that raised the event</param>
+        /// <param name="e">Event data</param>
+        private void PauseGame_OnPress(object sender, EventArgs e)
         {
             _levelController.Current.Pause();
             _player.Pause();
         }
+        /// <summary>
+        /// Sets the position of the player according to json constructed from the level data.
+        /// </summary>
+        /// <param name="sender">Reference to the object that raised the event</param>
+        /// <param name="e">Event data</param>
+        private void SetPlayerPosition_OnNextLevel(object sender, EventArgs e)
+        {
+            _player.PlayerDefaultX = _levelController.GetPlayerPosition.X;
+            _player.PlayerDefaultY = _levelController.GetPlayerPosition.Y;
+        }
         #endregion
         #region State Methods
+        /// <inheritdoc/>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
+        { 
+            spriteBatch.Begin();
+            spriteBatch.Draw(_backgroundTexture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+            spriteBatch.End();
             spriteBatch.Begin(transformMatrix: _camera.Transform);
             _player.Draw(spriteBatch, gameTime);
             _levelController.Draw(spriteBatch, gameTime, _camera.Transform);
-            _player.DrawDebug(_graphicsDevice);
+            _player.DrawDebug(GraphicsDevice);
             if (Keyboard.GetState().IsKeyDown(Keys.F1))
             {
-                DrawDebug(_graphicsDevice, spriteBatch);
+                DrawDebug(GraphicsDevice, spriteBatch);
             }
             spriteBatch.End();
             spriteBatch.Begin();
@@ -178,43 +258,25 @@ namespace SamSer.Control
             }
             spriteBatch.End();
         }
+        /// <inheritdoc/>
         public override void Update(GameTime gameTime)
         {
             PlayerExternalUpdate();
             _player.Update(gameTime);
             if (_player.Direction == GameDirection.Right
                 && _player.Position.X > _levelController.Current.GlobalBounds.X - PLAYER_WIDTH * 2) _player.Velocity.X = 0;
-            _camera.Follow(_player, _graphicsDevice);
-            if (IsPlayerDead())
+            _camera.Follow(_player, GraphicsDevice);
+            if (IsPlayerOutOfVerticalBounds())
             {
                 _levelController.Current.ResetSong();
-                _player.Reset();
+                _player.Die();
             }
             _pauseButton.Update(gameTime);
             _scoreCounter.Update(gameTime);
             _healthCounter.Update(gameTime);
             _levelController.Update(gameTime);
-            foreach (var entity in _levelController.Current.Entities)
-            {
-                if (LevelController.PlayerEntityCollision(_player, entity))
-                {
-                    if (entity.GetType() == typeof(Coin))
-                    {
-                        if (!((Coin)entity).Picked)
-                        {
-                            Score+=((int)((Coin)entity).Type);
-                        }
-                        ((Coin)entity).Picked = true;
-                    }
-                    if (entity.GetType().IsAssignableTo(typeof(BaseEnemy)))
-                    {
-                        if (_player.invulnerabilityTimer <= 0f)
-                        {
-                            _player.Reset();
-                        }
-                    }
-                }
-            }
+            _levelController.UpdateEntities(_player, _camera, out var scoreUpdate);
+            Score += scoreUpdate;
             if (_player.State == PlayerState.Paused)
             {
                 _pauseComponents.ForEach(c => c.Update(gameTime));
@@ -223,6 +285,11 @@ namespace SamSer.Control
         }
         #endregion
         #region Debug Methods
+        /// <summary>
+        /// Draws lines around all entities and platforms in the game, used for debug and test purposes
+        /// </summary>
+        /// <param name="gd"></param>
+        /// <param name="spriteBatch"></param>
         public void DrawDebug(GraphicsDevice gd, SpriteBatch spriteBatch)
         {
             var textures = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms").Objects;
@@ -273,7 +340,9 @@ namespace SamSer.Control
         }
         #endregion
         #region External Player Related Methods
-
+        /// <summary>
+        /// Updates player according to collision or manipulation with external objects
+        /// </summary>
         public void PlayerExternalUpdate()
         {
             var platforms = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Platforms")
@@ -281,24 +350,22 @@ namespace SamSer.Control
             var obstacles = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("Obstacles").Objects;
             var finish = _levelController.Current.TiledMap.GetLayer<TiledMapObjectLayer>("LevelEnd").Objects;
             var waterTiles = _levelController.Current.TiledMap.GetLayer<TiledMapTileLayer>("WaterLayer").Tiles;
-            _player.CollidingFromTop = false;
-            _player.CollidingFromBottom = false;
-            _player.CollidingFromLeft = false;
-            _player.CollidingFromRight = false;
-            _player.InWater = false;
-
-            foreach (var finishBlock in finish)
+            var deadlyLayer = _levelController.Current.TiledMap.GetLayer<TiledMapTileLayer>("DeadlyLayer").Tiles;
+            _player.ResetPhysicsValues();
+            //Updates level if player collides with end of the level
+            if ((from finishBlock in finish
+                    select new RectangleF(finishBlock.Position.X, finishBlock.Position.Y, finishBlock.Size.Width,
+                        finishBlock.Size.Height)
+                    into rectangle
+                    let playerRect = _player.BoundingBox
+                    where rectangle.Intersects(playerRect)
+                    select rectangle).Any())
             {
-                var rectangle = new RectangleF(finishBlock.Position.X, finishBlock.Position.Y, finishBlock.Size.Width, finishBlock.Size.Height);
-                var playerRect = _player.BoundingBox;
-                if (rectangle.Intersects(playerRect))
-                {
-                    _levelController.Current.LevelFinish.Invoke(_levelController.Current, EventArgs.Empty);
-                    _player.Position = new Vector2(100, 100);
-                    return;
-                }
+                _levelController.Current.LevelFinish.Invoke(_levelController.Current, EventArgs.Empty);
+                _player.Position = new Vector2(100, 100);
+                return;
             }
-
+            //entity or player collision with platforms
             foreach (var platform in platforms)
             {
                 var platformRectangle = new RectangleF(platform.Position.X, platform.Position.Y, platform.Size.Width, platform.Size.Height);
@@ -306,12 +373,14 @@ namespace SamSer.Control
                 _player.HandleCollisionY(platformRectangle, true);
                 _player.HandleCollisionX(platformRectangle);
             }
+            // entity or player collision with obstacles
             foreach (var obstacle in obstacles)
             {
                 var obstacleRectangle = new RectangleF(obstacle.Position.X, obstacle.Position.Y, obstacle.Size.Width, obstacle.Size.Height);
                 _player.HandleCollisionY(obstacleRectangle, false);
                 _player.HandleCollisionX(obstacleRectangle);
             }
+            //player collision with water
             foreach (var waterTile in waterTiles)
             {
                 var tileRectangle = new RectangleF(waterTile.X * 32, waterTile.Y * 32, 32, 32);
@@ -319,12 +388,26 @@ namespace SamSer.Control
                 {
                     _player.WaterCheck(tileRectangle);
                 }
+                
+            }
+            //player collision with deadly objects
+            foreach(var deathObject in deadlyLayer)
+            {
+                var deathRectangle = new RectangleF(deathObject.X * 32, deathObject.Y * 32, 32, 32);
+                if (deathObject.IsBlank) continue;
+                if (_player.BoundingBox.Intersects(deathRectangle) && _player.InvulnerabilityTimer <= 0f)
+                {
+                    _player.Die();
+                }
             }
         }
-
-        public bool IsPlayerDead()
+        /// <summary>
+        /// Checks whether the player is lower than the vertical camera limit
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPlayerOutOfVerticalBounds()
         {
-            return (_player.Position.Y > _graphicsDevice.Viewport.Height);
+            return (_player.Position.Y > GraphicsDevice.Viewport.Height);
         }
         #endregion
     }

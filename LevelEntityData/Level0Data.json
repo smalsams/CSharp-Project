@@ -2,23 +2,65 @@
   "entities": {
     "a": {
       "Class": "Coin",
-      "Id" :  "1",
-      "Type": "silver",
-      "Position": "600 660"
+      "Id": "1",
+      "Type": "copper",
+      "Position": "690 660"
     },
     "b": {
       "Class": "Coin",
       "Id": "2",
-      "Type": "gold",
+      "Type": "copper",
       "Position": "140 755"
     },
-    "c" : {
+    "c": {
       "Class": "FlameEnemy",
       "Id": "3",
-      "Position": "300 700",
+      "Position": "300 740",
       "Direction": 1,
       "InSight": "true",
-      "Velocity" : "-1 10"
+      "Velocity": "-0.5 5"
+    },
+    "d": {
+      "Class": "FlameEnemy",
+      "Id": "4",
+      "Position": "690 680",
+      "Direction": 1,
+      "InSight": "true",
+      "Velocity": "-0.5 5"
+    },
+    "e": {
+      "Class": "FlameEnemy",
+      "Id": "5",
+      "Position": "2500 500",
+      "Direction": 1,
+      "InSight": "false",
+      "Velocity": "-0.5 5"
+    },
+    "f": {
+      "Class": "FlameEnemy",
+      "Id": "6",
+      "Position": "2450 540",
+      "Direction": 1,
+      "InSight": "false",
+      "Velocity": "-0.5 5"
+    },
+    "g": {
+      "Class": "Coin",
+      "Id": "2",
+      "Type": "silver",
+      "Position": "5313 285"
+    },
+    "h": {
+      "Class": "Coin",
+      "Id": "2",
+      "Type": "gold",
+      "Position": "3040 730"
+    },
+    "i": {
+      "Class": "Coin",
+      "Id": "2",
+      "Type": "gold",
+      "Position": "6250 880"
     }
 
   },
@@ -26,8 +68,9 @@
     "coin_gold",
     "coin_silver",
     "coin_copper",
-    "bloody_zombie-NESW",
+    "bloody_zombie-SWEN",
     "Tuxedo",
     "messy"
-  ]
+  ],
+  "playerposition" :  "100 700"
 }

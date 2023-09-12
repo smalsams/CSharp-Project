@@ -57,6 +57,18 @@
 /processorParam:TextureFormat=Color
 /build:country-platform-forest.png
 
+#begin lava_ground_cracked_tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:lava_ground_cracked_tileset.png
+
 #begin PauseButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -68,6 +80,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PauseButton.png
+
+#begin sky1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sky1.png
 
 #begin Slider.png
 /importer:TextureImporter
@@ -93,12 +117,6 @@
 /processorParam:TextureFormat=Color
 /build:SliderScroll.png
 
-#begin Sounds/jumpland44100.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/jumpland44100.mp3
-
 #begin Sounds/jumppp11.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
@@ -123,35 +141,17 @@
 /processorParam:Quality=Best
 /build:Sounds/song_level1.mp3
 
+#begin Sounds/song_level2.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/song_level2.ogg
+
 #begin Sounds/space.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Sounds/space.mp3
-
-#begin Sprites/32x32-bat-sprite.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/32x32-bat-sprite.png
-
-#begin Sprites/bloody_zombie-NESW.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/bloody_zombie-NESW.png
 
 #begin Sprites/bloody_zombie-SWEN.png
 /importer:TextureImporter
@@ -164,18 +164,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/bloody_zombie-SWEN.png
-
-#begin Sprites/carrot..png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/carrot..png
 
 #begin Sprites/coin_copper.png
 /importer:TextureImporter
@@ -213,18 +201,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/coin_silver.png
 
-#begin Sprites/daxbotsheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/daxbotsheet.png
-
 #begin Sprites/headless_zombie-NESW.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -260,42 +236,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/messy.png
-
-#begin Sprites/rotting_zombie-NESW.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/rotting_zombie-NESW.png
-
-#begin Sprites/rotting_zombie-SWEN.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/rotting_zombie-SWEN.png
-
-#begin Sprites/saffron publish..png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/saffron publish..png
 
 #begin Sprites/SkelitonGuy.png
 /importer:TextureImporter
@@ -355,17 +295,10 @@
 /processor:TiledMapProcessor
 /build:TilesetGen/Level1.tmx
 
-#begin Tilesets/candyLand_tileset_v1_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/candyLand_tileset_v1_1.png
+#begin TilesetGen/Level2.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:TilesetGen/Level2.tmx
 
 #begin Tilesets/Jungle_terrain.png
 /importer:TextureImporter
@@ -379,7 +312,7 @@
 /processorParam:TextureFormat=Color
 /build:Tilesets/Jungle_terrain.png
 
-#begin Tilesets/lava_spr_strip45.png
+#begin Tilesets/TX Tileset Ground.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -389,9 +322,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Tilesets/lava_spr_strip45.png
+/build:Tilesets/TX Tileset Ground.png
 
-#begin Tilesets/Retro-Lines/biomes/Clean-Desert-Retro-Lines.png
+#begin Tilesets/TX Village Props.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -401,139 +334,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/biomes/Clean-Desert-Retro-Lines.png
-
-#begin Tilesets/Retro-Lines/biomes/Clean-Forest-Retro-Lines.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/biomes/Clean-Forest-Retro-Lines.png
-
-#begin Tilesets/Retro-Lines/biomes/Clean-Winter-Retro-Lines.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/biomes/Clean-Winter-Retro-Lines.png
-
-#begin Tilesets/Retro-Lines/biomes/Desert-Retro-Lines.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/biomes/Desert-Retro-Lines.png
-
-#begin Tilesets/Retro-Lines/biomes/Forest-Retro-Lines.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/biomes/Forest-Retro-Lines.png
-
-#begin Tilesets/Retro-Lines/biomes/Winter-Retro-Lines.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/biomes/Winter-Retro-Lines.png
-
-#begin Tilesets/Retro-Lines/Clean-Full-Retro-Line-Tiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/Clean-Full-Retro-Line-Tiles.png
-
-#begin Tilesets/Retro-Lines/Clean-Retro-Lines-Enemies.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/Clean-Retro-Lines-Enemies.png
-
-#begin Tilesets/Retro-Lines/Clean-Retro-Lines-Player.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/Clean-Retro-Lines-Player.png
-
-#begin Tilesets/Retro-Lines/Full-Retro-Lines-Tiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/Full-Retro-Lines-Tiles.png
-
-#begin Tilesets/Retro-Lines/Retro-Lines-Enemies.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/Retro-Lines-Enemies.png
-
-#begin Tilesets/Retro-Lines/Retro-Lines-Player.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tilesets/Retro-Lines/Retro-Lines-Player.png
+/build:Tilesets/TX Village Props.png
 
 #begin TitleFont.spritefont
 /importer:FontDescriptionImporter

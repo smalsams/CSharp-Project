@@ -4,22 +4,28 @@ using System.Collections.Generic;
 
 namespace SamSer.Control
 {
+    /// <summary>
+    /// Data structure used for storing textures in a level
+    /// </summary>
     public class TextureManager
     {
-        private Dictionary<string, Texture2D> _textureDictionary;
-        private ContentManager _content;
+        private readonly Dictionary<string, Texture2D> _textureDictionary;
+        private readonly ContentManager _content;
         public TextureManager(ContentManager content)
         {
             _textureDictionary = new Dictionary<string, Texture2D>();
             _content = content;
         }
-
         public Texture2D this[string name]
         {
             get => _textureDictionary[name];
-            set { if (!_textureDictionary.ContainsKey(name)) { _textureDictionary[name] = value; } }
+            set => _textureDictionary.TryAdd(name, value);
         }
-
+        /// <summary>
+        /// Adds the texture name - texture pair into the dictionary
+        /// </summary>
+        /// <param name="textureName"></param>
+        /// <returns></returns>
         public Texture2D LoadTexture(string textureName)
         {
             if (_textureDictionary.ContainsKey(textureName))
@@ -29,16 +35,6 @@ namespace SamSer.Control
             var texture = _content.Load<Texture2D>($"Sprites/{textureName}");
             _textureDictionary.Add(textureName, texture);
             return texture;
-        }
-
-        public void UnloadTexture(string textureName)
-        {
-            if (_textureDictionary.ContainsKey(textureName))
-            {
-                var texture = _textureDictionary[textureName];
-                texture.Dispose();
-                _textureDictionary.Remove(textureName);
-            }
         }
     }
 }

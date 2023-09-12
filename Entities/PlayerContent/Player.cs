@@ -16,7 +16,7 @@ using Animation = SamSer.Sprites.VerticalAnimation;
 namespace SamSer.Entities.PlayerContent;
 
 /// <summary>
-/// The Playable character for the game
+/// The playable character for the game.
 /// </summary>
 public class Player : IFocusable
 {
@@ -32,7 +32,8 @@ public class Player : IFocusable
     public Vector2 Velocity;
     private Vector2 _position;
     /// <remarks>Determines the current hitboxes of the <see cref="Player"/>.</remarks>
-    private RectangleF _boundingBox => new(Position.X - 10f, Position.Y + 5f, PLAYER_WIDTH, PLAYER_HEIGHT);
+    private RectangleF _boundingBox => new(Position.X - COLLISION_THRESHOLD_Y, Position.Y + COLLISION_THRESHOLD_X,
+        PLAYER_WIDTH, PLAYER_HEIGHT);
     /// <remarks>Time for which the <see cref="Player"/> cannot die (in seconds)</remarks>>
     public float InvulnerabilityDuration = 0.5f;
     /// <remarks>Time for which the <see cref="Player"/> has been invulnerable.</remarks>

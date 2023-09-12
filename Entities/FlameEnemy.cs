@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Newtonsoft.Json.Linq;
-using System.Text.Json.Serialization;
+using static SamSer.Utilities.GameUtilities;
 
 namespace SamSer.Entities
 {
@@ -12,7 +12,7 @@ namespace SamSer.Entities
     {
 
         /// <remarks>The bounds/hitboxes of the entity</remarks>
-        public override RectangleF BoundingBox => new(Position.X - 5f, Position.Y - 5f, 27, 32);
+        public override RectangleF BoundingBox => new(Position.X - COLLISION_THRESHOLD_X, Position.Y - COLLISION_THRESHOLD_X, 27, 32);
 
         /// <inheritdoc/>
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -46,7 +46,7 @@ namespace SamSer.Entities
             {
                 Position += Velocity;
                 SpriteStateProcessor.Update(gameTime);
-                Velocity = !OnPlatform ? new Vector2(Velocity.X, 5f) : new Vector2(Velocity.X, 0);
+                Velocity = !OnPlatform ? new Vector2(Velocity.X, JUMP_Y_VELOCITY) : new Vector2(Velocity.X, 0);
             }
             OnPlatform = false;
         }
@@ -76,7 +76,7 @@ namespace SamSer.Entities
             {
                 return;
             }
-            if (BoundingBox.Bottom > rectangle.Top && BoundingBox.Bottom - rectangle.Top < 15f)
+            if (BoundingBox.Bottom > rectangle.Top && BoundingBox.Bottom - rectangle.Top < COLLISION_THRESHOLD_Y * 3 / 2)
             {
                 OnPlatform = true;
             }

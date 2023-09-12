@@ -38,9 +38,8 @@ namespace SamSer.Control
         private readonly GraphicsDevice _device;
         private readonly ContentManager _contentManager;
         public TextureManager TextureManager;
-        private Vector2 _playerPosition;
-        private SoundEffect coinEffect;
-        public Vector2 GetPlayerPosition => _playerPosition;
+        private readonly SoundEffect _coinEffect;
+        public Vector2 GetPlayerPosition { get; private set; }
 
         public EventHandler SetPlayerPosition;
         public EventHandler WinGame;
@@ -54,7 +53,7 @@ namespace SamSer.Control
         {
             _levelList = new List<string>();
             LoadLevels(DIR_PATH_RELATIVE + "Content");
-            coinEffect = contentManager.Load<SoundEffect>(DIR_PATH_RELATIVE + "Content/Sounds/Picked Coin Echo");
+            _coinEffect = contentManager.Load<SoundEffect>(DIR_PATH_RELATIVE + "Content/Sounds/Picked Coin Echo");
             _contentManager = contentManager;
             _device = graphicsDevice;
             SetLevel(Index);
@@ -93,12 +92,11 @@ namespace SamSer.Control
         #endregion
         #region Level Control
 
-
         /// <summary>
         /// Event that is invoked after finishing a level.
         /// </summary>
         /// <param name="sender">Reference to the object that raised the event</param>
-        /// <param name="e">Event data</param>
+        /// <param name="args"></param>
         public void NextLevel(object sender, EventArgs args)
         {
             //stops music
@@ -152,7 +150,7 @@ namespace SamSer.Control
             {
                 Current.Entities.Add(SetEntity(entityJson.Value));
             }
-            _playerPosition = levelData.PlayerPosition;
+            GetPlayerPosition = levelData.PlayerPosition;
         }
 
 
@@ -171,8 +169,8 @@ namespace SamSer.Control
             var entityType = jsonObject["Class"]?.Value<string>();
             IEntity entity = entityType switch
             {
-                "Coin" => JsonConvert.DeserializeObject<Coin>(jsonObject.ToString(), new Vector2JsonConverter()),
-                "FlameEnemy" => JsonConvert.DeserializeObject<FlameEnemy>(jsonObject.ToString(), new Vector2JsonConverter()),
+                nameof(Coin) => JsonConvert.DeserializeObject<Coin>(jsonObject.ToString(), new Vector2JsonConverter()),
+                nameof(FlameEnemy) => JsonConvert.DeserializeObject<FlameEnemy>(jsonObject.ToString(), new Vector2JsonConverter()),
                 _ => throw new JsonException($"Unknown entity type: {entityType}"),
             };
             var texture = entity.GetTextureName(jsonObject);
@@ -211,8 +209,8 @@ namespace SamSer.Control
                 {
                     if (entity.GetType() == typeof(Coin))
                     {
-                        newScoreAddition += ((int)((Coin)entity).Type);
-                        coinEffect.Play();
+                        newScoreAddition += (int)((Coin)entity).Type;
+                        _coinEffect.Play();
                         Current.Entities.RemoveAt(i);
                     }
                     if (entity.GetType().IsAssignableTo(typeof(BaseEnemy)))
@@ -234,7 +232,7 @@ namespace SamSer.Control
         public void RemoveOutOfBoundsEntities()
         {
             //current map bounds
-            var mapBounds = new RectangleF(0, 0, Current.TiledMap.WidthInPixels, Current.TiledMap.HeightInPixels - 60);
+            var mapBounds = new RectangleF(0, 0, Current.TiledMap.WidthInPixels, Current.TiledMap.HeightInPixels - UPPER_BOUND_OFFSET);
 
             //entity check
             for (var i = 0; i < Current.Entities.Count; i++)

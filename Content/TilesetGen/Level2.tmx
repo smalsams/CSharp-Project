@@ -153,8 +153,8 @@
   <object id="19" x="960" y="384" width="32" height="576"/>
   <object id="20" x="1068" y="864" width="47" height="99"/>
   <object id="24" x="1120" y="480" width="224" height="32"/>
-  <object id="25" x="1152" y="512" width="32" height="64"/>
-  <object id="28" x="1312" y="512" width="32" height="32"/>
+  <object id="25" x="1152" y="481" width="32" height="95"/>
+  <object id="28" x="1312" y="481" width="32" height="63"/>
   <object id="29" x="1248" y="736" width="64" height="96"/>
   <object id="30" x="1216" y="768" width="32" height="32"/>
   <object id="31" x="1152" y="608" width="192" height="32"/>

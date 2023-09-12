@@ -30,6 +30,7 @@ namespace SamSer.Utilities
         public const float COLLISION_THRESHOLD_Y = 10f;
         public const float COLLISION_THRESHOLD_X = 5f;
         public const float GRAVITY_LIMIT = 10f;
+        public const int UPPER_BOUND_OFFSET = 60;
         public const int FPS = 10;
         public const string LEVEL_FOLDER = "./TilesetGen/";
         public const string PLAYER_TEXTURE_NAME = "Tuxedo";

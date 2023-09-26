@@ -1,0 +1,235 @@
+\hypertarget{class_sam_ser_1_1_control_1_1_level_controller}{}\doxysection{Sam\+Ser.\+Control.\+Level\+Controller Class Reference}
+\label{class_sam_ser_1_1_control_1_1_level_controller}\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+
+
+Main game control unit, responsible for loading and updating levels, entities and textures.   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_ada1eba37a5be44c2bc3c6b653f51562d}\label{class_sam_ser_1_1_control_1_1_level_controller_ada1eba37a5be44c2bc3c6b653f51562d}} 
+{\bfseries Level\+Controller} (Content\+Manager content\+Manager, Graphics\+Device graphics\+Device)
+\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_af608c8485dc678c66bf55963eb5ef3c7}{Load\+Levels}} (string path)
+\begin{DoxyCompactList}\small\item\em Loads every name of the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} in the folder containing generated level i the form of .tmx file. \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} names are stored in the \+\_\+level\+List list.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_a94e36f738bfa0958f3cfd73fca6c1b94}{Next\+Level}} (object sender, Event\+Args args)
+\begin{DoxyCompactList}\small\item\em Event that is invoked after finishing a level. Updates the index and sets the next level.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_a31e4e3657c8daf33022edfd2e3ae4382}{Set\+Level}} (int level\+Index)
+\begin{DoxyCompactList}\small\item\em Sets a new level according to a {\itshape level\+Index} . Passes the level name to the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_a8bbace5293ec575a35365a41fb5ef9b6}{Set\+Level(string)}} method.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_a8bbace5293ec575a35365a41fb5ef9b6}{Set\+Level}} (string level\+Name)
+\begin{DoxyCompactList}\small\item\em Sets a new level according to the {\itshape level\+Name} . Loads the level data and textures.  \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{IEntity}} \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_aa223186f866ffc60a3ca733a16d72a48}{Set\+Entity}} (JObject json\+Object)
+\begin{DoxyCompactList}\small\item\em Reformats data from the saved Json object and deserializes them into entity objects. Instantiates the entity and returns it.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_a451f231c54622e0d090af1b68fb2d6fd}{Entity\+Terrain\+Collision}} (RectangleF rectangle)
+\begin{DoxyCompactList}\small\item\em Checks collision of every entity with every terrain. If collision is detected, entity specific action is done within the respective class.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_a3a0c25487a56625f05533d4022d450bc}{Update\+Entities}} (\mbox{\hyperlink{class_player}{Player}} player, \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_camera}{Camera}} camera, out int new\+Score\+Addition)
+\begin{DoxyCompactList}\small\item\em Updates every entity in the current level, checks for collision with the player and removes entities that are out of bounds.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_aec4f5670ea34852d0eb4727262c3c663}\label{class_sam_ser_1_1_control_1_1_level_controller_aec4f5670ea34852d0eb4727262c3c663}} 
+void {\bfseries Remove\+Out\+Of\+Bounds\+Entities} ()
+\begin{DoxyCompactList}\small\item\em Removes every entity from the entity list (from game) that is not within allowed bounds, specified by the current map.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_aa857ea1e8ef9a136515137d86d28a7a4}{Draw}} (Sprite\+Batch sprite\+Batch, Game\+Time game\+Time, Matrix view\+Matrix)
+\begin{DoxyCompactList}\small\item\em Draws the current level.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_a8e084cd51c966c33922e4f1b42613599}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates object in the current level.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a35cc1a76c1b1748689dfc4fb6b0e0ca9}\label{class_sam_ser_1_1_control_1_1_level_controller_a35cc1a76c1b1748689dfc4fb6b0e0ca9}} 
+\mbox{\hyperlink{class_sam_ser_1_1_control_1_1_texture_manager}{Texture\+Manager}} {\bfseries Texture\+Manager}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_abac42696f19d03e4101eac29fe74556f}\label{class_sam_ser_1_1_control_1_1_level_controller_abac42696f19d03e4101eac29fe74556f}} 
+Event\+Handler {\bfseries Set\+Player\+Position}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a12170678dd5150dfd03a2cd37498ef2c}\label{class_sam_ser_1_1_control_1_1_level_controller_a12170678dd5150dfd03a2cd37498ef2c}} 
+Event\+Handler {\bfseries Win\+Game}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_ab979320b024a8f7672dbd376818bdaa3}{Index}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_a035afd6801cfa257aaa79e1feddd9866}{Current}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a3592411c6278ec5db5b1eb375c6b5053}\label{class_sam_ser_1_1_control_1_1_level_controller_a3592411c6278ec5db5b1eb375c6b5053}} 
+Vector2 {\bfseries Get\+Player\+Position}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main game control unit, responsible for loading and updating levels, entities and textures.  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_aa857ea1e8ef9a136515137d86d28a7a4}\label{class_sam_ser_1_1_control_1_1_level_controller_aa857ea1e8ef9a136515137d86d28a7a4}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level\+Controller.\+Draw (\begin{DoxyParamCaption}\item[{Sprite\+Batch}]{sprite\+Batch,  }\item[{Game\+Time}]{game\+Time,  }\item[{Matrix}]{view\+Matrix }\end{DoxyParamCaption})}
+
+
+
+Draws the current level.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+{\em game\+Time} & \\
+\hline
+{\em view\+Matrix} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a451f231c54622e0d090af1b68fb2d6fd}\label{class_sam_ser_1_1_control_1_1_level_controller_a451f231c54622e0d090af1b68fb2d6fd}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!EntityTerrainCollision@{EntityTerrainCollision}}
+\index{EntityTerrainCollision@{EntityTerrainCollision}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{EntityTerrainCollision()}{EntityTerrainCollision()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level\+Controller.\+Entity\+Terrain\+Collision (\begin{DoxyParamCaption}\item[{RectangleF}]{rectangle }\end{DoxyParamCaption})}
+
+
+
+Checks collision of every entity with every terrain. If collision is detected, entity specific action is done within the respective class.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em rectangle} & Bounds of a terrain\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_af608c8485dc678c66bf55963eb5ef3c7}\label{class_sam_ser_1_1_control_1_1_level_controller_af608c8485dc678c66bf55963eb5ef3c7}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!LoadLevels@{LoadLevels}}
+\index{LoadLevels@{LoadLevels}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{LoadLevels()}{LoadLevels()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level\+Controller.\+Load\+Levels (\begin{DoxyParamCaption}\item[{string}]{path }\end{DoxyParamCaption})}
+
+
+
+Loads every name of the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} in the folder containing generated level i the form of .tmx file. \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} names are stored in the \+\_\+level\+List list.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the folder containing level names.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a94e36f738bfa0958f3cfd73fca6c1b94}\label{class_sam_ser_1_1_control_1_1_level_controller_a94e36f738bfa0958f3cfd73fca6c1b94}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!NextLevel@{NextLevel}}
+\index{NextLevel@{NextLevel}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{NextLevel()}{NextLevel()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level\+Controller.\+Next\+Level (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{args }\end{DoxyParamCaption})}
+
+
+
+Event that is invoked after finishing a level. Updates the index and sets the next level.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Reference to the object that raised the event\\
+\hline
+{\em args} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_aa223186f866ffc60a3ca733a16d72a48}\label{class_sam_ser_1_1_control_1_1_level_controller_aa223186f866ffc60a3ca733a16d72a48}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!SetEntity@{SetEntity}}
+\index{SetEntity@{SetEntity}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{SetEntity()}{SetEntity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{IEntity}} Sam\+Ser.\+Control.\+Level\+Controller.\+Set\+Entity (\begin{DoxyParamCaption}\item[{JObject}]{json\+Object }\end{DoxyParamCaption})}
+
+
+
+Reformats data from the saved Json object and deserializes them into entity objects. Instantiates the entity and returns it.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em json\+Object} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Json-\/\+Constructed IEntity object.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Json\+Exception} & If the given entity type is not supported\\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a31e4e3657c8daf33022edfd2e3ae4382}\label{class_sam_ser_1_1_control_1_1_level_controller_a31e4e3657c8daf33022edfd2e3ae4382}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!SetLevel@{SetLevel}}
+\index{SetLevel@{SetLevel}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{SetLevel()}{SetLevel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level\+Controller.\+Set\+Level (\begin{DoxyParamCaption}\item[{int}]{level\+Index }\end{DoxyParamCaption})}
+
+
+
+Sets a new level according to a {\itshape level\+Index} . Passes the level name to the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller_a8bbace5293ec575a35365a41fb5ef9b6}{Set\+Level(string)}} method.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em level\+Index} & An index of the new level to be set\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a8bbace5293ec575a35365a41fb5ef9b6}\label{class_sam_ser_1_1_control_1_1_level_controller_a8bbace5293ec575a35365a41fb5ef9b6}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!SetLevel@{SetLevel}}
+\index{SetLevel@{SetLevel}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{SetLevel()}{SetLevel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level\+Controller.\+Set\+Level (\begin{DoxyParamCaption}\item[{string}]{level\+Name }\end{DoxyParamCaption})}
+
+
+
+Sets a new level according to the {\itshape level\+Name} . Loads the level data and textures.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em level\+Name} & A name of the new level to be set\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a8e084cd51c966c33922e4f1b42613599}\label{class_sam_ser_1_1_control_1_1_level_controller_a8e084cd51c966c33922e4f1b42613599}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!Update@{Update}}
+\index{Update@{Update}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level\+Controller.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})}
+
+
+
+Updates object in the current level.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a3a0c25487a56625f05533d4022d450bc}\label{class_sam_ser_1_1_control_1_1_level_controller_a3a0c25487a56625f05533d4022d450bc}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!UpdateEntities@{UpdateEntities}}
+\index{UpdateEntities@{UpdateEntities}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{UpdateEntities()}{UpdateEntities()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level\+Controller.\+Update\+Entities (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}}}]{player,  }\item[{\mbox{\hyperlink{class_sam_ser_1_1_control_1_1_camera}{Camera}}}]{camera,  }\item[{out int}]{new\+Score\+Addition }\end{DoxyParamCaption})}
+
+
+
+Updates every entity in the current level, checks for collision with the player and removes entities that are out of bounds.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & Reference to player\\
+\hline
+{\em camera} & Reference to the current game camera\\
+\hline
+{\em new\+Score\+Addition} & New score after the update\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_a035afd6801cfa257aaa79e1feddd9866}\label{class_sam_ser_1_1_control_1_1_level_controller_a035afd6801cfa257aaa79e1feddd9866}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!Current@{Current}}
+\index{Current@{Current}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{Current}{Current}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} Sam\+Ser.\+Control.\+Level\+Controller.\+Current\hspace{0.3cm}{\ttfamily [get]}}
+
+Reference to the current level\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_controller_ab979320b024a8f7672dbd376818bdaa3}\label{class_sam_ser_1_1_control_1_1_level_controller_ab979320b024a8f7672dbd376818bdaa3}} 
+\index{SamSer.Control.LevelController@{SamSer.Control.LevelController}!Index@{Index}}
+\index{Index@{Index}!SamSer.Control.LevelController@{SamSer.Control.LevelController}}
+\doxysubsubsection{\texorpdfstring{Index}{Index}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Control.\+Level\+Controller.\+Index\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Indicates level number
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Control/Level\+Controller.\+cs\end{DoxyCompactItemize}

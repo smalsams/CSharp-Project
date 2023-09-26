@@ -1,0 +1,313 @@
+\hypertarget{class_player}{}\doxysection{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+
+
+The playable character for the game, controlled by the user. Responsible for the control of the player\textquotesingle{}s movement and animation, as well as the player\textquotesingle{}s attributes.   
+
+
+Inheritance diagram for Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_player}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a0048870244b19316fd33801933d11e21}\label{class_player_a0048870244b19316fd33801933d11e21}} 
+{\bfseries Player} (Texture2D player\+Textures)
+\item 
+\mbox{\Hypertarget{class_player_a3f5bf8d0f68dfdc5e40061fb41e581bd}\label{class_player_a3f5bf8d0f68dfdc5e40061fb41e581bd}} 
+{\bfseries Player} (Player\+Data data)
+\item 
+void \mbox{\hyperlink{class_player_a25d10ebd0fd12c3c1f74f8b9a32468fa}{Load\+Texture}} (Texture2D sprite\+Sheet)
+\begin{DoxyCompactList}\small\item\em Loads all necessary assets for the \mbox{\hyperlink{class_player}{Player}} and constructs the necessary components for Animation  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_aba99e761d1f5821f79e525cf4dbfbc7b}\label{class_player_aba99e761d1f5821f79e525cf4dbfbc7b}} 
+void {\bfseries Draw} (Sprite\+Batch sprite\+Batch, Game\+Time game\+Time)
+\item 
+void \mbox{\hyperlink{class_player_ac3a0e098a8ef7b0486f7b8f64384b6da}{Air\+Gravity\+Move}} (Keyboard\+State keyboard\+State, Vector2 previous)
+\begin{DoxyCompactList}\small\item\em Defines movement and physics in air environment, checks \mbox{\hyperlink{class_player}{Player}} input and invokes movement events.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a12072ad63aa608a920d51495e85c4d27}{Water\+Gravity\+Move}} (Keyboard\+State keyboard\+State, Vector2 previous)
+\begin{DoxyCompactList}\small\item\em Defines movement and physics in water environment, checks \mbox{\hyperlink{class_player}{Player}} input and invokes movement events.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_aa49da3265e03a36b53ae4bf2fa44dce1}\label{class_player_aa49da3265e03a36b53ae4bf2fa44dce1}} 
+void {\bfseries Update} (Game\+Time game\+Time)
+\item 
+void \mbox{\hyperlink{class_player_a40369e5f07521de6a30921a648d17887}{Draw\+Debug}} (Graphics\+Device gd)
+\begin{DoxyCompactList}\small\item\em Draws lines around the \mbox{\hyperlink{class_player}{Player}}, mainly for debug and test purposes  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a4b4b7868201a8052a90b42d705f53825}{Handle\+CollisionY}} (RectangleF platform\+Rectangle, bool platform)
+\begin{DoxyCompactList}\small\item\em Handles collision with terrain on Y-\/axis, basically only controlling vertical movement  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a0897e8f138f4b33027c4d1b9d4f480d1}{Handle\+CollisionX}} (RectangleF platform\+Rectangle)
+\begin{DoxyCompactList}\small\item\em Handles collision with terrain on X-\/axis, basically only controlling horizontal movement  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a61cb527c9711989c24e497216f480de4}{Water\+Check}} (RectangleF rectangle)
+\begin{DoxyCompactList}\small\item\em Checks if the \mbox{\hyperlink{class_player}{Player}} is located in water  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_aaae975531f407dd76057076f5e448895}\label{class_player_aaae975531f407dd76057076f5e448895}} 
+void {\bfseries Pause} ()
+\begin{DoxyCompactList}\small\item\em Pauses the \mbox{\hyperlink{class_player}{Player}} animation  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_a845a19a1bd9e4e63b5a0c18842307b0e}\label{class_player_a845a19a1bd9e4e63b5a0c18842307b0e}} 
+void {\bfseries Die} ()
+\begin{DoxyCompactList}\small\item\em Makes the \mbox{\hyperlink{class_player}{Player}} reset its position and removes 1 health point  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_ac530f0c5f22f8665967b8db806c21799}\label{class_player_ac530f0c5f22f8665967b8db806c21799}} 
+void {\bfseries Reset\+Physics\+Values} ()
+\begin{DoxyCompactList}\small\item\em Resets every collider booleans  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_a24641913d9dd9bc7a765117dad1518b7}\label{class_player_a24641913d9dd9bc7a765117dad1518b7}} 
+void {\bfseries Walk} ()
+\begin{DoxyCompactList}\small\item\em Makes the \mbox{\hyperlink{class_player}{Player}}\textquotesingle{}s animation be a Walk animation  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_a5903144d2559305d553a398aceabf956}\label{class_player_a5903144d2559305d553a398aceabf956}} 
+void {\bfseries Stop} ()
+\begin{DoxyCompactList}\small\item\em Makes the \mbox{\hyperlink{class_player}{Player}}\textquotesingle{}s animation be an Idle animation  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_a689d6b007b09f694a246fe806bef7d5f}\label{class_player_a689d6b007b09f694a246fe806bef7d5f}} 
+void {\bfseries Jump} ()
+\begin{DoxyCompactList}\small\item\em Makes the \mbox{\hyperlink{class_player}{Player}}\textquotesingle{}s animation be a Jump animation  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_a8606877c12c87ef9c73041437395e4c7}\label{class_player_a8606877c12c87ef9c73041437395e4c7}} 
+void {\bfseries Swim} ()
+\begin{DoxyCompactList}\small\item\em Makes the \mbox{\hyperlink{class_player}{Player}}\textquotesingle{}s animation be a Swim animation  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static string \mbox{\hyperlink{class_player_af73061d36d8a0de019bf4671b9f9b94e}{Get\+Texture\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Gets the texture name for \mbox{\hyperlink{class_player}{Player}}  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a9c38abc9b2de83e288199a71e21ce35b}\label{class_player_a9c38abc9b2de83e288199a71e21ce35b}} 
+float {\bfseries Player\+DefaultX} = 100
+\item 
+\mbox{\Hypertarget{class_player_a4a121c92170760f97ebb2a5b1b9a9534}\label{class_player_a4a121c92170760f97ebb2a5b1b9a9534}} 
+float {\bfseries Player\+DefaultY} = 600
+\item 
+\mbox{\Hypertarget{class_player_aa8fbab53164e35ef20ba63e90469a8df}\label{class_player_aa8fbab53164e35ef20ba63e90469a8df}} 
+Vector2 {\bfseries Velocity}
+\item 
+float \mbox{\hyperlink{class_player_a7f9d0595e67a246d20c8f5f11a690877}{Invulnerability\+Duration}} = 0.\+5f
+\item 
+float \mbox{\hyperlink{class_player_a3a1bda3f66a17d0e2436888b04e9d15f}{Invulnerability\+Timer}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Vector2 \mbox{\hyperlink{class_player_ac768e07fad95f12c16da902f2d76d13e}{Position}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_player_a273cf5ecc57dbdb59aeda0f8b9bb46c0}\label{class_player_a273cf5ecc57dbdb59aeda0f8b9bb46c0}} 
+Player\+State {\bfseries State}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\hyperlink{namespace_sam_ser_1_1_control_a7b0c11a2998bd8c54e6bded0b2176224}{Game\+Direction}} \mbox{\hyperlink{class_player_a1ca776cc0dc785241f538c7127d3c48a}{Direction}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+bool \mbox{\hyperlink{class_player_a0aa8f47fa4e02bf730ea27a0bffcf9bf}{Has\+Jumped}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_player_ad9bebeaf6f8ac8db3d0663cd6745ce46}\label{class_player_ad9bebeaf6f8ac8db3d0663cd6745ce46}} 
+bool {\bfseries Colliding\+From\+Top}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_player_a86ed8abb19441f06d203e529659bdfb8}\label{class_player_a86ed8abb19441f06d203e529659bdfb8}} 
+bool {\bfseries Colliding\+From\+Left}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_player_ac6519f176068c53f511175ea82b02881}\label{class_player_ac6519f176068c53f511175ea82b02881}} 
+bool {\bfseries Colliding\+From\+Bottom}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_player_a8252d47bfcddd7cb8cc819389a96e277}\label{class_player_a8252d47bfcddd7cb8cc819389a96e277}} 
+bool {\bfseries Colliding\+From\+Right}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+bool \mbox{\hyperlink{class_player_ac4009a372f37acb7a5847025c2801d34}{In\+Water}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_player_a129d77184feb05c2743ef38726dc23da}{Health}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_player_a8745740df0f1f7373a4c23d9111d0e1d}\label{class_player_a8745740df0f1f7373a4c23d9111d0e1d}} 
+Event\+Handler {\bfseries Jump\+Event}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Invoked at \mbox{\hyperlink{class_player}{Player}} jumping.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_ac83d9a8b333e3c87f3c2b917ce25e103}\label{class_player_ac83d9a8b333e3c87f3c2b917ce25e103}} 
+Event\+Handler {\bfseries No\+Health\+Event}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Invoked at \mbox{\hyperlink{class_player}{Player}} having less than 0 health  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_aa564833330c89ce0366f33bed86e9f93}\label{class_player_aa564833330c89ce0366f33bed86e9f93}} 
+RectangleF {\bfseries Bounding\+Box}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_player_ae8b62f5f01eef62c98db37b5efa8215b}\label{class_player_ae8b62f5f01eef62c98db37b5efa8215b}} 
+static int {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The playable character for the game, controlled by the user. Responsible for the control of the player\textquotesingle{}s movement and animation, as well as the player\textquotesingle{}s attributes.  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_player_ac3a0e098a8ef7b0486f7b8f64384b6da}\label{class_player_ac3a0e098a8ef7b0486f7b8f64384b6da}} 
+\index{Player@{Player}!AirGravityMove@{AirGravityMove}}
+\index{AirGravityMove@{AirGravityMove}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{AirGravityMove()}{AirGravityMove()}}
+{\footnotesize\ttfamily void Player.\+Air\+Gravity\+Move (\begin{DoxyParamCaption}\item[{Keyboard\+State}]{keyboard\+State,  }\item[{Vector2}]{previous }\end{DoxyParamCaption})}
+
+
+
+Defines movement and physics in air environment, checks \mbox{\hyperlink{class_player}{Player}} input and invokes movement events.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em keyboard\+State} & Keys that are currently pressed\\
+\hline
+{\em previous} & Last position of the player\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a40369e5f07521de6a30921a648d17887}\label{class_player_a40369e5f07521de6a30921a648d17887}} 
+\index{Player@{Player}!DrawDebug@{DrawDebug}}
+\index{DrawDebug@{DrawDebug}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{DrawDebug()}{DrawDebug()}}
+{\footnotesize\ttfamily void Player.\+Draw\+Debug (\begin{DoxyParamCaption}\item[{Graphics\+Device}]{gd }\end{DoxyParamCaption})}
+
+
+
+Draws lines around the \mbox{\hyperlink{class_player}{Player}}, mainly for debug and test purposes  
+
+
+\begin{DoxyParams}{Parameters}
+{\em gd} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_af73061d36d8a0de019bf4671b9f9b94e}\label{class_player_af73061d36d8a0de019bf4671b9f9b94e}} 
+\index{Player@{Player}!GetTextureName@{GetTextureName}}
+\index{GetTextureName@{GetTextureName}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetTextureName()}{GetTextureName()}}
+{\footnotesize\ttfamily static string Player.\+Get\+Texture\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the texture name for \mbox{\hyperlink{class_player}{Player}}  
+
+\begin{DoxyReturn}{Returns}
+The name of the texture exclusive for \mbox{\hyperlink{class_player}{Player}}
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_a0897e8f138f4b33027c4d1b9d4f480d1}\label{class_player_a0897e8f138f4b33027c4d1b9d4f480d1}} 
+\index{Player@{Player}!HandleCollisionX@{HandleCollisionX}}
+\index{HandleCollisionX@{HandleCollisionX}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{HandleCollisionX()}{HandleCollisionX()}}
+{\footnotesize\ttfamily void Player.\+Handle\+CollisionX (\begin{DoxyParamCaption}\item[{RectangleF}]{platform\+Rectangle }\end{DoxyParamCaption})}
+
+
+
+Handles collision with terrain on X-\/axis, basically only controlling horizontal movement  
+
+
+\begin{DoxyParams}{Parameters}
+{\em platform\+Rectangle} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a4b4b7868201a8052a90b42d705f53825}\label{class_player_a4b4b7868201a8052a90b42d705f53825}} 
+\index{Player@{Player}!HandleCollisionY@{HandleCollisionY}}
+\index{HandleCollisionY@{HandleCollisionY}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{HandleCollisionY()}{HandleCollisionY()}}
+{\footnotesize\ttfamily void Player.\+Handle\+CollisionY (\begin{DoxyParamCaption}\item[{RectangleF}]{platform\+Rectangle,  }\item[{bool}]{platform }\end{DoxyParamCaption})}
+
+
+
+Handles collision with terrain on Y-\/axis, basically only controlling vertical movement  
+
+
+\begin{DoxyParams}{Parameters}
+{\em platform\+Rectangle} & \\
+\hline
+{\em platform} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a25d10ebd0fd12c3c1f74f8b9a32468fa}\label{class_player_a25d10ebd0fd12c3c1f74f8b9a32468fa}} 
+\index{Player@{Player}!LoadTexture@{LoadTexture}}
+\index{LoadTexture@{LoadTexture}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{LoadTexture()}{LoadTexture()}}
+{\footnotesize\ttfamily void Player.\+Load\+Texture (\begin{DoxyParamCaption}\item[{Texture2D}]{sprite\+Sheet }\end{DoxyParamCaption})}
+
+
+
+Loads all necessary assets for the \mbox{\hyperlink{class_player}{Player}} and constructs the necessary components for Animation  
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Sheet} & The texture with all sprites necessary for \mbox{\hyperlink{class_player}{Player}} construction\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a61cb527c9711989c24e497216f480de4}\label{class_player_a61cb527c9711989c24e497216f480de4}} 
+\index{Player@{Player}!WaterCheck@{WaterCheck}}
+\index{WaterCheck@{WaterCheck}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{WaterCheck()}{WaterCheck()}}
+{\footnotesize\ttfamily void Player.\+Water\+Check (\begin{DoxyParamCaption}\item[{RectangleF}]{rectangle }\end{DoxyParamCaption})}
+
+
+
+Checks if the \mbox{\hyperlink{class_player}{Player}} is located in water  
+
+
+\begin{DoxyParams}{Parameters}
+{\em rectangle} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a12072ad63aa608a920d51495e85c4d27}\label{class_player_a12072ad63aa608a920d51495e85c4d27}} 
+\index{Player@{Player}!WaterGravityMove@{WaterGravityMove}}
+\index{WaterGravityMove@{WaterGravityMove}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{WaterGravityMove()}{WaterGravityMove()}}
+{\footnotesize\ttfamily void Player.\+Water\+Gravity\+Move (\begin{DoxyParamCaption}\item[{Keyboard\+State}]{keyboard\+State,  }\item[{Vector2}]{previous }\end{DoxyParamCaption})}
+
+
+
+Defines movement and physics in water environment, checks \mbox{\hyperlink{class_player}{Player}} input and invokes movement events.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em keyboard\+State} & Keys that are currently pressed\\
+\hline
+{\em previous} & Last \mbox{\hyperlink{class_player_ac768e07fad95f12c16da902f2d76d13e}{Position}} of the \mbox{\hyperlink{class_player}{Player}}\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_player_a7f9d0595e67a246d20c8f5f11a690877}\label{class_player_a7f9d0595e67a246d20c8f5f11a690877}} 
+\index{Player@{Player}!InvulnerabilityDuration@{InvulnerabilityDuration}}
+\index{InvulnerabilityDuration@{InvulnerabilityDuration}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{InvulnerabilityDuration}{InvulnerabilityDuration}}
+{\footnotesize\ttfamily float Player.\+Invulnerability\+Duration = 0.\+5f}
+
+Time for which the \mbox{\hyperlink{class_player}{Player}} cannot die (in seconds)
+
+\texorpdfstring{$>$}{>} \mbox{\Hypertarget{class_player_a3a1bda3f66a17d0e2436888b04e9d15f}\label{class_player_a3a1bda3f66a17d0e2436888b04e9d15f}} 
+\index{Player@{Player}!InvulnerabilityTimer@{InvulnerabilityTimer}}
+\index{InvulnerabilityTimer@{InvulnerabilityTimer}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{InvulnerabilityTimer}{InvulnerabilityTimer}}
+{\footnotesize\ttfamily float Player.\+Invulnerability\+Timer}
+
+Time for which the \mbox{\hyperlink{class_player}{Player}} has been invulnerable.
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_player_a1ca776cc0dc785241f538c7127d3c48a}\label{class_player_a1ca776cc0dc785241f538c7127d3c48a}} 
+\index{Player@{Player}!Direction@{Direction}}
+\index{Direction@{Direction}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Direction}{Direction}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_sam_ser_1_1_control_a7b0c11a2998bd8c54e6bded0b2176224}{Game\+Direction}} Player.\+Direction\hspace{0.3cm}{\ttfamily [get]}}
+
+The direction the \mbox{\hyperlink{class_player}{Player}} is facing.\mbox{\Hypertarget{class_player_a0aa8f47fa4e02bf730ea27a0bffcf9bf}\label{class_player_a0aa8f47fa4e02bf730ea27a0bffcf9bf}} 
+\index{Player@{Player}!HasJumped@{HasJumped}}
+\index{HasJumped@{HasJumped}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{HasJumped}{HasJumped}}
+{\footnotesize\ttfamily bool Player.\+Has\+Jumped\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Determines whether the \mbox{\hyperlink{class_player}{Player}} has recently jumped\mbox{\Hypertarget{class_player_a129d77184feb05c2743ef38726dc23da}\label{class_player_a129d77184feb05c2743ef38726dc23da}} 
+\index{Player@{Player}!Health@{Health}}
+\index{Health@{Health}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Health}{Health}}
+{\footnotesize\ttfamily int Player.\+Health\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Current health points of the \mbox{\hyperlink{class_player}{Player}}.\mbox{\Hypertarget{class_player_ac4009a372f37acb7a5847025c2801d34}\label{class_player_ac4009a372f37acb7a5847025c2801d34}} 
+\index{Player@{Player}!InWater@{InWater}}
+\index{InWater@{InWater}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{InWater}{InWater}}
+{\footnotesize\ttfamily bool Player.\+In\+Water\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Indicates whether the \mbox{\hyperlink{class_player}{Player}} is in a water environment\mbox{\Hypertarget{class_player_ac768e07fad95f12c16da902f2d76d13e}\label{class_player_ac768e07fad95f12c16da902f2d76d13e}} 
+\index{Player@{Player}!Position@{Position}}
+\index{Position@{Position}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily Vector2 Player.\+Position\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Determines the current position of the \mbox{\hyperlink{class_player}{Player}} on the screen
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_control_1_1_i_focusable_ab1c871d48a8daf8d8719ae63411e6e51}{Sam\+Ser.\+Control.\+IFocusable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Entities/\+Player\+Content/Player.\+cs\end{DoxyCompactItemize}

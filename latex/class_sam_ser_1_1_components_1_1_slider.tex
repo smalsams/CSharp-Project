@@ -1,0 +1,114 @@
+\hypertarget{class_sam_ser_1_1_components_1_1_slider}{}\doxysection{Sam\+Ser.\+Components.\+Slider Class Reference}
+\label{class_sam_ser_1_1_components_1_1_slider}\index{SamSer.Components.Slider@{SamSer.Components.Slider}}
+
+
+\mbox{\hyperlink{class_sam_ser_1_1_components_1_1_slider}{Slider}} component, which allows for an area on screen to get mapped onto a range of possible values according to the position on the screen. Allows for user defined event to be invoked every time the position of the slider is changed.   
+
+
+Inheritance diagram for Sam\+Ser.\+Components.\+Slider\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sam_ser_1_1_components_1_1_slider}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_slider_ad5a901b44fd93b8590dfa8c7db620d6e}\label{class_sam_ser_1_1_components_1_1_slider_ad5a901b44fd93b8590dfa8c7db620d6e}} 
+{\bfseries Slider} (Texture2D slider\+Texture, Texture2D scroll\+Texture, Vector2 slider\+Position, float default\+Value=1f)
+\item 
+override void \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_slider_a7582c27fca086ba06cd0977186e01a9b}{Draw}} (Game\+Time game\+Time, Sprite\+Batch sprite\+Batch)
+\begin{DoxyCompactList}\small\item\em Draws the component area onto the game screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+{\em sprite\+Batch} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_slider_a09a193e2accd333488b94ff84d75efb5}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the component area every tick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_slider_afd1e38b9e427755266f4a2413a1d7a0f}\label{class_sam_ser_1_1_components_1_1_slider_afd1e38b9e427755266f4a2413a1d7a0f}} 
+Event\+Handler$<$ float $>$ {\bfseries Slider\+Scroll}
+\begin{DoxyCompactList}\small\item\em User defined event, which is invoked every time the position of the slider is changed  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Vector2 \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_slider_ac2c0e50a40f1229722bbd8950714e973}{Slider\+Position}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_sam_ser_1_1_components_1_1_slider}{Slider}} component, which allows for an area on screen to get mapped onto a range of possible values according to the position on the screen. Allows for user defined event to be invoked every time the position of the slider is changed.  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_slider_a7582c27fca086ba06cd0977186e01a9b}\label{class_sam_ser_1_1_components_1_1_slider_a7582c27fca086ba06cd0977186e01a9b}} 
+\index{SamSer.Components.Slider@{SamSer.Components.Slider}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.Components.Slider@{SamSer.Components.Slider}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily override void Sam\+Ser.\+Components.\+Slider.\+Draw (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time,  }\item[{Sprite\+Batch}]{sprite\+Batch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Draws the component area onto the game screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+{\em sprite\+Batch} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_component_a0ab5c2f4964ef06db08a668a5b61a764}{Sam\+Ser.\+Components.\+Component}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_slider_a09a193e2accd333488b94ff84d75efb5}\label{class_sam_ser_1_1_components_1_1_slider_a09a193e2accd333488b94ff84d75efb5}} 
+\index{SamSer.Components.Slider@{SamSer.Components.Slider}!Update@{Update}}
+\index{Update@{Update}!SamSer.Components.Slider@{SamSer.Components.Slider}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily override void Sam\+Ser.\+Components.\+Slider.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Updates the component area every tick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_component_a29af6a3878b5a8621029067eedebfc1c}{Sam\+Ser.\+Components.\+Component}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_slider_ac2c0e50a40f1229722bbd8950714e973}\label{class_sam_ser_1_1_components_1_1_slider_ac2c0e50a40f1229722bbd8950714e973}} 
+\index{SamSer.Components.Slider@{SamSer.Components.Slider}!SliderPosition@{SliderPosition}}
+\index{SliderPosition@{SliderPosition}!SamSer.Components.Slider@{SamSer.Components.Slider}}
+\doxysubsubsection{\texorpdfstring{SliderPosition}{SliderPosition}}
+{\footnotesize\ttfamily Vector2 Sam\+Ser.\+Components.\+Slider.\+Slider\+Position\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Position of the slider on the screen, which acts as the ranged area for the scroll 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Components/Slider.\+cs\end{DoxyCompactItemize}

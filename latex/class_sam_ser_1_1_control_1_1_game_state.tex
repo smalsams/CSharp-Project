@@ -1,0 +1,216 @@
+\hypertarget{class_sam_ser_1_1_control_1_1_game_state}{}\doxysection{Sam\+Ser.\+Control.\+Game\+State Class Reference}
+\label{class_sam_ser_1_1_control_1_1_game_state}\index{SamSer.Control.GameState@{SamSer.Control.GameState}}
+
+
+Playable \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_state}{State}} instance. Acts as a game session, responsible for interaction between the environment and the player.   
+
+
+Inheritance diagram for Sam\+Ser.\+Control.\+Game\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sam_ser_1_1_control_1_1_game_state}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state_ac2fcfb79b757023833c0699136149f26}{Game\+State}} (Content\+Manager content\+Manager, \mbox{\hyperlink{class_sam_ser_1_1_two_d_platformer}{Two\+DPlatformer}} game, Graphics\+Device graphics\+Device, \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller}{Level\+Controller}} level\+Controller)
+\begin{DoxyCompactList}\small\item\em The Non-\/\+Json constructor for the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state}{Game\+State}}.  \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state_affd198f69e803c49b0cb42fec7abd643}{Game\+State}} (Content\+Manager content\+Manager, \mbox{\hyperlink{class_sam_ser_1_1_two_d_platformer}{Two\+DPlatformer}} game, Graphics\+Device graphics\+Device, \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller}{Level\+Controller}} level\+Controller, \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_player_content_1_1_player_data}{Player\+Data}} player\+Data)
+\begin{DoxyCompactList}\small\item\em The Json constructor for the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state}{Game\+State}}.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_a5e0ca5c6efc5d3caf4f1fb1ddf06aae3}\label{class_sam_ser_1_1_control_1_1_game_state_a5e0ca5c6efc5d3caf4f1fb1ddf06aae3}} 
+void {\bfseries Load\+Components} ()
+\begin{DoxyCompactList}\small\item\em Loads assets exclusive/non-\/exclusive for \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state}{Game\+State}} into the content manager and creates components that these assets represent.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state_a477b2f92bf7ae50607f0b53feff1f3b1}{Play\+Sound\+Effect\+\_\+\+On\+Jump}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Plays the jump sound effect.  \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state_a3d3b4567e5978f3db42aee29c76e3b53}{Draw}} (Game\+Time game\+Time, Sprite\+Batch sprite\+Batch)
+\begin{DoxyCompactList}\small\item\em Draws everything present on the screen in given state in real time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+{\em sprite\+Batch} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state_a3f35fa7784168eba34a2aa1922e0820a}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates everything present on the screen in given state in real time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state_ad6e89214ee58f63c454f18a5e7000037}{Draw\+Debug}} (Graphics\+Device gd, Sprite\+Batch sprite\+Batch)
+\begin{DoxyCompactList}\small\item\em Draws lines around all entities and platforms in the game, used for debug and test purposes  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_a94f3282741a5ffc1771a1dba6720286c}\label{class_sam_ser_1_1_control_1_1_game_state_a94f3282741a5ffc1771a1dba6720286c}} 
+void {\bfseries Player\+External\+Update} ()
+\begin{DoxyCompactList}\small\item\em Updates player according to collision or manipulation with external objects  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state_a02d22eb65f09c449c76a31aaf0823d7f}{Is\+Player\+Out\+Of\+Vertical\+Bounds}} ()
+\begin{DoxyCompactList}\small\item\em Checks whether the player is lower than the vertical camera limit  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state_a8152700ab194957a479bbd5f7803f8c3}{Score}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Playable \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_state}{State}} instance. Acts as a game session, responsible for interaction between the environment and the player.  
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_ac2fcfb79b757023833c0699136149f26}\label{class_sam_ser_1_1_control_1_1_game_state_ac2fcfb79b757023833c0699136149f26}} 
+\index{SamSer.Control.GameState@{SamSer.Control.GameState}!GameState@{GameState}}
+\index{GameState@{GameState}!SamSer.Control.GameState@{SamSer.Control.GameState}}
+\doxysubsubsection{\texorpdfstring{GameState()}{GameState()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Sam\+Ser.\+Control.\+Game\+State.\+Game\+State (\begin{DoxyParamCaption}\item[{Content\+Manager}]{content\+Manager,  }\item[{\mbox{\hyperlink{class_sam_ser_1_1_two_d_platformer}{Two\+DPlatformer}}}]{game,  }\item[{Graphics\+Device}]{graphics\+Device,  }\item[{\mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller}{Level\+Controller}}}]{level\+Controller }\end{DoxyParamCaption})}
+
+
+
+The Non-\/\+Json constructor for the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state}{Game\+State}}.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em content\+Manager} & Object responsible for asset manipulation, for further documentation see Content\+Manager\\
+\hline
+{\em game} & The game instance.\\
+\hline
+{\em graphics\+Device} & \\
+\hline
+{\em level\+Controller} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_affd198f69e803c49b0cb42fec7abd643}\label{class_sam_ser_1_1_control_1_1_game_state_affd198f69e803c49b0cb42fec7abd643}} 
+\index{SamSer.Control.GameState@{SamSer.Control.GameState}!GameState@{GameState}}
+\index{GameState@{GameState}!SamSer.Control.GameState@{SamSer.Control.GameState}}
+\doxysubsubsection{\texorpdfstring{GameState()}{GameState()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Sam\+Ser.\+Control.\+Game\+State.\+Game\+State (\begin{DoxyParamCaption}\item[{Content\+Manager}]{content\+Manager,  }\item[{\mbox{\hyperlink{class_sam_ser_1_1_two_d_platformer}{Two\+DPlatformer}}}]{game,  }\item[{Graphics\+Device}]{graphics\+Device,  }\item[{\mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_controller}{Level\+Controller}}}]{level\+Controller,  }\item[{\mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_player_content_1_1_player_data}{Player\+Data}}}]{player\+Data }\end{DoxyParamCaption})}
+
+
+
+The Json constructor for the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_game_state}{Game\+State}}.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em content\+Manager} & Object responsible for asset manipulation, for further documentation see Content\+Manager\\
+\hline
+{\em game} & The game instance.\\
+\hline
+{\em graphics\+Device} & \\
+\hline
+{\em level\+Controller} & \\
+\hline
+{\em player\+Data} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_a3d3b4567e5978f3db42aee29c76e3b53}\label{class_sam_ser_1_1_control_1_1_game_state_a3d3b4567e5978f3db42aee29c76e3b53}} 
+\index{SamSer.Control.GameState@{SamSer.Control.GameState}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.Control.GameState@{SamSer.Control.GameState}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily override void Sam\+Ser.\+Control.\+Game\+State.\+Draw (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time,  }\item[{Sprite\+Batch}]{sprite\+Batch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Draws everything present on the screen in given state in real time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+{\em sprite\+Batch} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_state_a7251d6e93a2a0eb7a71abd411f01bdc8}{Sam\+Ser.\+Control.\+State}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_ad6e89214ee58f63c454f18a5e7000037}\label{class_sam_ser_1_1_control_1_1_game_state_ad6e89214ee58f63c454f18a5e7000037}} 
+\index{SamSer.Control.GameState@{SamSer.Control.GameState}!DrawDebug@{DrawDebug}}
+\index{DrawDebug@{DrawDebug}!SamSer.Control.GameState@{SamSer.Control.GameState}}
+\doxysubsubsection{\texorpdfstring{DrawDebug()}{DrawDebug()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Game\+State.\+Draw\+Debug (\begin{DoxyParamCaption}\item[{Graphics\+Device}]{gd,  }\item[{Sprite\+Batch}]{sprite\+Batch }\end{DoxyParamCaption})}
+
+
+
+Draws lines around all entities and platforms in the game, used for debug and test purposes  
+
+
+\begin{DoxyParams}{Parameters}
+{\em gd} & \\
+\hline
+{\em sprite\+Batch} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_a02d22eb65f09c449c76a31aaf0823d7f}\label{class_sam_ser_1_1_control_1_1_game_state_a02d22eb65f09c449c76a31aaf0823d7f}} 
+\index{SamSer.Control.GameState@{SamSer.Control.GameState}!IsPlayerOutOfVerticalBounds@{IsPlayerOutOfVerticalBounds}}
+\index{IsPlayerOutOfVerticalBounds@{IsPlayerOutOfVerticalBounds}!SamSer.Control.GameState@{SamSer.Control.GameState}}
+\doxysubsubsection{\texorpdfstring{IsPlayerOutOfVerticalBounds()}{IsPlayerOutOfVerticalBounds()}}
+{\footnotesize\ttfamily bool Sam\+Ser.\+Control.\+Game\+State.\+Is\+Player\+Out\+Of\+Vertical\+Bounds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks whether the player is lower than the vertical camera limit  
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_a477b2f92bf7ae50607f0b53feff1f3b1}\label{class_sam_ser_1_1_control_1_1_game_state_a477b2f92bf7ae50607f0b53feff1f3b1}} 
+\index{SamSer.Control.GameState@{SamSer.Control.GameState}!PlaySoundEffect\_OnJump@{PlaySoundEffect\_OnJump}}
+\index{PlaySoundEffect\_OnJump@{PlaySoundEffect\_OnJump}!SamSer.Control.GameState@{SamSer.Control.GameState}}
+\doxysubsubsection{\texorpdfstring{PlaySoundEffect\_OnJump()}{PlaySoundEffect\_OnJump()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Game\+State.\+Play\+Sound\+Effect\+\_\+\+On\+Jump (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})}
+
+
+
+Plays the jump sound effect.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Reference to the object that raised the event\\
+\hline
+{\em e} & Event data\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_a3f35fa7784168eba34a2aa1922e0820a}\label{class_sam_ser_1_1_control_1_1_game_state_a3f35fa7784168eba34a2aa1922e0820a}} 
+\index{SamSer.Control.GameState@{SamSer.Control.GameState}!Update@{Update}}
+\index{Update@{Update}!SamSer.Control.GameState@{SamSer.Control.GameState}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily override void Sam\+Ser.\+Control.\+Game\+State.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Updates everything present on the screen in given state in real time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_state_a92548ac21b2be085a980ad8bd12971d9}{Sam\+Ser.\+Control.\+State}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_game_state_a8152700ab194957a479bbd5f7803f8c3}\label{class_sam_ser_1_1_control_1_1_game_state_a8152700ab194957a479bbd5f7803f8c3}} 
+\index{SamSer.Control.GameState@{SamSer.Control.GameState}!Score@{Score}}
+\index{Score@{Score}!SamSer.Control.GameState@{SamSer.Control.GameState}}
+\doxysubsubsection{\texorpdfstring{Score}{Score}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Control.\+Game\+State.\+Score\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Current score in the form of int representing the number of Coins caught during the game 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Control/Game\+State.\+cs\end{DoxyCompactItemize}

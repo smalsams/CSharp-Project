@@ -1,0 +1,77 @@
+\hypertarget{class_sam_ser_1_1_sprites_1_1_sprite_state_processor}{}\doxysection{Sam\+Ser.\+Sprites.\+Sprite\+State\+Processor Class Reference}
+\label{class_sam_ser_1_1_sprites_1_1_sprite_state_processor}\index{SamSer.Sprites.SpriteStateProcessor@{SamSer.Sprites.SpriteStateProcessor}}
+
+
+Data structure storing the animation states and their assigned names   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a434c07ef5d5b5906395085462a0b222f}{Add\+State}} (string name, \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base}{Animation\+Base}} state)
+\begin{DoxyCompactList}\small\item\em Adds a state with an original name to the sprite processor  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a0c498b88a8d00df9626070d52c3bd056}{Change\+Current}} (string name)
+\begin{DoxyCompactList}\small\item\em Changes the current state to a different one via a string name  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a22681dcde09207cc3f22aa56be9faf00}\label{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a22681dcde09207cc3f22aa56be9faf00}} 
+void {\bfseries Draw} (Sprite\+Batch sprite\+Batch, Vector2 position, Sprite\+Effects sprite\+Effects)
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a72b273a91041db0fd5ae1b7e026c1bd8}\label{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a72b273a91041db0fd5ae1b7e026c1bd8}} 
+void {\bfseries Update} (Game\+Time game\+Time)
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base}{Animation\+Base}} \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a013c9b58d73d667de6c981c462334ca4}{Current}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Data structure storing the animation states and their assigned names  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a434c07ef5d5b5906395085462a0b222f}\label{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a434c07ef5d5b5906395085462a0b222f}} 
+\index{SamSer.Sprites.SpriteStateProcessor@{SamSer.Sprites.SpriteStateProcessor}!AddState@{AddState}}
+\index{AddState@{AddState}!SamSer.Sprites.SpriteStateProcessor@{SamSer.Sprites.SpriteStateProcessor}}
+\doxysubsubsection{\texorpdfstring{AddState()}{AddState()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Sprites.\+Sprite\+State\+Processor.\+Add\+State (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{\mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base}{Animation\+Base}}}]{state }\end{DoxyParamCaption})}
+
+
+
+Adds a state with an original name to the sprite processor  
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the new state\\
+\hline
+{\em state} & The new state\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a0c498b88a8d00df9626070d52c3bd056}\label{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a0c498b88a8d00df9626070d52c3bd056}} 
+\index{SamSer.Sprites.SpriteStateProcessor@{SamSer.Sprites.SpriteStateProcessor}!ChangeCurrent@{ChangeCurrent}}
+\index{ChangeCurrent@{ChangeCurrent}!SamSer.Sprites.SpriteStateProcessor@{SamSer.Sprites.SpriteStateProcessor}}
+\doxysubsubsection{\texorpdfstring{ChangeCurrent()}{ChangeCurrent()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Sprites.\+Sprite\+State\+Processor.\+Change\+Current (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Changes the current state to a different one via a string name  
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the new state\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a013c9b58d73d667de6c981c462334ca4}\label{class_sam_ser_1_1_sprites_1_1_sprite_state_processor_a013c9b58d73d667de6c981c462334ca4}} 
+\index{SamSer.Sprites.SpriteStateProcessor@{SamSer.Sprites.SpriteStateProcessor}!Current@{Current}}
+\index{Current@{Current}!SamSer.Sprites.SpriteStateProcessor@{SamSer.Sprites.SpriteStateProcessor}}
+\doxysubsubsection{\texorpdfstring{Current}{Current}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base}{Animation\+Base}} Sam\+Ser.\+Sprites.\+Sprite\+State\+Processor.\+Current\hspace{0.3cm}{\ttfamily [get]}}
+
+The current animation state
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Sprites/Sprite\+State\+Processor.\+cs\end{DoxyCompactItemize}

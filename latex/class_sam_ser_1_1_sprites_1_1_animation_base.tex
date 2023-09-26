@@ -1,0 +1,176 @@
+\hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base}{}\doxysection{Sam\+Ser.\+Sprites.\+Animation\+Base Class Reference}
+\label{class_sam_ser_1_1_sprites_1_1_animation_base}\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+
+
+Base implementation of an animation consisting of basic texture switching   
+
+
+Inheritance diagram for Sam\+Ser.\+Sprites.\+Animation\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sam_ser_1_1_sprites_1_1_animation_base}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_aad8e4c4ade737aa394ecb34d71d70e09}\label{class_sam_ser_1_1_sprites_1_1_animation_base_aad8e4c4ade737aa394ecb34d71d70e09}} 
+void {\bfseries Animate} ()
+\begin{DoxyCompactList}\small\item\em Starts the current animation  \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_a175c5952211d0492e62378e518fa6244}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the animation every frame  \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_ab3acdbabacc60d997695cd8f30e4f688}{Draw}} (Sprite\+Batch sprite\+Batch, Vector2 position, Sprite\+Effects sprite\+Effects)
+\begin{DoxyCompactList}\small\item\em Draws the current texture with a given Sprite\+Effect  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_aec9eaa0607a1a58b11301a8598b21a01}\label{class_sam_ser_1_1_sprites_1_1_animation_base_aec9eaa0607a1a58b11301a8598b21a01}} 
+{\bfseries Animation\+Base} (Texture2D texture, int sprite\+Animation\+Count, Point texture\+Origin, Size sprite\+Dimensions, int entity\+Scale=1)
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_afd1e799bcb6312f5c11bf26cd7bf89a7}{Fps}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Texture2D \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_abdb20cc8b16fc7de19b6a93bd5d49221}{Texture}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_a268b68482d0e2047adbaa8bfed96ae01}{Texture\+Length}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_ab54bbeacb04409744a004aba84b8ef27}{Scale}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Point \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_a07a51a62c731ea4e3eedc469b1cfed12}{Origin}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_a4b232fba91d133ec56eb641d411dd106}{Sprite\+Width}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_ae931e8f71540be2f2e01a32aa28bc7ea}{Sprite\+Height}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Vector2 \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_a551a583286599bd704e249ea235821c6}{Map\+Origin}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\hyperlink{namespace_sam_ser_1_1_sprites_a7d370c8579766244f6e080748dfb8fdc}{Animation\+State}} \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_a4dd729fa4b4c37774455516a77657e8a}{State}} = Animation\+State.\+Cancelled\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\item 
+double \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_a76a374b2f6d6b9a5b65d172d800ced30}{Time}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\item 
+double \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_animation_base_afe3a5406b35e55f20703b1f883db48c9}{Total\+Time}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base implementation of an animation consisting of basic texture switching  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_ab3acdbabacc60d997695cd8f30e4f688}\label{class_sam_ser_1_1_sprites_1_1_animation_base_ab3acdbabacc60d997695cd8f30e4f688}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily abstract void Sam\+Ser.\+Sprites.\+Animation\+Base.\+Draw (\begin{DoxyParamCaption}\item[{Sprite\+Batch}]{sprite\+Batch,  }\item[{Vector2}]{position,  }\item[{Sprite\+Effects}]{sprite\+Effects }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Draws the current texture with a given Sprite\+Effect  
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+{\em position} & \\
+\hline
+{\em sprite\+Effects} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_horizontal_animation_a1b86f29aa65d9130d0343ea6dcea55b3}{Sam\+Ser.\+Sprites.\+Horizontal\+Animation}}, and \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_vertical_animation_aff98c6699be1986ff7722eeead8a946d}{Sam\+Ser.\+Sprites.\+Vertical\+Animation}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_a175c5952211d0492e62378e518fa6244}\label{class_sam_ser_1_1_sprites_1_1_animation_base_a175c5952211d0492e62378e518fa6244}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!Update@{Update}}
+\index{Update@{Update}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily abstract void Sam\+Ser.\+Sprites.\+Animation\+Base.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Updates the animation every frame  
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_horizontal_animation_a9584f7aba56b2d895a73e117d45962a0}{Sam\+Ser.\+Sprites.\+Horizontal\+Animation}}, and \mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_vertical_animation_a3c2c0ddcdaf3666516aa5f38c8626e05}{Sam\+Ser.\+Sprites.\+Vertical\+Animation}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_afd1e799bcb6312f5c11bf26cd7bf89a7}\label{class_sam_ser_1_1_sprites_1_1_animation_base_afd1e799bcb6312f5c11bf26cd7bf89a7}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!Fps@{Fps}}
+\index{Fps@{Fps}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{Fps}{Fps}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Sprites.\+Animation\+Base.\+Fps\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}, {\ttfamily [protected]}}
+
+Number of textures that get appear within a second\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_a551a583286599bd704e249ea235821c6}\label{class_sam_ser_1_1_sprites_1_1_animation_base_a551a583286599bd704e249ea235821c6}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!MapOrigin@{MapOrigin}}
+\index{MapOrigin@{MapOrigin}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{MapOrigin}{MapOrigin}}
+{\footnotesize\ttfamily Vector2 Sam\+Ser.\+Sprites.\+Animation\+Base.\+Map\+Origin\hspace{0.3cm}{\ttfamily [get]}}
+
+Defines where the actual sprite center will be\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_a07a51a62c731ea4e3eedc469b1cfed12}\label{class_sam_ser_1_1_sprites_1_1_animation_base_a07a51a62c731ea4e3eedc469b1cfed12}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!Origin@{Origin}}
+\index{Origin@{Origin}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{Origin}{Origin}}
+{\footnotesize\ttfamily Point Sam\+Ser.\+Sprites.\+Animation\+Base.\+Origin\hspace{0.3cm}{\ttfamily [get]}}
+
+Defines where the sprite center is on the sprite sheet\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_ab54bbeacb04409744a004aba84b8ef27}\label{class_sam_ser_1_1_sprites_1_1_animation_base_ab54bbeacb04409744a004aba84b8ef27}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!Scale@{Scale}}
+\index{Scale@{Scale}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{Scale}{Scale}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Sprites.\+Animation\+Base.\+Scale\hspace{0.3cm}{\ttfamily [get]}}
+
+Defines how much will the actual size differ from the default one\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_ae931e8f71540be2f2e01a32aa28bc7ea}\label{class_sam_ser_1_1_sprites_1_1_animation_base_ae931e8f71540be2f2e01a32aa28bc7ea}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!SpriteHeight@{SpriteHeight}}
+\index{SpriteHeight@{SpriteHeight}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{SpriteHeight}{SpriteHeight}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Sprites.\+Animation\+Base.\+Sprite\+Height\hspace{0.3cm}{\ttfamily [get]}}
+
+Height of the single sprite\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_a4b232fba91d133ec56eb641d411dd106}\label{class_sam_ser_1_1_sprites_1_1_animation_base_a4b232fba91d133ec56eb641d411dd106}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!SpriteWidth@{SpriteWidth}}
+\index{SpriteWidth@{SpriteWidth}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{SpriteWidth}{SpriteWidth}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Sprites.\+Animation\+Base.\+Sprite\+Width\hspace{0.3cm}{\ttfamily [get]}}
+
+Width of the single sprite\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_a4dd729fa4b4c37774455516a77657e8a}\label{class_sam_ser_1_1_sprites_1_1_animation_base_a4dd729fa4b4c37774455516a77657e8a}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!State@{State}}
+\index{State@{State}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_sam_ser_1_1_sprites_a7d370c8579766244f6e080748dfb8fdc}{Animation\+State}} Sam\+Ser.\+Sprites.\+Animation\+Base.\+State = Animation\+State.\+Cancelled\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+Determines the state of the animation\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_abdb20cc8b16fc7de19b6a93bd5d49221}\label{class_sam_ser_1_1_sprites_1_1_animation_base_abdb20cc8b16fc7de19b6a93bd5d49221}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!Texture@{Texture}}
+\index{Texture@{Texture}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{Texture}{Texture}}
+{\footnotesize\ttfamily Texture2D Sam\+Ser.\+Sprites.\+Animation\+Base.\+Texture\hspace{0.3cm}{\ttfamily [get]}}
+
+Texture containing the sprite sheet\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_a268b68482d0e2047adbaa8bfed96ae01}\label{class_sam_ser_1_1_sprites_1_1_animation_base_a268b68482d0e2047adbaa8bfed96ae01}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!TextureLength@{TextureLength}}
+\index{TextureLength@{TextureLength}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{TextureLength}{TextureLength}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Sprites.\+Animation\+Base.\+Texture\+Length\hspace{0.3cm}{\ttfamily [get]}}
+
+Length of the sprite sheet\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_a76a374b2f6d6b9a5b65d172d800ced30}\label{class_sam_ser_1_1_sprites_1_1_animation_base_a76a374b2f6d6b9a5b65d172d800ced30}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!Time@{Time}}
+\index{Time@{Time}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{Time}{Time}}
+{\footnotesize\ttfamily double Sam\+Ser.\+Sprites.\+Animation\+Base.\+Time\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+The current time\mbox{\Hypertarget{class_sam_ser_1_1_sprites_1_1_animation_base_afe3a5406b35e55f20703b1f883db48c9}\label{class_sam_ser_1_1_sprites_1_1_animation_base_afe3a5406b35e55f20703b1f883db48c9}} 
+\index{SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}!TotalTime@{TotalTime}}
+\index{TotalTime@{TotalTime}!SamSer.Sprites.AnimationBase@{SamSer.Sprites.AnimationBase}}
+\doxysubsubsection{\texorpdfstring{TotalTime}{TotalTime}}
+{\footnotesize\ttfamily double Sam\+Ser.\+Sprites.\+Animation\+Base.\+Total\+Time\hspace{0.3cm}{\ttfamily [get]}}
+
+Total possible time for the whole animation
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Sprites/Animation\+Base.\+cs\end{DoxyCompactItemize}

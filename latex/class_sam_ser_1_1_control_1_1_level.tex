@@ -1,0 +1,102 @@
+\hypertarget{class_sam_ser_1_1_control_1_1_level}{}\doxysection{Sam\+Ser.\+Control.\+Level Class Reference}
+\label{class_sam_ser_1_1_control_1_1_level}\index{SamSer.Control.Level@{SamSer.Control.Level}}
+
+
+Implementation of the single map in the game   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_a4c51cce883271fdbdc0fee581d1fba5b}\label{class_sam_ser_1_1_control_1_1_level_a4c51cce883271fdbdc0fee581d1fba5b}} 
+{\bfseries Level} (Tiled\+Map map, Tiled\+Map\+Renderer renderer, Song song)
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_ab1ad3e04950ce4482f42206423847406}\label{class_sam_ser_1_1_control_1_1_level_ab1ad3e04950ce4482f42206423847406}} 
+void {\bfseries Pause} ()
+\begin{DoxyCompactList}\small\item\em Controls the action in the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} if the level is paused/unpaused  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_ab85746e6939180adf36f8b1d24d7286a}{Draw}} (Sprite\+Batch sprite\+Batch, Game\+Time game\+Time, Matrix view\+Matrix)
+\begin{DoxyCompactList}\small\item\em Draws the entities specific to the single \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} onto the screen while applying matrix transformation and creating a camera focus effect  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_a54853b32213eac4fcacb421a962058ae}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates objects characteristic to the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} every tick  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_a5b360b1fcc576dbb7ae75ca41a6590bb}\label{class_sam_ser_1_1_control_1_1_level_a5b360b1fcc576dbb7ae75ca41a6590bb}} 
+void {\bfseries Play\+Song} ()
+\begin{DoxyCompactList}\small\item\em Plays the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} specific theme.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_a7bb01b0c4685571df85a7996188c7fc1}\label{class_sam_ser_1_1_control_1_1_level_a7bb01b0c4685571df85a7996188c7fc1}} 
+void {\bfseries Reset\+Song} ()
+\begin{DoxyCompactList}\small\item\em Makes the song play from the beginning again.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_a610a1935080699826714da63e929365f}\label{class_sam_ser_1_1_control_1_1_level_a610a1935080699826714da63e929365f}} 
+Tiled\+Map {\bfseries Tiled\+Map}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_ab44ba5ee28767c07e90dac86a9583a20}\label{class_sam_ser_1_1_control_1_1_level_ab44ba5ee28767c07e90dac86a9583a20}} 
+Event\+Handler {\bfseries Level\+Finish}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{IEntity}} $>$ \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_a4e3acc68c8279705a438c4d67bc00b25}{Entities}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+Vector2 \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level_abe72838c4cf9547946b34aff779a8be8}{Global\+Bounds}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the single map in the game  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_ab85746e6939180adf36f8b1d24d7286a}\label{class_sam_ser_1_1_control_1_1_level_ab85746e6939180adf36f8b1d24d7286a}} 
+\index{SamSer.Control.Level@{SamSer.Control.Level}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.Control.Level@{SamSer.Control.Level}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level.\+Draw (\begin{DoxyParamCaption}\item[{Sprite\+Batch}]{sprite\+Batch,  }\item[{Game\+Time}]{game\+Time,  }\item[{Matrix}]{view\+Matrix }\end{DoxyParamCaption})}
+
+
+
+Draws the entities specific to the single \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} onto the screen while applying matrix transformation and creating a camera focus effect  
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+{\em game\+Time} & \\
+\hline
+{\em view\+Matrix} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_a54853b32213eac4fcacb421a962058ae}\label{class_sam_ser_1_1_control_1_1_level_a54853b32213eac4fcacb421a962058ae}} 
+\index{SamSer.Control.Level@{SamSer.Control.Level}!Update@{Update}}
+\index{Update@{Update}!SamSer.Control.Level@{SamSer.Control.Level}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Control.\+Level.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})}
+
+
+
+Updates objects characteristic to the \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} every tick  
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_a4e3acc68c8279705a438c4d67bc00b25}\label{class_sam_ser_1_1_control_1_1_level_a4e3acc68c8279705a438c4d67bc00b25}} 
+\index{SamSer.Control.Level@{SamSer.Control.Level}!Entities@{Entities}}
+\index{Entities@{Entities}!SamSer.Control.Level@{SamSer.Control.Level}}
+\doxysubsubsection{\texorpdfstring{Entities}{Entities}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{IEntity}}$>$ Sam\+Ser.\+Control.\+Level.\+Entities\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+List of every \mbox{\hyperlink{class_sam_ser_1_1_control_1_1_level}{Level}} specific IEntity\mbox{\Hypertarget{class_sam_ser_1_1_control_1_1_level_abe72838c4cf9547946b34aff779a8be8}\label{class_sam_ser_1_1_control_1_1_level_abe72838c4cf9547946b34aff779a8be8}} 
+\index{SamSer.Control.Level@{SamSer.Control.Level}!GlobalBounds@{GlobalBounds}}
+\index{GlobalBounds@{GlobalBounds}!SamSer.Control.Level@{SamSer.Control.Level}}
+\doxysubsubsection{\texorpdfstring{GlobalBounds}{GlobalBounds}}
+{\footnotesize\ttfamily Vector2 Sam\+Ser.\+Control.\+Level.\+Global\+Bounds\hspace{0.3cm}{\ttfamily [get]}}
+
+Size of the level
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Control/Level.\+cs\end{DoxyCompactItemize}

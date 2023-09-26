@@ -1,0 +1,87 @@
+\hypertarget{class_sam_ser_1_1_two_d_platformer}{}\doxysection{Sam\+Ser.\+Two\+DPlatformer Class Reference}
+\label{class_sam_ser_1_1_two_d_platformer}\index{SamSer.TwoDPlatformer@{SamSer.TwoDPlatformer}}
+
+
+Mono\+Game class that handles the game loop and the drawing of the game, as well as the switching of states. See State for more information. Responsible for the creation of the game window and the graphics device.   
+
+
+Inheritance diagram for Sam\+Ser.\+Two\+DPlatformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sam_ser_1_1_two_d_platformer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_two_d_platformer_a31d5164e4b1257fe78eb33c7221ec542}{Change\+State}} (\mbox{\hyperlink{class_sam_ser_1_1_control_1_1_state}{State}} state)
+\begin{DoxyCompactList}\small\item\em Changes the current state of the game to the specified state.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_two_d_platformer_a5da9cff7a64aa86e891690560bc0761d}\label{class_sam_ser_1_1_two_d_platformer_a5da9cff7a64aa86e891690560bc0761d}} 
+override void {\bfseries Initialize} ()
+\begin{DoxyCompactList}\small\item\em Method that initializes the game window and the graphics device.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_two_d_platformer_a2008d525866596654d4b94994234ac35}\label{class_sam_ser_1_1_two_d_platformer_a2008d525866596654d4b94994234ac35}} 
+override void {\bfseries Load\+Content} ()
+\begin{DoxyCompactList}\small\item\em Loads the content of the game (passes the actual loading work to the responsible state instance).  \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_sam_ser_1_1_two_d_platformer_aab72905bd441ca4966e4778e630dd9a7}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the game state (passes the actual updating work to the responsible state instance).  \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_sam_ser_1_1_two_d_platformer_ab534ab9c9a140eb0fc090d15705eeb38}{Draw}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Draws the game state (passes the actual drawing work to the responsible state instance).  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Mono\+Game class that handles the game loop and the drawing of the game, as well as the switching of states. See State for more information. Responsible for the creation of the game window and the graphics device.  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_two_d_platformer_a31d5164e4b1257fe78eb33c7221ec542}\label{class_sam_ser_1_1_two_d_platformer_a31d5164e4b1257fe78eb33c7221ec542}} 
+\index{SamSer.TwoDPlatformer@{SamSer.TwoDPlatformer}!ChangeState@{ChangeState}}
+\index{ChangeState@{ChangeState}!SamSer.TwoDPlatformer@{SamSer.TwoDPlatformer}}
+\doxysubsubsection{\texorpdfstring{ChangeState()}{ChangeState()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Two\+DPlatformer.\+Change\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sam_ser_1_1_control_1_1_state}{State}}}]{state }\end{DoxyParamCaption})}
+
+
+
+Changes the current state of the game to the specified state.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & State to be changed into\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_two_d_platformer_ab534ab9c9a140eb0fc090d15705eeb38}\label{class_sam_ser_1_1_two_d_platformer_ab534ab9c9a140eb0fc090d15705eeb38}} 
+\index{SamSer.TwoDPlatformer@{SamSer.TwoDPlatformer}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.TwoDPlatformer@{SamSer.TwoDPlatformer}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily override void Sam\+Ser.\+Two\+DPlatformer.\+Draw (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Draws the game state (passes the actual drawing work to the responsible state instance).  
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_two_d_platformer_aab72905bd441ca4966e4778e630dd9a7}\label{class_sam_ser_1_1_two_d_platformer_aab72905bd441ca4966e4778e630dd9a7}} 
+\index{SamSer.TwoDPlatformer@{SamSer.TwoDPlatformer}!Update@{Update}}
+\index{Update@{Update}!SamSer.TwoDPlatformer@{SamSer.TwoDPlatformer}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily override void Sam\+Ser.\+Two\+DPlatformer.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Updates the game state (passes the actual updating work to the responsible state instance).  
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Two\+DPlatformer.\+cs\end{DoxyCompactItemize}

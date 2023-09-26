@@ -1,0 +1,85 @@
+\hypertarget{class_sam_ser_1_1_components_1_1_counter}{}\doxysection{Sam\+Ser.\+Components.\+Counter\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_sam_ser_1_1_components_1_1_counter}\index{SamSer.Components.Counter$<$ T $>$@{SamSer.Components.Counter$<$ T $>$}}
+
+
+Generic implementation for Text area with an user defined updater method assigned to it, which allows for generic updating of the \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_counter_aaad0770cbb78dadddfbfb0be87b3eedd}{Value}}   
+
+
+Inheritance diagram for Sam\+Ser.\+Components.\+Counter\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_sam_ser_1_1_components_1_1_counter}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_counter_ab2227099d455d5135aac27b3bdb6e652}\label{class_sam_ser_1_1_components_1_1_counter_ab2227099d455d5135aac27b3bdb6e652}} 
+{\bfseries Counter} (Sprite\+Font font, Vector2 position, string content, T default\+Value, Func$<$ T $>$ updater)
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_counter_a31a652f6fc3ddf99e6d20503f1fe1cf3}\label{class_sam_ser_1_1_components_1_1_counter_a31a652f6fc3ddf99e6d20503f1fe1cf3}} 
+{\bfseries Counter} (Sprite\+Font font, Vector2 position, string content, Color color, T default\+Value, Func$<$ T $>$ updater)
+\item 
+override void \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_counter_a89f555437ddc37c483ab5a3e4dd67714}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the component area every tick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+T \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_counter_aaad0770cbb78dadddfbfb0be87b3eedd}{Value}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Generic implementation for Text area with an user defined updater method assigned to it, which allows for generic updating of the \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_counter_aaad0770cbb78dadddfbfb0be87b3eedd}{Value}}  
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of the counted value, should have a meaningful string conversion\\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_counter_a89f555437ddc37c483ab5a3e4dd67714}\label{class_sam_ser_1_1_components_1_1_counter_a89f555437ddc37c483ab5a3e4dd67714}} 
+\index{SamSer.Components.Counter$<$ T $>$@{SamSer.Components.Counter$<$ T $>$}!Update@{Update}}
+\index{Update@{Update}!SamSer.Components.Counter$<$ T $>$@{SamSer.Components.Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_counter}{Sam\+Ser.\+Components.\+Counter}}$<$ T $>$.Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Updates the component area every tick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_component_a29af6a3878b5a8621029067eedebfc1c}{Sam\+Ser.\+Components.\+Component}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_counter_aaad0770cbb78dadddfbfb0be87b3eedd}\label{class_sam_ser_1_1_components_1_1_counter_aaad0770cbb78dadddfbfb0be87b3eedd}} 
+\index{SamSer.Components.Counter$<$ T $>$@{SamSer.Components.Counter$<$ T $>$}!Value@{Value}}
+\index{Value@{Value}!SamSer.Components.Counter$<$ T $>$@{SamSer.Components.Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Value}{Value}}
+{\footnotesize\ttfamily T \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_counter}{Sam\+Ser.\+Components.\+Counter}}$<$ T $>$.Value\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Value of type T to be displayed as a counting object after the text area
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Components/Counter.\+cs\end{DoxyCompactItemize}

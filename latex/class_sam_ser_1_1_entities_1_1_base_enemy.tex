@@ -1,0 +1,368 @@
+\hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy}{}\doxysection{Sam\+Ser.\+Entities.\+Base\+Enemy Class Reference}
+\label{class_sam_ser_1_1_entities_1_1_base_enemy}\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+
+
+Defines an entity that kills player upon intersection with its texture   
+
+
+Inheritance diagram for Sam\+Ser.\+Entities.\+Base\+Enemy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_sam_ser_1_1_entities_1_1_base_enemy}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract void \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a6afc2fcb54b980d5eeec4544c7b93d60}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates every action and texture on screen in real time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_acc3cc084a5ec994ac54444b9238f164b}{Draw}} (Sprite\+Batch sprite\+Batch, Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Draws necessary textures on screen in real time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+abstract string \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_abf7842ce9da1b33b0942c4ef11e64eef}{Get\+Texture\+Name}} (JObject json\+Object)
+\begin{DoxyCompactList}\small\item\em Gets texture name from a partially de-\/serialized JSON object belonging to an entity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json\+Object} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a3e81fdde70b919c33b6da36093a71d52}{Load\+Texture}} (Texture2D texture)
+\begin{DoxyCompactList}\small\item\em Loads texture for the entity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a062ddff860f6ba08973c63f9bb4a7154}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a062ddff860f6ba08973c63f9bb4a7154}} 
+{\bfseries Base\+Enemy} ()
+\begin{DoxyCompactList}\small\item\em Constructs the \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy}{Base\+Enemy}} from a JSON, used mainly for loading from a file.  \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a1dcc683d5ff19c38062ed56a28ac53d7}{Base\+Enemy}} (Texture2D texture)
+\begin{DoxyCompactList}\small\item\em Regular in-\/code construction for the \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy}{Base\+Enemy}} class, used mainly for testing.  \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_aa2f7516b4f8217d36e49e1b6d1576990}{CollisionX}} (RectangleF rectangle)
+\begin{DoxyCompactList}\small\item\em Checks if entity collides with a rectangle horizontally  \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_af0e6248a4ac5559a00f4a8e5df863000}{CollisionY}} (RectangleF rectangle)
+\begin{DoxyCompactList}\small\item\em Checks if entity collides with a rectangle vertically  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a1d4ae279813bad2107e8a69fc8cac185}{On\+Platform}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\item 
+Vector2 \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a24a883259d28f82fc9aeee5d66adbdc5}{Position}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Top-\/\+Left point of the entity on the game screen as a vector  \end{DoxyCompactList}\item 
+Vector2 \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a71211838b0175a07dff63fa18101186b}{Velocity}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+Vector2 \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a802e8375baf36f488b4144cdcfb1b342}{Rotation}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+abstract RectangleF \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a097cb16373ad409a143507158e39921f}{Bounding\+Box}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em An imaginary rectangle that specifies the hitboxes of the \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy}{Base\+Enemy}} entity  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_ae4309f4163ff468fbb1b9af3b7f946d9}\label{class_sam_ser_1_1_entities_1_1_base_enemy_ae4309f4163ff468fbb1b9af3b7f946d9}} 
+int {\bfseries Width}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Width of the \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy}{Base\+Enemy}}  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a10c931f2a3a9045d844423bca8690471}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a10c931f2a3a9045d844423bca8690471}} 
+int {\bfseries Height}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Height of the \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy}{Base\+Enemy}}  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a77bc97f955512b6832e724965a96a585}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a77bc97f955512b6832e724965a96a585}} 
+\mbox{\hyperlink{class_sam_ser_1_1_sprites_1_1_sprite_state_processor}{Sprite\+State\+Processor}} {\bfseries Sprite\+State\+Processor}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Responsible for the control of animation states given to the \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy}{Base\+Enemy}}  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a222e124c53df03b1c495f49867999407}{In\+Sight}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Specifies whether the entity is visible for the player  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a579396443ef872f825f908f426f3831a}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a579396443ef872f825f908f426f3831a}} 
+\mbox{\hyperlink{namespace_sam_ser_1_1_control_a7b0c11a2998bd8c54e6bded0b2176224}{Game\+Direction}} {\bfseries Direction}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The direction the entity is focusing towards  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_ad00de100d6582532aaf81f20d3ec526e}{Paused}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_ae2b6ee1c8ccf8838ff3a0f37cc35c5fe}{Health}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+Event\+Handler \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_aa1f63794a3dca28f5120aa0df9e29d04}{Player\+Collision\+Event}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a68b36108e633152b8a02a9edffb1f270}{Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines an entity that kills player upon intersection with its texture  
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a1dcc683d5ff19c38062ed56a28ac53d7}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a1dcc683d5ff19c38062ed56a28ac53d7}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!BaseEnemy@{BaseEnemy}}
+\index{BaseEnemy@{BaseEnemy}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{BaseEnemy()}{BaseEnemy()}}
+{\footnotesize\ttfamily Sam\+Ser.\+Entities.\+Base\+Enemy.\+Base\+Enemy (\begin{DoxyParamCaption}\item[{Texture2D}]{texture }\end{DoxyParamCaption})}
+
+
+
+Regular in-\/code construction for the \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy}{Base\+Enemy}} class, used mainly for testing.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_aa2f7516b4f8217d36e49e1b6d1576990}\label{class_sam_ser_1_1_entities_1_1_base_enemy_aa2f7516b4f8217d36e49e1b6d1576990}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!CollisionX@{CollisionX}}
+\index{CollisionX@{CollisionX}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{CollisionX()}{CollisionX()}}
+{\footnotesize\ttfamily abstract void Sam\+Ser.\+Entities.\+Base\+Enemy.\+CollisionX (\begin{DoxyParamCaption}\item[{RectangleF}]{rectangle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks if entity collides with a rectangle horizontally  
+
+
+\begin{DoxyParams}{Parameters}
+{\em rectangle} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_ad7f97543df9a270204ae4738571c3f16}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_ae69b7d8a48599068e35399fa40f1fc41}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_af0e6248a4ac5559a00f4a8e5df863000}\label{class_sam_ser_1_1_entities_1_1_base_enemy_af0e6248a4ac5559a00f4a8e5df863000}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!CollisionY@{CollisionY}}
+\index{CollisionY@{CollisionY}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{CollisionY()}{CollisionY()}}
+{\footnotesize\ttfamily abstract void Sam\+Ser.\+Entities.\+Base\+Enemy.\+CollisionY (\begin{DoxyParamCaption}\item[{RectangleF}]{rectangle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks if entity collides with a rectangle vertically  
+
+
+\begin{DoxyParams}{Parameters}
+{\em rectangle} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_a739a552adeea2dd695e4e651b4cfca06}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_ad56fa97107b982da357e9e28bf0a7cf7}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_acc3cc084a5ec994ac54444b9238f164b}\label{class_sam_ser_1_1_entities_1_1_base_enemy_acc3cc084a5ec994ac54444b9238f164b}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily abstract void Sam\+Ser.\+Entities.\+Base\+Enemy.\+Draw (\begin{DoxyParamCaption}\item[{Sprite\+Batch}]{sprite\+Batch,  }\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Draws necessary textures on screen in real time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a9d593eae367ecee955b9bd61d2738dda}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_aec84e8d24c7d785f1a8c350d00181351}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_a512f3d7c79d07767fb17bad9e6c4f4c1}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_abf7842ce9da1b33b0942c4ef11e64eef}\label{class_sam_ser_1_1_entities_1_1_base_enemy_abf7842ce9da1b33b0942c4ef11e64eef}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!GetTextureName@{GetTextureName}}
+\index{GetTextureName@{GetTextureName}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{GetTextureName()}{GetTextureName()}}
+{\footnotesize\ttfamily abstract string Sam\+Ser.\+Entities.\+Base\+Enemy.\+Get\+Texture\+Name (\begin{DoxyParamCaption}\item[{JObject}]{json\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets texture name from a partially de-\/serialized JSON object belonging to an entity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json\+Object} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a7f86560cdd0907a7d73b3ee86f12a621}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_a76a868c032aa7350b1e660573589b748}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_a70388d48ab3bca78926dff955dd1f2c2}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a3e81fdde70b919c33b6da36093a71d52}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a3e81fdde70b919c33b6da36093a71d52}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!LoadTexture@{LoadTexture}}
+\index{LoadTexture@{LoadTexture}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{LoadTexture()}{LoadTexture()}}
+{\footnotesize\ttfamily abstract void Sam\+Ser.\+Entities.\+Base\+Enemy.\+Load\+Texture (\begin{DoxyParamCaption}\item[{Texture2D}]{texture }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Loads texture for the entity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_ac07c6b5cdcd0c6dc2fe74c70033fad6e}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_ae6177ad0213811ff085cf265ad194aff}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_a09695ee0cf619cf20853dfba3f114d7c}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a6afc2fcb54b980d5eeec4544c7b93d60}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a6afc2fcb54b980d5eeec4544c7b93d60}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!Update@{Update}}
+\index{Update@{Update}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily abstract void Sam\+Ser.\+Entities.\+Base\+Enemy.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Updates every action and texture on screen in real time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_aaba5de2ad5ce4b629cc03eb8d95963c7}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_a3758e9949a9e2ffdc1cee68c10852c57}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_aef348aae5602a09d3da317eb7eba8021}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a097cb16373ad409a143507158e39921f}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a097cb16373ad409a143507158e39921f}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!BoundingBox@{BoundingBox}}
+\index{BoundingBox@{BoundingBox}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{BoundingBox}{BoundingBox}}
+{\footnotesize\ttfamily abstract RectangleF Sam\+Ser.\+Entities.\+Base\+Enemy.\+Bounding\+Box\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+An imaginary rectangle that specifies the hitboxes of the \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy}{Base\+Enemy}} entity  
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_ae2b6ee1c8ccf8838ff3a0f37cc35c5fe}\label{class_sam_ser_1_1_entities_1_1_base_enemy_ae2b6ee1c8ccf8838ff3a0f37cc35c5fe}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!Health@{Health}}
+\index{Health@{Health}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{Health}{Health}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Entities.\+Base\+Enemy.\+Health\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Specifies the number of lives left for the enemy entity. \mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a68b36108e633152b8a02a9edffb1f270}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a68b36108e633152b8a02a9edffb1f270}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!Id@{Id}}
+\index{Id@{Id}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Entities.\+Base\+Enemy.\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Specifies the ID of the entity. 
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a4949a1b8730c2522ddf6e9c019a9d997}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a222e124c53df03b1c495f49867999407}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a222e124c53df03b1c495f49867999407}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!InSight@{InSight}}
+\index{InSight@{InSight}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{InSight}{InSight}}
+{\footnotesize\ttfamily bool Sam\+Ser.\+Entities.\+Base\+Enemy.\+In\+Sight\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Specifies whether the entity is visible for the player  
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a1d4ae279813bad2107e8a69fc8cac185}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a1d4ae279813bad2107e8a69fc8cac185}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!OnPlatform@{OnPlatform}}
+\index{OnPlatform@{OnPlatform}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{OnPlatform}{OnPlatform}}
+{\footnotesize\ttfamily bool Sam\+Ser.\+Entities.\+Base\+Enemy.\+On\+Platform\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+Determines whether entity is on a platform or in air.\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_ad00de100d6582532aaf81f20d3ec526e}\label{class_sam_ser_1_1_entities_1_1_base_enemy_ad00de100d6582532aaf81f20d3ec526e}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!Paused@{Paused}}
+\index{Paused@{Paused}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{Paused}{Paused}}
+{\footnotesize\ttfamily bool Sam\+Ser.\+Entities.\+Base\+Enemy.\+Paused\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Specifies whether entity is paused. 
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_aa1f63794a3dca28f5120aa0df9e29d04}\label{class_sam_ser_1_1_entities_1_1_base_enemy_aa1f63794a3dca28f5120aa0df9e29d04}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!PlayerCollisionEvent@{PlayerCollisionEvent}}
+\index{PlayerCollisionEvent@{PlayerCollisionEvent}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{PlayerCollisionEvent}{PlayerCollisionEvent}}
+{\footnotesize\ttfamily Event\+Handler Sam\+Ser.\+Entities.\+Base\+Enemy.\+Player\+Collision\+Event\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Collision event between player and entity\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a24a883259d28f82fc9aeee5d66adbdc5}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a24a883259d28f82fc9aeee5d66adbdc5}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!Position@{Position}}
+\index{Position@{Position}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily Vector2 Sam\+Ser.\+Entities.\+Base\+Enemy.\+Position\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Top-\/\+Left point of the entity on the game screen as a vector  
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a30d387ac34bd9cc543216b8d6f56ed47}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a802e8375baf36f488b4144cdcfb1b342}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a802e8375baf36f488b4144cdcfb1b342}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!Rotation@{Rotation}}
+\index{Rotation@{Rotation}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{Rotation}{Rotation}}
+{\footnotesize\ttfamily Vector2 Sam\+Ser.\+Entities.\+Base\+Enemy.\+Rotation\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Rotation is a vector that determines the rotation of the entity in the X and Y axis.\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_base_enemy_a71211838b0175a07dff63fa18101186b}\label{class_sam_ser_1_1_entities_1_1_base_enemy_a71211838b0175a07dff63fa18101186b}} 
+\index{SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}!Velocity@{Velocity}}
+\index{Velocity@{Velocity}!SamSer.Entities.BaseEnemy@{SamSer.Entities.BaseEnemy}}
+\doxysubsubsection{\texorpdfstring{Velocity}{Velocity}}
+{\footnotesize\ttfamily Vector2 Sam\+Ser.\+Entities.\+Base\+Enemy.\+Velocity\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+Velocity is a vector that determines the speed of the entity in the X and Y axis.
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Entities/Base\+Enemy.\+cs\end{DoxyCompactItemize}

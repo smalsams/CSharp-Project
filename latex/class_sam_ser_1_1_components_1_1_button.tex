@@ -1,0 +1,170 @@
+\hypertarget{class_sam_ser_1_1_components_1_1_button}{}\doxysection{Sam\+Ser.\+Components.\+Button Class Reference}
+\label{class_sam_ser_1_1_components_1_1_button}\index{SamSer.Components.Button@{SamSer.Components.Button}}
+
+
+Defines a clickable area on the screen implemented with an event as the trigger behind it, as well as a texture and a font. Can be invoked by mouse or keyboard.   
+
+
+Inheritance diagram for Sam\+Ser.\+Components.\+Button\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_sam_ser_1_1_components_1_1_button}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a755d93279f3f2c3a438612fa5528e55b}\label{class_sam_ser_1_1_components_1_1_button_a755d93279f3f2c3a438612fa5528e55b}} 
+{\bfseries Button} (Texture2D texture, Sprite\+Font font, Vector2 position, string content)
+\begin{DoxyCompactList}\small\item\em inheritdoc/\texorpdfstring{$>$}{>} \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button_a60b171ea63055531ebe5e0ef8d3ee10d}{Draw}} (Game\+Time game\+Time, Sprite\+Batch sprite\+Batch)
+\begin{DoxyCompactList}\small\item\em Draws the component area onto the game screen.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a671a005a4873bb7d561b29baff5c2fa3}\label{class_sam_ser_1_1_components_1_1_button_a671a005a4873bb7d561b29baff5c2fa3}} 
+void {\bfseries Update\+Input} ()
+\begin{DoxyCompactList}\small\item\em Synchronizes the keyboard and mouse states with real-\/time inputs  \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button_a7648b68954a6e3ca74a7c131b1bbcba9}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the component area every tick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button_a68b609d546df3f5cc3b7a9f588bb9b49}{Add\+Keyboard\+Invoker}} (Keys key)
+\begin{DoxyCompactList}\small\item\em Allows for buttons being invokable by keyboard events.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a98d57193e19542795e7a03a972e7de3c}\label{class_sam_ser_1_1_components_1_1_button_a98d57193e19542795e7a03a972e7de3c}} 
+Event\+Handler {\bfseries Button\+Press}
+\begin{DoxyCompactList}\small\item\em User defined event invoked at pressing the \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button}{Button}}  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a7e621e8f08811943f28d760ff22a2bf4}\label{class_sam_ser_1_1_components_1_1_button_a7e621e8f08811943f28d760ff22a2bf4}} 
+Mouse\+State {\bfseries Current\+Mouse\+State}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_af21b60262bef2ad855eb0ba4955e4e7d}\label{class_sam_ser_1_1_components_1_1_button_af21b60262bef2ad855eb0ba4955e4e7d}} 
+Mouse\+State {\bfseries Previous\+Mouse\+State}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a5d80ff9725a8dae680ba7ac516da7d75}\label{class_sam_ser_1_1_components_1_1_button_a5d80ff9725a8dae680ba7ac516da7d75}} 
+Keys {\bfseries Key\+Invoker}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a47d5e11b6b75b69546e91e9e780ba991}\label{class_sam_ser_1_1_components_1_1_button_a47d5e11b6b75b69546e91e9e780ba991}} 
+Keyboard\+State {\bfseries Previous\+Keyboard\+State}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a1ba429e9bd639eba157e950f7900d982}\label{class_sam_ser_1_1_components_1_1_button_a1ba429e9bd639eba157e950f7900d982}} 
+Keyboard\+State {\bfseries Current\+Keyboard\+State}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_ac8f9d35b370850263c594ed86f64fea5}\label{class_sam_ser_1_1_components_1_1_button_ac8f9d35b370850263c594ed86f64fea5}} 
+bool {\bfseries Hovered}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a9eb9dea271547bf921bbda9a5ff3e799}\label{class_sam_ser_1_1_components_1_1_button_a9eb9dea271547bf921bbda9a5ff3e799}} 
+bool {\bfseries Pressed}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Color \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button_a216c01fee5e1ed775eb9a3c5b20cffea}{Text\+Color}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a1b08be6ef30525e69aa4da5d51bdac57}\label{class_sam_ser_1_1_components_1_1_button_a1b08be6ef30525e69aa4da5d51bdac57}} 
+Vector2 {\bfseries Position}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+Rectangle \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button_a7b7ebc15a9c3c494b2295e9691263106}{Rectangle}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+string \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button_aac77fb974cae0c6dc427aa1a47d71d0f}{Content}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines a clickable area on the screen implemented with an event as the trigger behind it, as well as a texture and a font. Can be invoked by mouse or keyboard.  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a68b609d546df3f5cc3b7a9f588bb9b49}\label{class_sam_ser_1_1_components_1_1_button_a68b609d546df3f5cc3b7a9f588bb9b49}} 
+\index{SamSer.Components.Button@{SamSer.Components.Button}!AddKeyboardInvoker@{AddKeyboardInvoker}}
+\index{AddKeyboardInvoker@{AddKeyboardInvoker}!SamSer.Components.Button@{SamSer.Components.Button}}
+\doxysubsubsection{\texorpdfstring{AddKeyboardInvoker()}{AddKeyboardInvoker()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Components.\+Button.\+Add\+Keyboard\+Invoker (\begin{DoxyParamCaption}\item[{Keys}]{key }\end{DoxyParamCaption})}
+
+
+
+Allows for buttons being invokable by keyboard events.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Any key on the keyboard\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a60b171ea63055531ebe5e0ef8d3ee10d}\label{class_sam_ser_1_1_components_1_1_button_a60b171ea63055531ebe5e0ef8d3ee10d}} 
+\index{SamSer.Components.Button@{SamSer.Components.Button}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.Components.Button@{SamSer.Components.Button}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily override void Sam\+Ser.\+Components.\+Button.\+Draw (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time,  }\item[{Sprite\+Batch}]{sprite\+Batch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Draws the component area onto the game screen.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+{\em sprite\+Batch} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_component_a0ab5c2f4964ef06db08a668a5b61a764}{Sam\+Ser.\+Components.\+Component}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a7648b68954a6e3ca74a7c131b1bbcba9}\label{class_sam_ser_1_1_components_1_1_button_a7648b68954a6e3ca74a7c131b1bbcba9}} 
+\index{SamSer.Components.Button@{SamSer.Components.Button}!Update@{Update}}
+\index{Update@{Update}!SamSer.Components.Button@{SamSer.Components.Button}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily override void Sam\+Ser.\+Components.\+Button.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Updates the component area every tick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_component_a29af6a3878b5a8621029067eedebfc1c}{Sam\+Ser.\+Components.\+Component}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_serial_button_ab1cd065aa3ddcab3c0a0b66f77c0724c}{Sam\+Ser.\+Components.\+Serial\+Button$<$ T $>$}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_aac77fb974cae0c6dc427aa1a47d71d0f}\label{class_sam_ser_1_1_components_1_1_button_aac77fb974cae0c6dc427aa1a47d71d0f}} 
+\index{SamSer.Components.Button@{SamSer.Components.Button}!Content@{Content}}
+\index{Content@{Content}!SamSer.Components.Button@{SamSer.Components.Button}}
+\doxysubsubsection{\texorpdfstring{Content}{Content}}
+{\footnotesize\ttfamily string Sam\+Ser.\+Components.\+Button.\+Content\hspace{0.3cm}{\ttfamily [get]}}
+
+Text for the \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button}{Button}}\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a7b7ebc15a9c3c494b2295e9691263106}\label{class_sam_ser_1_1_components_1_1_button_a7b7ebc15a9c3c494b2295e9691263106}} 
+\index{SamSer.Components.Button@{SamSer.Components.Button}!Rectangle@{Rectangle}}
+\index{Rectangle@{Rectangle}!SamSer.Components.Button@{SamSer.Components.Button}}
+\doxysubsubsection{\texorpdfstring{Rectangle}{Rectangle}}
+{\footnotesize\ttfamily Rectangle Sam\+Ser.\+Components.\+Button.\+Rectangle\hspace{0.3cm}{\ttfamily [get]}}
+
+Hitbox of the \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button}{Button}}\mbox{\Hypertarget{class_sam_ser_1_1_components_1_1_button_a216c01fee5e1ed775eb9a3c5b20cffea}\label{class_sam_ser_1_1_components_1_1_button_a216c01fee5e1ed775eb9a3c5b20cffea}} 
+\index{SamSer.Components.Button@{SamSer.Components.Button}!TextColor@{TextColor}}
+\index{TextColor@{TextColor}!SamSer.Components.Button@{SamSer.Components.Button}}
+\doxysubsubsection{\texorpdfstring{TextColor}{TextColor}}
+{\footnotesize\ttfamily Color Sam\+Ser.\+Components.\+Button.\+Text\+Color\hspace{0.3cm}{\ttfamily [get]}}
+
+Color of the \mbox{\hyperlink{class_sam_ser_1_1_components_1_1_button_aac77fb974cae0c6dc427aa1a47d71d0f}{Content}} text. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Components/Button.\+cs\end{DoxyCompactItemize}

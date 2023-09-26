@@ -1,0 +1,190 @@
+\hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity}{}\doxysection{Sam\+Ser.\+Entities.\+IEntity Interface Reference}
+\label{interface_sam_ser_1_1_entities_1_1_i_entity}\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+
+
+Defines a base non-\/playable object   
+
+
+Inheritance diagram for Sam\+Ser.\+Entities.\+IEntity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_sam_ser_1_1_entities_1_1_i_entity}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a9d593eae367ecee955b9bd61d2738dda}{Draw}} (Sprite\+Batch sprite\+Batch, Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Draws necessary textures on screen in real time  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_aaba5de2ad5ce4b629cc03eb8d95963c7}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates every action and texture on screen in real time  \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a7f86560cdd0907a7d73b3ee86f12a621}{Get\+Texture\+Name}} (JObject json\+Object)
+\begin{DoxyCompactList}\small\item\em Gets texture name from a partially de-\/serialized JSON object belonging to an entity  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_ac07c6b5cdcd0c6dc2fe74c70033fad6e}{Load\+Texture}} (Texture2D texture)
+\begin{DoxyCompactList}\small\item\em Loads texture for the entity  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a4949a1b8730c2522ddf6e9c019a9d997}{Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Additional identification of the entity in the form of an Id  \end{DoxyCompactList}\item 
+Vector2 \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a30d387ac34bd9cc543216b8d6f56ed47}{Position}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Top-\/\+Left point of the entity on the game screen as a vector  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_af326b92a3c789401412a52dbe4e15f9e}{Paused}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+bool \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a6f38f4518ac0a7761980e48747e20877}{In\+Sight}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+RectangleF \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a061bbef1ccf30fa4fa6b2e1d1682b463}{Bounding\+Box}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines a base non-\/playable object  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity_a9d593eae367ecee955b9bd61d2738dda}\label{interface_sam_ser_1_1_entities_1_1_i_entity_a9d593eae367ecee955b9bd61d2738dda}} 
+\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Entities.\+IEntity.\+Draw (\begin{DoxyParamCaption}\item[{Sprite\+Batch}]{sprite\+Batch,  }\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})}
+
+
+
+Draws necessary textures on screen in real time  
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_acc3cc084a5ec994ac54444b9238f164b}{Sam\+Ser.\+Entities.\+Base\+Enemy}}, \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_a1a1423bb122a41ce6cf7ecc705064aa6}{Sam\+Ser.\+Entities.\+Coin}}, \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_aec84e8d24c7d785f1a8c350d00181351}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_a512f3d7c79d07767fb17bad9e6c4f4c1}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+\mbox{\Hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity_a7f86560cdd0907a7d73b3ee86f12a621}\label{interface_sam_ser_1_1_entities_1_1_i_entity_a7f86560cdd0907a7d73b3ee86f12a621}} 
+\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}!GetTextureName@{GetTextureName}}
+\index{GetTextureName@{GetTextureName}!SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+\doxysubsubsection{\texorpdfstring{GetTextureName()}{GetTextureName()}}
+{\footnotesize\ttfamily string Sam\+Ser.\+Entities.\+IEntity.\+Get\+Texture\+Name (\begin{DoxyParamCaption}\item[{JObject}]{json\+Object }\end{DoxyParamCaption})}
+
+
+
+Gets texture name from a partially de-\/serialized JSON object belonging to an entity  
+
+
+\begin{DoxyParams}{Parameters}
+{\em json\+Object} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_abf7842ce9da1b33b0942c4ef11e64eef}{Sam\+Ser.\+Entities.\+Base\+Enemy}}, \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_ad9a4bf8f2a75c7f0e2d65abcf450f9a7}{Sam\+Ser.\+Entities.\+Coin}}, \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_a76a868c032aa7350b1e660573589b748}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_a70388d48ab3bca78926dff955dd1f2c2}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+\mbox{\Hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity_ac07c6b5cdcd0c6dc2fe74c70033fad6e}\label{interface_sam_ser_1_1_entities_1_1_i_entity_ac07c6b5cdcd0c6dc2fe74c70033fad6e}} 
+\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}!LoadTexture@{LoadTexture}}
+\index{LoadTexture@{LoadTexture}!SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+\doxysubsubsection{\texorpdfstring{LoadTexture()}{LoadTexture()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Entities.\+IEntity.\+Load\+Texture (\begin{DoxyParamCaption}\item[{Texture2D}]{texture }\end{DoxyParamCaption})}
+
+
+
+Loads texture for the entity  
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a3e81fdde70b919c33b6da36093a71d52}{Sam\+Ser.\+Entities.\+Base\+Enemy}}, \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_abe09462a50b4c38ab4907de6c9028aee}{Sam\+Ser.\+Entities.\+Coin}}, \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_ae6177ad0213811ff085cf265ad194aff}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_a09695ee0cf619cf20853dfba3f114d7c}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+\mbox{\Hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity_aaba5de2ad5ce4b629cc03eb8d95963c7}\label{interface_sam_ser_1_1_entities_1_1_i_entity_aaba5de2ad5ce4b629cc03eb8d95963c7}} 
+\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}!Update@{Update}}
+\index{Update@{Update}!SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Entities.\+IEntity.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})}
+
+
+
+Updates every action and texture on screen in real time  
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a6afc2fcb54b980d5eeec4544c7b93d60}{Sam\+Ser.\+Entities.\+Base\+Enemy}}, \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_ae95c46f35e5e7c354d0f43eb65b5a5cd}{Sam\+Ser.\+Entities.\+Coin}}, \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_a3758e9949a9e2ffdc1cee68c10852c57}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_zombie_aef348aae5602a09d3da317eb7eba8021}{Sam\+Ser.\+Entities.\+Zombie}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity_a061bbef1ccf30fa4fa6b2e1d1682b463}\label{interface_sam_ser_1_1_entities_1_1_i_entity_a061bbef1ccf30fa4fa6b2e1d1682b463}} 
+\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}!BoundingBox@{BoundingBox}}
+\index{BoundingBox@{BoundingBox}!SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+\doxysubsubsection{\texorpdfstring{BoundingBox}{BoundingBox}}
+{\footnotesize\ttfamily RectangleF Sam\+Ser.\+Entities.\+IEntity.\+Bounding\+Box\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a097cb16373ad409a143507158e39921f}{Sam\+Ser.\+Entities.\+Base\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_flame_enemy_ac17db26da7ec9624bc0709e2277a03d4}{Sam\+Ser.\+Entities.\+Flame\+Enemy}}.
+
+\mbox{\Hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity_a4949a1b8730c2522ddf6e9c019a9d997}\label{interface_sam_ser_1_1_entities_1_1_i_entity_a4949a1b8730c2522ddf6e9c019a9d997}} 
+\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}!Id@{Id}}
+\index{Id@{Id}!SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Entities.\+IEntity.\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Additional identification of the entity in the form of an Id  
+
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a68b36108e633152b8a02a9edffb1f270}{Sam\+Ser.\+Entities.\+Base\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_ab5c4632b528273f559a407f62280cb5a}{Sam\+Ser.\+Entities.\+Coin}}.
+
+\mbox{\Hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity_a6f38f4518ac0a7761980e48747e20877}\label{interface_sam_ser_1_1_entities_1_1_i_entity_a6f38f4518ac0a7761980e48747e20877}} 
+\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}!InSight@{InSight}}
+\index{InSight@{InSight}!SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+\doxysubsubsection{\texorpdfstring{InSight}{InSight}}
+{\footnotesize\ttfamily bool Sam\+Ser.\+Entities.\+IEntity.\+In\+Sight\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a222e124c53df03b1c495f49867999407}{Sam\+Ser.\+Entities.\+Base\+Enemy}}.
+
+\mbox{\Hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity_af326b92a3c789401412a52dbe4e15f9e}\label{interface_sam_ser_1_1_entities_1_1_i_entity_af326b92a3c789401412a52dbe4e15f9e}} 
+\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}!Paused@{Paused}}
+\index{Paused@{Paused}!SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+\doxysubsubsection{\texorpdfstring{Paused}{Paused}}
+{\footnotesize\ttfamily bool Sam\+Ser.\+Entities.\+IEntity.\+Paused\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_ad00de100d6582532aaf81f20d3ec526e}{Sam\+Ser.\+Entities.\+Base\+Enemy}}.
+
+\mbox{\Hypertarget{interface_sam_ser_1_1_entities_1_1_i_entity_a30d387ac34bd9cc543216b8d6f56ed47}\label{interface_sam_ser_1_1_entities_1_1_i_entity_a30d387ac34bd9cc543216b8d6f56ed47}} 
+\index{SamSer.Entities.IEntity@{SamSer.Entities.IEntity}!Position@{Position}}
+\index{Position@{Position}!SamSer.Entities.IEntity@{SamSer.Entities.IEntity}}
+\doxysubsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily Vector2 Sam\+Ser.\+Entities.\+IEntity.\+Position\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Top-\/\+Left point of the entity on the game screen as a vector  
+
+
+
+Implemented in \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_base_enemy_a24a883259d28f82fc9aeee5d66adbdc5}{Sam\+Ser.\+Entities.\+Base\+Enemy}}, and \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_a4dc67f59221b941ae57c2a209172e808}{Sam\+Ser.\+Entities.\+Coin}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Entities/IEntity.\+cs\end{DoxyCompactItemize}

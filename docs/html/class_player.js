@@ -1,0 +1,28 @@
+var class_player =
+[
+    [ "AirGravityMove", "class_player.html#ac3a0e098a8ef7b0486f7b8f64384b6da", null ],
+    [ "Die", "class_player.html#a845a19a1bd9e4e63b5a0c18842307b0e", null ],
+    [ "Draw", "class_player.html#aba99e761d1f5821f79e525cf4dbfbc7b", null ],
+    [ "DrawDebug", "class_player.html#a40369e5f07521de6a30921a648d17887", null ],
+    [ "HandleCollisionX", "class_player.html#a0897e8f138f4b33027c4d1b9d4f480d1", null ],
+    [ "HandleCollisionY", "class_player.html#a4b4b7868201a8052a90b42d705f53825", null ],
+    [ "Jump", "class_player.html#a689d6b007b09f694a246fe806bef7d5f", null ],
+    [ "LoadTexture", "class_player.html#a25d10ebd0fd12c3c1f74f8b9a32468fa", null ],
+    [ "Pause", "class_player.html#aaae975531f407dd76057076f5e448895", null ],
+    [ "ResetPhysicsValues", "class_player.html#ac530f0c5f22f8665967b8db806c21799", null ],
+    [ "Stop", "class_player.html#a5903144d2559305d553a398aceabf956", null ],
+    [ "Swim", "class_player.html#a8606877c12c87ef9c73041437395e4c7", null ],
+    [ "Update", "class_player.html#aa49da3265e03a36b53ae4bf2fa44dce1", null ],
+    [ "Walk", "class_player.html#a24641913d9dd9bc7a765117dad1518b7", null ],
+    [ "WaterCheck", "class_player.html#a61cb527c9711989c24e497216f480de4", null ],
+    [ "WaterGravityMove", "class_player.html#a12072ad63aa608a920d51495e85c4d27", null ],
+    [ "InvulnerabilityDuration", "class_player.html#a7f9d0595e67a246d20c8f5f11a690877", null ],
+    [ "InvulnerabilityTimer", "class_player.html#a3a1bda3f66a17d0e2436888b04e9d15f", null ],
+    [ "Direction", "class_player.html#a1ca776cc0dc785241f538c7127d3c48a", null ],
+    [ "HasJumped", "class_player.html#a0aa8f47fa4e02bf730ea27a0bffcf9bf", null ],
+    [ "Health", "class_player.html#a129d77184feb05c2743ef38726dc23da", null ],
+    [ "InWater", "class_player.html#ac4009a372f37acb7a5847025c2801d34", null ],
+    [ "JumpEvent", "class_player.html#a8745740df0f1f7373a4c23d9111d0e1d", null ],
+    [ "NoHealthEvent", "class_player.html#ac83d9a8b333e3c87f3c2b917ce25e103", null ],
+    [ "Position", "class_player.html#ac768e07fad95f12c16da902f2d76d13e", null ]
+];

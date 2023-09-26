@@ -1,0 +1,202 @@
+\hypertarget{class_sam_ser_1_1_entities_1_1_coin}{}\doxysection{Sam\+Ser.\+Entities.\+Coin Class Reference}
+\label{class_sam_ser_1_1_entities_1_1_coin}\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+
+
+Defines a collectable coin object used as a score measurement   
+
+
+Inheritance diagram for Sam\+Ser.\+Entities.\+Coin\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sam_ser_1_1_entities_1_1_coin}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_ad9c12b1ed8b74edc99b5265fcfc06ad0}\label{class_sam_ser_1_1_entities_1_1_coin_ad9c12b1ed8b74edc99b5265fcfc06ad0}} 
+{\bfseries Coin} (Texture2D texture)
+\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_abe09462a50b4c38ab4907de6c9028aee}{Load\+Texture}} (Texture2D texture)
+\begin{DoxyCompactList}\small\item\em Loads texture for the entity  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_a1a1423bb122a41ce6cf7ecc705064aa6}{Draw}} (Sprite\+Batch sprite\+Batch, Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Draws necessary textures on screen in real time  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_ae95c46f35e5e7c354d0f43eb65b5a5cd}{Update}} (Game\+Time game\+Time)
+\begin{DoxyCompactList}\small\item\em Updates every action and texture on screen in real time  \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_ad9a4bf8f2a75c7f0e2d65abcf450f9a7}{Get\+Texture\+Name}} (JObject json\+Object)
+\begin{DoxyCompactList}\small\item\em Gets texture name from a partially de-\/serialized JSON object belonging to an entity  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_ab5c4632b528273f559a407f62280cb5a}{Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Additional identification of the entity in the form of an Id  \end{DoxyCompactList}\item 
+Vector2 \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_a4dc67f59221b941ae57c2a209172e808}{Position}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Top-\/\+Left point of the entity on the game screen as a vector  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_abcec817206f743413de2add6d38ffa9d}\label{class_sam_ser_1_1_entities_1_1_coin_abcec817206f743413de2add6d38ffa9d}} 
+\mbox{\hyperlink{namespace_sam_ser_1_1_entities_a896cf8c7630b1700e5780b5e15051a1c}{Coin\+Type}} {\bfseries Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_a4523ae9010a429585bd35746863c631e}\label{class_sam_ser_1_1_entities_1_1_coin_a4523ae9010a429585bd35746863c631e}} 
+int {\bfseries Width}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_a548ca04479ab6d28d5a31ac682dbca4b}\label{class_sam_ser_1_1_entities_1_1_coin_a548ca04479ab6d28d5a31ac682dbca4b}} 
+int {\bfseries Height}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+RectangleF \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_a52fd28a15c7cea8b8be70214d93ec207}{Bounding\+Box}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+bool \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_ab957e3b437be0326185de739ca153b25}{Paused}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+bool \mbox{\hyperlink{class_sam_ser_1_1_entities_1_1_coin_a92d1f4b287b6b8d8ffc1df2d52606dd0}{In\+Sight}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines a collectable coin object used as a score measurement  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_a1a1423bb122a41ce6cf7ecc705064aa6}\label{class_sam_ser_1_1_entities_1_1_coin_a1a1423bb122a41ce6cf7ecc705064aa6}} 
+\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}!Draw@{Draw}}
+\index{Draw@{Draw}!SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Entities.\+Coin.\+Draw (\begin{DoxyParamCaption}\item[{Sprite\+Batch}]{sprite\+Batch,  }\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})}
+
+
+
+Draws necessary textures on screen in real time  
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Batch} & \\
+\hline
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a9d593eae367ecee955b9bd61d2738dda}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_ad9a4bf8f2a75c7f0e2d65abcf450f9a7}\label{class_sam_ser_1_1_entities_1_1_coin_ad9a4bf8f2a75c7f0e2d65abcf450f9a7}} 
+\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}!GetTextureName@{GetTextureName}}
+\index{GetTextureName@{GetTextureName}!SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+\doxysubsubsection{\texorpdfstring{GetTextureName()}{GetTextureName()}}
+{\footnotesize\ttfamily string Sam\+Ser.\+Entities.\+Coin.\+Get\+Texture\+Name (\begin{DoxyParamCaption}\item[{JObject}]{json\+Object }\end{DoxyParamCaption})}
+
+
+
+Gets texture name from a partially de-\/serialized JSON object belonging to an entity  
+
+
+\begin{DoxyParams}{Parameters}
+{\em json\+Object} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a7f86560cdd0907a7d73b3ee86f12a621}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_abe09462a50b4c38ab4907de6c9028aee}\label{class_sam_ser_1_1_entities_1_1_coin_abe09462a50b4c38ab4907de6c9028aee}} 
+\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}!LoadTexture@{LoadTexture}}
+\index{LoadTexture@{LoadTexture}!SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+\doxysubsubsection{\texorpdfstring{LoadTexture()}{LoadTexture()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Entities.\+Coin.\+Load\+Texture (\begin{DoxyParamCaption}\item[{Texture2D}]{texture }\end{DoxyParamCaption})}
+
+
+
+Loads texture for the entity  
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_ac07c6b5cdcd0c6dc2fe74c70033fad6e}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_ae95c46f35e5e7c354d0f43eb65b5a5cd}\label{class_sam_ser_1_1_entities_1_1_coin_ae95c46f35e5e7c354d0f43eb65b5a5cd}} 
+\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}!Update@{Update}}
+\index{Update@{Update}!SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Sam\+Ser.\+Entities.\+Coin.\+Update (\begin{DoxyParamCaption}\item[{Game\+Time}]{game\+Time }\end{DoxyParamCaption})}
+
+
+
+Updates every action and texture on screen in real time  
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_aaba5de2ad5ce4b629cc03eb8d95963c7}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_a52fd28a15c7cea8b8be70214d93ec207}\label{class_sam_ser_1_1_entities_1_1_coin_a52fd28a15c7cea8b8be70214d93ec207}} 
+\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}!BoundingBox@{BoundingBox}}
+\index{BoundingBox@{BoundingBox}!SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+\doxysubsubsection{\texorpdfstring{BoundingBox}{BoundingBox}}
+{\footnotesize\ttfamily RectangleF Sam\+Ser.\+Entities.\+Coin.\+Bounding\+Box\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_ab5c4632b528273f559a407f62280cb5a}\label{class_sam_ser_1_1_entities_1_1_coin_ab5c4632b528273f559a407f62280cb5a}} 
+\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}!Id@{Id}}
+\index{Id@{Id}!SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily int Sam\+Ser.\+Entities.\+Coin.\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Additional identification of the entity in the form of an Id  
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a4949a1b8730c2522ddf6e9c019a9d997}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_a92d1f4b287b6b8d8ffc1df2d52606dd0}\label{class_sam_ser_1_1_entities_1_1_coin_a92d1f4b287b6b8d8ffc1df2d52606dd0}} 
+\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}!InSight@{InSight}}
+\index{InSight@{InSight}!SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+\doxysubsubsection{\texorpdfstring{InSight}{InSight}}
+{\footnotesize\ttfamily bool Sam\+Ser.\+Entities.\+Coin.\+In\+Sight\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_ab957e3b437be0326185de739ca153b25}\label{class_sam_ser_1_1_entities_1_1_coin_ab957e3b437be0326185de739ca153b25}} 
+\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}!Paused@{Paused}}
+\index{Paused@{Paused}!SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+\doxysubsubsection{\texorpdfstring{Paused}{Paused}}
+{\footnotesize\ttfamily bool Sam\+Ser.\+Entities.\+Coin.\+Paused\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+\mbox{\Hypertarget{class_sam_ser_1_1_entities_1_1_coin_a4dc67f59221b941ae57c2a209172e808}\label{class_sam_ser_1_1_entities_1_1_coin_a4dc67f59221b941ae57c2a209172e808}} 
+\index{SamSer.Entities.Coin@{SamSer.Entities.Coin}!Position@{Position}}
+\index{Position@{Position}!SamSer.Entities.Coin@{SamSer.Entities.Coin}}
+\doxysubsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily Vector2 Sam\+Ser.\+Entities.\+Coin.\+Position\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Top-\/\+Left point of the entity on the game screen as a vector  
+
+
+
+Implements \mbox{\hyperlink{interface_sam_ser_1_1_entities_1_1_i_entity_a30d387ac34bd9cc543216b8d6f56ed47}{Sam\+Ser.\+Entities.\+IEntity}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Entities/Coin.\+cs\end{DoxyCompactItemize}

@@ -3,10 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
+using SamSer.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace SamSer.Entities
+namespace SamSer.Control
 {
     /// <summary>
     /// Implementation of the single map in the game
@@ -39,7 +40,7 @@ namespace SamSer.Entities
             if (_paused)
             {
                 MediaPlayer.Pause();
-                foreach(var entity in Entities)
+                foreach (var entity in Entities)
                 {
                     entity.Paused = true;
                 }
@@ -47,7 +48,7 @@ namespace SamSer.Entities
             else
             {
                 MediaPlayer.Resume();
-                foreach(var entity in Entities)
+                foreach (var entity in Entities)
                 {
                     entity.Paused = false;
                 }

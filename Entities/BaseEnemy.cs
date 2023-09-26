@@ -24,7 +24,9 @@ namespace SamSer.Entities
         public abstract void Draw(SpriteBatch spriteBatch, GameTime gameTime);
         /// <inheritdoc/>
         public Vector2 Position { get; set; }
+        /// <remarks>Velocity is a vector that determines the speed of the entity in the X and Y axis.</remarks>
         public Vector2 Velocity { get; set; }
+        /// <remarks>Rotation is a vector that determines the rotation of the entity in the X and Y axis.</remarks>
         public Vector2 Rotation { get; set; }
         /// <summary>
         /// An imaginary rectangle that specifies the hitboxes of the <see cref="BaseEnemy"/> entity
@@ -56,7 +58,7 @@ namespace SamSer.Entities
         /// <inheritdoc/>
         public abstract void LoadTexture(Texture2D texture);
         /// <summary>
-        /// Constructs the BaseEnemy from a JSON
+        /// Constructs the BaseEnemy from a JSON, used mainly for loading from a file. 
         /// </summary>
         [JsonConstructor]
         public BaseEnemy()
@@ -64,7 +66,7 @@ namespace SamSer.Entities
             SpriteStateProcessor = new SpriteStateProcessor();
         }
         /// <summary>
-        /// Regular in-code construction for the BaseEnemy class
+        /// Regular in-code construction for the BaseEnemy class, used mainly for testing.
         /// </summary>
         /// <param name="texture"></param>
         public BaseEnemy(Texture2D texture)
@@ -73,6 +75,7 @@ namespace SamSer.Entities
             Height = texture.Height;
             SpriteStateProcessor = new SpriteStateProcessor();
         }
+        /// <remarks>Specifies whether entity is paused. </remarks>
         public bool Paused { get; set; }
         /// <summary>
         /// Checks if entity collides with a rectangle horizontally
@@ -85,9 +88,13 @@ namespace SamSer.Entities
         /// <param name="rectangle"></param>
         public abstract void CollisionY(RectangleF rectangle);
 
-
+        /// <remarks>Specifies the number of lives left for the enemy entity. </remarks>
         public int Health { get; set; }
+
+        /// <remarks>Collision event between player and entity</remarks>
         public EventHandler PlayerCollisionEvent { get; set; }
+
+        /// <remarks>Specifies the ID of the entity. </remarks>
         public int Id { get; set; }
     }
 }

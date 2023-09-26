@@ -6,7 +6,8 @@ using System;
 namespace SamSer.Components
 {
     /// <summary>
-    /// Defines a clickable area on the screen implemented with an event as the trigger behind it
+    /// Defines a clickable area on the screen implemented with an event as the trigger behind it, as well as a texture and a font.
+    /// Can be invoked by mouse or keyboard.
     /// </summary>
     public class Button : Component
     {
@@ -88,7 +89,7 @@ namespace SamSer.Components
             }
         }
         /// <summary>
-        /// Allows for buttons being invokable by keyboard events.
+        /// Allows for buttons being invokable by keyboard events. 
         /// </summary>
         /// <param name="key">Any key on the keyboard</param>
         public void AddKeyboardInvoker(Keys key)

@@ -7,6 +7,7 @@ namespace SamSer.Components
 {
     /// <summary>
     /// Slider component, which allows for an area on screen to get mapped onto a range of possible values according to the position on the screen.
+    /// Allows for user defined event to be invoked every time the position of the slider is changed.
     /// </summary>
     public sealed class Slider : Component
     {

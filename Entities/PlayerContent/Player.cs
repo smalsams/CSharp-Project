@@ -16,7 +16,8 @@ using Animation = SamSer.Sprites.VerticalAnimation;
 namespace SamSer.Entities.PlayerContent;
 
 /// <summary>
-/// The playable character for the game.
+/// The playable character for the game, controlled by the user. Responsible for the control of the player's movement and animation,
+/// as well as the player's attributes. 
 /// </summary>
 public class Player : IFocusable
 {
@@ -265,10 +266,6 @@ public class Player : IFocusable
         if (State == PlayerState.Paused) return;
         _stateProcessor.Update(gameTime);
         var keyboardState = Keyboard.GetState();
-        if (keyboardState.IsKeyDown(Keys.F1))
-        {
-            _drawDebug = !_drawDebug;
-        }
         Position += Velocity;
         if (InWater)
         {
@@ -291,6 +288,7 @@ public class Player : IFocusable
     public void DrawDebug(GraphicsDevice gd)
     {
         _rectangleTexture2D = new Texture2D(gd, (int)_boundingBox.Width, (int)_boundingBox.Height);
+        _drawDebug = !_drawDebug;
         var colours = new List<Color>();
         for (var i = 0; i < (int)_boundingBox.Height; i++)
         {

@@ -1,8 +1,12 @@
-﻿using SamSer.Control;
+﻿using System;
+using SamSer.Control;
 using SamSer.Sprites;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGame.Extended.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using static SamSer.Utilities.GameUtilities;
 
@@ -58,16 +62,17 @@ namespace SamSer.Entities
                 return;
             }
 
-            if ((!(BoundingBox.Right > rectangle.Left) || !(BoundingBox.Right < rectangle.Right))
-                && (!(BoundingBox.Left < rectangle.Right) || !(BoundingBox.Left > rectangle.Left)) &&
-                (!(BoundingBox.Left < 0))) return;
-            Direction = Direction switch
+            if ((BoundingBox.Right > rectangle.Left && BoundingBox.Right < rectangle.Right)
+                || (BoundingBox.Left < rectangle.Right && BoundingBox.Left > rectangle.Left) || (BoundingBox.Left < 0 && Velocity.X < 0))
             {
-                GameDirection.Left => GameDirection.Right,
-                GameDirection.Right => GameDirection.Left,
-                _ => Direction
-            };
-            Velocity = new Vector2(-Velocity.X, Velocity.Y);
+                Direction = Direction switch
+                {
+                    GameDirection.Left => GameDirection.Right,
+                    GameDirection.Right => GameDirection.Left,
+                    _ => Direction
+                };
+                Velocity = new Vector2(-Velocity.X, Velocity.Y);
+            }
         }
         /// <inheritdoc/>
         public override void CollisionY(RectangleF rectangle)
@@ -81,5 +86,6 @@ namespace SamSer.Entities
                 OnPlatform = true;
             }
         }
+
     }
 }

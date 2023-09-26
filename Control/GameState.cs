@@ -16,12 +16,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using static SamSer.Utilities.GameUtilities;
-using MonoGame.Extended.Entities;
 
 namespace SamSer.Control
 {
     /// <summary>
-    /// Playable <see cref="State"/> instance.
+    /// Playable <see cref="State"/> instance. Acts as a game session, responsible for interaction between the environment and the player.
     /// </summary>
     public sealed class GameState : State
     {
@@ -192,22 +191,29 @@ namespace SamSer.Control
             //Serializes all formatted data into a json string
             var jsonData = JsonConvert.SerializeObject(gameData, Formatting.Indented);
             //saves the produced file into Saves folder into one of 4 slots
+            var saveDirectory = Path.Combine(DIR_PATH_RELATIVE, "Saves");
+            if (!Directory.Exists(saveDirectory))
+            {
+                Directory.CreateDirectory(saveDirectory);
+            }
+            var saveFiles = Directory.GetFiles(saveDirectory);
             var fileNum = 1;
-            var filename = $"{DIR_PATH_RELATIVE}Saves/save{fileNum}";
-            while (File.Exists(filename) && fileNum < 4)
+            var filename = Path.Combine(saveDirectory, $"save{fileNum}");
+            while (saveFiles.Contains(filename) && fileNum < 4)
             {
                 fileNum++;
-                filename = $"{DIR_PATH_RELATIVE}Saves/save{fileNum}";
+                filename = Path.Combine(saveDirectory, $"save{fileNum}");
             }
-            if (!File.Exists(filename))
+            if (!saveFiles.Contains(filename))
             {
                 File.WriteAllText(filename, jsonData);
                 return;
             }
-            File.Delete($"{DIR_PATH_RELATIVE}Saves/save1");
-            File.Move($"{DIR_PATH_RELATIVE}Saves/save2", $"{DIR_PATH_RELATIVE}Saves/save1");
-            File.Move($"{DIR_PATH_RELATIVE}Saves/save3", $"{DIR_PATH_RELATIVE}Saves/save2");
-            File.Move($"{DIR_PATH_RELATIVE}Saves/save4", $"{DIR_PATH_RELATIVE}Saves/save3");
+            File.Delete(Path.Combine(saveDirectory, "save1"));
+            for (var i = 2; i <= 4; i++)
+            {
+                File.Move(Path.Combine(saveDirectory, $"save{i}"), Path.Combine(saveDirectory, $"save{i - 1}"));
+            }
             File.WriteAllText(filename, jsonData);
 
         }
@@ -242,9 +248,9 @@ namespace SamSer.Control
             spriteBatch.Begin(transformMatrix: _camera.Transform);
             _player.Draw(spriteBatch, gameTime);
             _levelController.Draw(spriteBatch, gameTime, _camera.Transform);
-            _player.DrawDebug(GraphicsDevice);
             if (Keyboard.GetState().IsKeyDown(Keys.F1))
             {
+                _player.DrawDebug(GraphicsDevice);
                 DrawDebug(GraphicsDevice, spriteBatch);
             }
             spriteBatch.End();
@@ -257,6 +263,7 @@ namespace SamSer.Control
                 _pauseComponents.ForEach(c => c.Draw(gameTime, spriteBatch));
             }
             spriteBatch.End();
+            
         }
         /// <inheritdoc/>
         public override void Update(GameTime gameTime)

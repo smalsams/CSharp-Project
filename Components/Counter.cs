@@ -5,7 +5,8 @@ using System;
 namespace SamSer.Components
 {
     /// <summary>
-    /// Generic implementation for Text area with an user defined updater method assigned to it
+    /// Generic implementation for Text area with an user defined updater method assigned to it,
+    /// which allows for generic updating of the <see cref="Value"/>
     /// </summary>
     /// <typeparam name="T">Type of the counted value, should have a meaningful string conversion</typeparam>
     public sealed class Counter<T> : TextComponent
@@ -17,6 +18,7 @@ namespace SamSer.Components
         /// </summary>
         private readonly Func<T> _updater;
 
+        
         public Counter(SpriteFont font, Vector2 position, string content, T defaultValue, Func<T> updater) : base(font, position, content)
         {
             Value = defaultValue;

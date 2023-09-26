@@ -185,8 +185,9 @@ public sealed class MainMenuState : State
             var properties = JObject.Parse(entityInfo.Properties);
             IEntity entity = entityInfo.Type switch
             {
-                "Coin" => JsonConvert.DeserializeObject<Coin>(entityInfo.Properties) ,
-                "FlameEnemy" => JsonConvert.DeserializeObject<FlameEnemy>(entityInfo.Properties),
+                nameof(Coin) => JsonConvert.DeserializeObject<Coin>(entityInfo.Properties) ,
+                nameof(FlameEnemy) => JsonConvert.DeserializeObject<FlameEnemy>(entityInfo.Properties),
+                nameof(Zombie) => JsonConvert.DeserializeObject<Zombie>(entityInfo.Properties),
                 _ => throw new ArgumentOutOfRangeException()
             };
             var name = entity.GetTextureName(properties);

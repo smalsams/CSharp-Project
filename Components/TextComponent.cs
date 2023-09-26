@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace SamSer.Components{
 
     /// <summary>
-    /// Basic text area on screen.
+    /// Basic text area on screen, can be used as a label or a counter.
     /// </summary>
     public class TextComponent : Component
     {

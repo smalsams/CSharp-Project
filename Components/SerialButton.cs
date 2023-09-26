@@ -5,7 +5,7 @@ using System;
 namespace SamSer.Components
 {
     /// <summary>
-    /// Adds a context to the basic button, can be used as serial buttons
+    /// Adds a context to the basic button, can be used as serial buttons, each with a different (or same) context.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class SerialButton<T> : Button

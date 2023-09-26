@@ -4,12 +4,12 @@ using Microsoft.Xna.Framework.Graphics;
 namespace SamSer.Components
 {
     /// <summary>
-    /// Base for any reserved or user defined area on screen
+    /// Base for any reserved or user defined area on screen, such as buttons, textboxes, etc.
     /// </summary>
     public abstract class Component
     {
         /// <summary>
-        /// Draws the component area onto the game screen
+        /// Draws the component area onto the game screen.
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="spriteBatch"></param>

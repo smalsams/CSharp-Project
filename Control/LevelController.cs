@@ -14,14 +14,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Audio;
 using static SamSer.Utilities.GameUtilities;
 
 namespace SamSer.Control
 {
     /// <summary>
-    /// Main game control unit, 
+    /// Main game control unit, responsible for loading and updating levels, entities and textures. 
     /// </summary>
     public sealed class LevelController
     {
@@ -65,7 +64,8 @@ namespace SamSer.Control
 
 
         /// <summary>
-        /// Loads every name of the <see cref="Level"/> in the folder containing generated level i the form of .tmx file
+        /// Loads every name of the <see cref="Level"/> in the folder containing generated level i the form of .tmx file.
+        /// Level names are stored in the <see cref="_levelList"/> list.
         /// </summary>
         /// <param name="path">Path to the folder containing level names.</param>
         public void LoadLevels(string path)
@@ -77,7 +77,7 @@ namespace SamSer.Control
 
 
         /// <summary>
-        /// Loads data from the memory for the specific level
+        /// Loads data from the memory for the specific level. Uses <see cref="JsonConvert"/> to deserialize the data.
         /// </summary>
         /// <param name="levelName">Name of the level whose data will be fetched</param>
         /// <returns></returns>
@@ -93,7 +93,7 @@ namespace SamSer.Control
         #region Level Control
 
         /// <summary>
-        /// Event that is invoked after finishing a level.
+        /// Event that is invoked after finishing a level. Updates the index and sets the next level.
         /// </summary>
         /// <param name="sender">Reference to the object that raised the event</param>
         /// <param name="args"></param>
@@ -117,7 +117,7 @@ namespace SamSer.Control
 
 
         /// <summary>
-        /// Sets a new level according to a <paramref name="levelIndex"/>
+        /// Sets a new level according to a <paramref name="levelIndex"/>. Passes the level name to the <see cref="SetLevel(string)"/> method.
         /// </summary>
         /// <param name="levelIndex">An index of the new level to be set</param>
         public void SetLevel(int levelIndex)
@@ -128,7 +128,7 @@ namespace SamSer.Control
 
 
         /// <summary>
-        /// Sets a new level according to the <paramref name="levelName"/>
+        /// Sets a new level according to the <paramref name="levelName"/>. Loads the level data and textures.
         /// </summary>
         /// <param name="levelName">A name of the new level to be set</param>
         public void SetLevel(string levelName)
@@ -159,7 +159,7 @@ namespace SamSer.Control
 
 
         /// <summary>
-        /// Reformats data from the saved Json object and deserializes them into entity objects.
+        /// Reformats data from the saved Json object and deserializes them into entity objects. Instantiates the entity and returns it.
         /// </summary>
         /// <param name="jsonObject"></param>
         /// <returns>A Json-Constructed <see cref="IEntity"/> object.</returns>
@@ -171,6 +171,7 @@ namespace SamSer.Control
             {
                 nameof(Coin) => JsonConvert.DeserializeObject<Coin>(jsonObject.ToString(), new Vector2JsonConverter()),
                 nameof(FlameEnemy) => JsonConvert.DeserializeObject<FlameEnemy>(jsonObject.ToString(), new Vector2JsonConverter()),
+                nameof(Zombie) => JsonConvert.DeserializeObject<Zombie>(jsonObject.ToString(), new Vector2JsonConverter()),
                 _ => throw new JsonException($"Unknown entity type: {entityType}"),
             };
             var texture = entity.GetTextureName(jsonObject);
@@ -180,7 +181,7 @@ namespace SamSer.Control
 
 
         /// <summary>
-        /// Checks collision of every entity with every terrain
+        /// Checks collision of every entity with every terrain. If collision is detected, entity specific action is done within the respective class.
         /// </summary>
         /// <param name="rectangle">Bounds of a terrain</param>
         public void EntityTerrainCollision(RectangleF rectangle)
@@ -194,7 +195,7 @@ namespace SamSer.Control
 
 
         /// <summary>
-        /// Updates every entity in the current level
+        /// Updates every entity in the current level, checks for collision with the player and removes entities that are out of bounds.
         /// </summary>
         /// <param name="player">Reference to player</param>
         /// <param name="camera">Reference to the current game camera</param>
@@ -221,13 +222,16 @@ namespace SamSer.Control
                         }
                     }
                 }
-                entity.InSight = camera.CameraRectangle.Intersects(entity.BoundingBox);
+
+                var viewBox = new RectangleF(entity.BoundingBox.Left + COLLISION_THRESHOLD_X, entity.BoundingBox.Top,
+                    entity.BoundingBox.Width, entity.BoundingBox.Height);
+                entity.InSight = camera.CameraRectangle.Intersects(viewBox);
             }
         }
 
 
         /// <summary>
-        /// Removes every entity from the entity list (from game) that is not within allowed bounds.
+        /// Removes every entity from the entity list (from game) that is not within allowed bounds, specified by the current map.
         /// </summary>
         public void RemoveOutOfBoundsEntities()
         {
@@ -250,7 +254,7 @@ namespace SamSer.Control
 
 
         /// <summary>
-        /// Draws the current level
+        /// Draws the current level.
         /// </summary>
         /// <param name="spriteBatch"></param>
         /// <param name="gameTime"></param>

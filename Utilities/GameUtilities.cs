@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace SamSer.Utilities
 {
     /// <summary>
-    /// Collection of useful constants of primitive types or methods.
+    /// Collection of useful constants of primitive types or methods. 
     /// </summary>
     public static class GameUtilities
     {
